@@ -1,0 +1,48 @@
+<body>
+   <div class="dashboard dashboard_1 py-5">
+      <div class="full_container py-5">
+        <div class="container">
+           <div class="center">
+              <div class="login_section">
+                 <div class="logo_login">
+                    <div class="center">
+                       <img width="210" height="100" src="../../../../assets/images/logo_icon.png" alt="#" />
+                    </div>
+                 </div>
+                 <div class="alert alert-danger text-dark text-center" *ngIf="apiError">
+                  {{apiError}}
+                </div>
+                 <div class="login_form">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                       <fieldset>
+                          <div class="field">
+                             <label class="label_field">Email Address</label>
+                             <input type="email" name="email" formControlName="email" placeholder="E-mail" />
+                             <div class="row">
+                              <div class="col-3"></div>
+                             </div>
+                             <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message text-danger fw-bold">
+                             <pre>                       Please enter a valid email.</pre>
+                            </div>
+                          </div>
+                          <div class="field">
+                             <label class="label_field">Password</label>
+                             <input type="password" formControlName="password" name="password" placeholder="Password" />
+                             <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message text-danger fw-bold">
+                             <pre>                       Please enter a valid password.</pre>
+                            </div>
+                          </div>
+                          <div class="field margin_0">
+                             <label class="label_field hidden">hidden label</label>
+                             <button class="main_bt">Sing In</button>
+                          </div>
+                       </fieldset>
+                    </form>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </div>
+      </div>      
+</body>
+<p-toast></p-toast>

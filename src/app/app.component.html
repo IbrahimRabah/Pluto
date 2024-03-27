@@ -1,0 +1,9 @@
+<div *ngIf="!isLogin" >
+    <router-outlet></router-outlet>
+</div>
+
+
+<div *ngIf="isLogin">    
+    <app-main-content></app-main-content>
+</div>
+<!-- <app-footer></app-footer> -->

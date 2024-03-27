@@ -1,0 +1,111 @@
+<div class="py-5 d-flex justify-content-center">
+    <div class="row ">
+        <p-table class="py-5" [value]="salesHistory" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            [tableStyle]="{ 'max-width': '100%' }" [responsive]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {numberOfPage} entries"
+            [rowsPerPageOptions]="[5, 10, 20]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Canvas</th>
+                    <th>SecondCall</th>
+                    <th>Deposit</th>
+                    <th>Follow</th>
+                    <th>Sell</th>
+                    <th>Register</th>
+                    <th>View Details</th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{item.salesMan}}</td>
+                    <td>{{item.date.toString().substring(0,10)}}</td>
+                    <td>{{ item.canvas }}</td>
+                    <td>{{ item.secondCall }}</td>
+                    <td>{{ item.deposit }}</td>
+                    <td>{{ item.follow }}</td>
+                    <td>{{ item.sell }}</td>
+                    <td>{{ item.register }}</td>
+                    <td>
+                        <button type="button" data-bs-toggle="modal" href="#exampleModalToggle" class="btn btn-xs"
+                            (click)="getSalesById(item.id)">
+                            View Details
+                        </button>
+                    </td>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="paginatorleft">
+                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+            </ng-template>
+            <ng-template pTemplate="paginatorright">
+                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+            </ng-template>
+        </p-table>
+    </div>
+    <div *ngFor="let item of numberOfPage;">
+        <button (click)="returnPages(item)">{{item}}</button>
+    </div>
+</div>
+<!-- **************************************** -->
+
+
+
+
+<!-- ************** update ************* -->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+    tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Update</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="salesHome" class="p-fluid">
+                    <div class="roww">
+                        <div class="p-col-12 p-md-6">
+                            <label for="canves">Canvas</label>
+                            <p-inputNumber inputId="canves" formControlName="canvas" placeholder="Enter canvas value"
+                                [showButtons]="false">
+                            </p-inputNumber>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <label for="second">Second</label>
+                            <p-inputNumber inputId="second" formControlName="secondCall"
+                                placeholder="Enter second value" [showButtons]="false"></p-inputNumber>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <label for="salse">Sales</label>
+                            <p-inputNumber inputId="salse" formControlName="sell" placeholder="Enter sales value"
+                                [showButtons]="false">
+                            </p-inputNumber>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <label for="follow">Follow</label>
+                            <p-inputNumber inputId="follow" formControlName="follow" placeholder="Enter follow-up value"
+                                [showButtons]="false"></p-inputNumber>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <label for="register">Register</label>
+                            <p-inputNumber inputId="register" formControlName="register"
+                                placeholder="Enter register value" [showButtons]="false"></p-inputNumber>
+                        </div>
+                        <div class="p-col-12 p-md-6">
+                            <label for="deposit">Deposit</label>
+                            <p-inputNumber inputId="deposit" formControlName="deposit" placeholder="Enter deposit value"
+                                [showButtons]="false"></p-inputNumber>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                    [disabled]="!salesHome.valid" (click)="update()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<p-toast></p-toast>

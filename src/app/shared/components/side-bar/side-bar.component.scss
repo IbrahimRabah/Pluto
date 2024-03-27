@@ -1,0 +1,22 @@
+
+ul li a {
+	width: 70%;
+    font-size: 17px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.253);
+}
+ ul li a:hover {
+	color: rgb(28, 173, 173);
+	width: 50%;
+	border-bottom: 1px double rgba(255, 255, 255, 0.253);
+	transition: 0.4s;
+	
+}
+ul li.active > a {
+	background: transparent;
+	color: white;
+}
+
+.nav-item{
+	display: flex;
+	justify-content: center;
+}

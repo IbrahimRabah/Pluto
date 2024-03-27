@@ -1,0 +1,42 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-gradient-primary-subtle">
+  <div class="container">
+    <div  (click)="onIconClick()">
+      <i class="fas fa-bars " style="font-size:25px;cursor: pointer;" (click)="onIconClick()" *ngIf="isLogedIn"></i>
+    </div>   
+    <!-- <button  style="color: rgb(245, 245, 245);"
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"  style="color: rgb(245, 245, 245);"></span>
+    </button> -->
+
+      <ul class="navbar-nav">
+        <div class="dropdown">
+          <img src="../../../../assets/images/login_image.jpg" alt="" height="40" width="40" data-bs-toggle="dropdown" style="border-radius:50px;cursor: pointer;">        
+          <ul class="dropdown-menu">
+            <li class="nav-item mr-3 px-4" routerLinkActive="active" *ngIf="!isLogedIn">
+              <a class="nav-link main-color" routerLink="/auth/login">
+                <i class="fas fa-sign-in-alt"></i> Login
+              </a>
+            </li>
+            <li class="nav-item mr-3 px-4" routerLinkActive="active" *ngIf="isLogedIn" >
+              <a class="nav-link main-color" (click)="logout()">
+                <i class="fa fa-sign-out-alt"></i> Logout
+              </a>
+            </li>
+            <li class="nav-item px-4" routerLinkActive="active" *ngIf="!isLogedIn">
+              <a class="nav-link main-color" routerLink="/auth/register">
+                <i class="fas fa-user-plus"></i> Register
+              </a>
+            </li>
+          </ul>
+        </div>
+      </ul>
+  </div>
+</nav>
+

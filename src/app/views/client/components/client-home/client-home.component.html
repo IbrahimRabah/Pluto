@@ -1,0 +1,57 @@
+<form [formGroup]="formClient" (ngSubmit)="onSubmit()" class="form-container">
+    <div class="form-row">
+        <div class="field-container">
+            <label for="name">Name:</label>
+            <input id="name" type="text" pInputText formControlName="name" placeholder="Name" />
+        </div>
+        <div class="field-container">
+            <label for="nationalId">National ID:</label>
+            <input id="nationalId" type="text" pInputText formControlName="nationalId" placeholder="National ID" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="field-container">
+            <label for="phoneNumber">Phone Number:</label>
+            <input id="phoneNumber" type="text" pInputText formControlName="phoneNumber" placeholder="Phone Number" />
+        </div>
+        <div class="field-container">
+            <label for="email">Email:</label>
+            <input id="email" type="email" pInputText formControlName="email" placeholder="Email" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="field-container">
+            <label for="password">Password:</label>
+            <input id="password" type="password" pInputText formControlName="password" placeholder="Password" />
+        </div>
+        <div class="field-container">
+            <label for="accountId">Account ID:</label>
+            <input id="accountId" type="text" pInputText formControlName="accountId" placeholder="Account ID" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="field-container">
+            <label for="platform">Platform:</label>
+            <input id="platform" type="text" pInputText formControlName="platform" placeholder="Platform" />
+        </div>
+        <div class="field-container">
+            <label for="company">Company:</label>
+            <input id="company" type="text" pInputText formControlName="company" placeholder="Company" />
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="field-container">
+            <label for="deposit">Deposit:</label>
+            <input id="deposit" type="number" pInputText formControlName="deposit" placeholder="Deposit" />
+        </div>
+        <div class="field-container">
+            <label for="salesId">Sales ID:</label>
+            <select style="height: 40px; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+                formControlName="salesId" class="custom-select">
+                <option value="" disabled selected>Select Sales ID</option>
+                <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" pButton label="Submit" [disabled]="!formClient.valid"></button>
+</form>

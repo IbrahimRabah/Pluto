@@ -1,0 +1,51 @@
+#registerDiv{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.registration-form {
+  width: 800px;
+  margin: 50px 80px 22px  80px;
+  padding: 20px;
+  border: 1px solid #63b8ff;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+  text-align: center;
+  font-size: 24px;
+  color: #63b8ff;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 16px;
+  color: #63b8ff;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  width: 100%;
+  font-size: 16px;
+  border: 1px solid #63b8ff;
+  border-radius: 5px;
+}
+
+.btn-register {
+  display: block;
+  width: 100%;
+  background-color: #ff6600; /* Orange background color */
+  color: #fff; /* White text color */
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-register:hover {
+  background-color: #e55e00; /* Slightly darker orange on hover */
+}

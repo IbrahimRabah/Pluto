@@ -1,0 +1,45 @@
+<div class="py-5"> 
+  <form [formGroup]="salesHome" (ngSubmit)="onSubmit()" class="p-fluid">
+    <div class="row py-2">
+      <div class="col col-lg-12">
+        <div class="p-col-12 p-md-6">
+          <label for="canves">Canvas</label>
+          <p-inputNumber inputId="canves" formControlName="canvas" placeholder="Enter canvas value" [showButtons]="false">
+          </p-inputNumber>
+        </div>
+        <div class="p-col-12 p-md-6">
+          <label for="second">Second</label>
+          <p-inputNumber inputId="second" formControlName="secondCall" placeholder="Enter second value"
+            [showButtons]="false"></p-inputNumber>
+        </div>
+        <div class="p-col-12 p-md-6">
+          <label for="salse">Sales</label>
+          <p-inputNumber inputId="salse" formControlName="sell" placeholder="Enter sales value" [showButtons]="false">
+          </p-inputNumber>
+        </div>
+        <div class="p-col-12 p-md-6">
+          <label for="follow">Follow</label>
+          <p-inputNumber inputId="follow" formControlName="follow" placeholder="Enter follow-up value"
+            [showButtons]="false"></p-inputNumber>
+        </div>
+        <div class="p-col-12 p-md-6">
+          <label for="register">Register</label>
+          <p-inputNumber inputId="register" formControlName="register" placeholder="Enter register value"
+            [showButtons]="false"></p-inputNumber>
+        </div>
+        <div class="p-col-12 p-md-6">
+          <label for="deposit">Deposit</label>
+          <p-inputNumber inputId="deposit" formControlName="deposit" placeholder="Enter deposit value"
+            [showButtons]="false"></p-inputNumber>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center ">
+        <button *ngIf="slaesId!=='null'" type="submit" pButton label="Update Record" [disabled]="!salesHome.valid"
+        class="p-mt-2"></button>
+      <button *ngIf="slaesId==='null'" type="submit" pButton label="Add Record" [disabled]="!salesHome.valid"
+        class="p-mt-2"></button>
+      </div>
+      </div>
+  </form>
+</div>
+<p-toast></p-toast>
