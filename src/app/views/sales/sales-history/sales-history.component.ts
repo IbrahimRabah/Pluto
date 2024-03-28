@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { SalesService } from '../services/sales.service';
 import { SalesHistoryResponse, SalesItem } from 'src/app/core/models/Sales.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService } from 'primeng/api';
-
+import { LazyLoadEvent, MessageService } from 'primeng/api';
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
 @Component({
   selector: 'app-sales-history',
   templateUrl: './sales-history.component.html',
@@ -12,10 +17,11 @@ import { MessageService } from 'primeng/api';
 })
 export class SalesHistoryComponent implements OnInit {
   salesHistory!: SalesItem[]
+  PageEvent!:PageEvent[];
   SalesMan: String = "";
   SalesId: string = "";
-  StartDate: Date = new Date();
-  EndDate: Date = new Date();
+  StartDate:Date=new Date(new Date().setDate(new Date().getDate()-60));
+  EndDate:Date=new Date(new Date().setDate(new Date().getDate()));
   Page: number = 1
   PageSize: number = 10
   numberOfPage:number[]=[];
@@ -29,7 +35,7 @@ export class SalesHistoryComponent implements OnInit {
   addedDate!: Date
   salesId!: string
   x!:string;
-
+  totalCount:number=0;
   constructor(private salesService: SalesService,private formBuilder: FormBuilder,private messageService:MessageService) { }
   ngOnInit(): void {
     this.initializeSalesForm();
@@ -38,17 +44,13 @@ export class SalesHistoryComponent implements OnInit {
 
   
   getSalesHistory() {
-    const queryURL = `?SalesMan=${this.SalesMan}&SalesId${this.SalesId}&StartDate${this.StartDate}&EndDate${this.EndDate}&Page${this.Page}&PageSize${this.PageSize}&IsSortingAscending${this.IsSortingAscending}&Take${this.Take}&Skip${this.Skip}&OrderByDirection${this.OrderByDirection}`;
+    const queryURL = `?SalesMan=${this.SalesMan}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
     this.salesService.getSalesDayBy(queryURL).subscribe({
       next: (response: SalesHistoryResponse) => {
-        this.numberOfPage=[];
         this.salesHistory = response.data.items;
         // debugger
-        const x=Math.ceil(response.data.count/this.PageSize)
-        for(let i=1;i<=x;i++){
-          this.numberOfPage.push(i);
-        }
-        // this.numberOfPage =Math.floor(response.data.count/this.Page);
+        this.totalCount=Math.ceil(response.data.count)
+        console.log("total",this.totalCount)
       },
       error: (err) => {
         console.error(err)
@@ -83,7 +85,6 @@ export class SalesHistoryComponent implements OnInit {
     }
   }
   getSalesById(salesId: string) {
-    this.x=salesId;
     this.salesService.getSalesDayById(salesId).subscribe({
       next: (data) => {
         this.addedDate = new Date(data.data.date);
@@ -101,6 +102,19 @@ export class SalesHistoryComponent implements OnInit {
   }
   returnPages(pageReturn:number){
     this.Page=pageReturn;
+    this.getSalesHistory()
+  }
+  next() {
+    this.Page = ++ this.Page ;
+    this.getSalesHistory()
+   }
+
+ prev() {
+    this.Page = -- this.Page ;
+    this.getSalesHistory()
+
+  }
+  changeClander(){
     this.getSalesHistory()
   }
 }

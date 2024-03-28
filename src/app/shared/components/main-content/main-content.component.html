@@ -76,14 +76,14 @@
                         <!-- ******************** seller ****************************** -->
                         <li class="nav-item" *ngIf="userRole=='Sales'">
                             <a routerLink="/sales/salesHome" routerLinkActive="active" class="nav-link align-middle px-0">
-                                <i class="fa-solid fa-user-tie fa-lg  text-success m-3"></i> <span
+                                <i class="fa-solid fa-home fa-lg  text-primary m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Home
                                 </span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a routerLink="/sales/salesHistory" routerLinkActive="active" class="nav-link align-middle px-0">
-                                <i class="fa-solid fa-user-tie fa-lg  text-success m-3"></i> <span
+                                <i class="fa-solid fa-user-tie fa-lg  text-warning m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> History
                                 </span>
                             </a>
@@ -118,8 +118,8 @@
                                 <a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" (click)="logout()"><i
-                                        class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                                <a class="dropdown-item" style="cursor:pointer;" (click)="logout()"><i
+                                class="fa-solid fa-right-from-bracket"></i> Logout</a>
                             </li>
                         </ul>
                     </li>

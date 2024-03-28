@@ -1,9 +1,14 @@
 <div class="py-5 d-flex justify-content-center">
     <div class="row ">
-        <p-table class="py-5" [value]="salesHistory" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+        <div class="d-flex justify-content-between mb-3">
+            <label for="StartDate" class="fw-bold mt-2"> Start Date : </label>
+            <p-calendar [(ngModel)]="StartDate" (ngModelChange)="changeClander()" [showIcon]="true" inputId="StartDate"></p-calendar>
+            <label for="EndDate" class="fw-bold mt-2">End Date : </label>
+            <p-calendar [(ngModel)]="EndDate" (ngModelChange)="changeClander()" [showIcon]="true" inputId="EndDate"></p-calendar>
+        </div>
+        <p-table class="py-2" [value]="salesHistory" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true"
             [tableStyle]="{ 'max-width': '100%' }" [responsive]="true"
-            currentPageReportTemplate="Showing {first} to {last} of {numberOfPage} entries"
-            [rowsPerPageOptions]="[5, 10, 20]">
+            >
             <ng-template pTemplate="header">
                 <tr>
                     <th>Name</th>
@@ -38,15 +43,12 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">
-                <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" styleClass="p-button-text"></p-button>
             </ng-template>
             <ng-template pTemplate="paginatorright">
-                <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                <p-button type="button" icon="pi pi-chevron-right" (click)="next()" styleClass="p-button-text"></p-button>
             </ng-template>
         </p-table>
-    </div>
-    <div *ngFor="let item of numberOfPage;">
-        <button (click)="returnPages(item)">{{item}}</button>
     </div>
 </div>
 <!-- **************************************** -->
