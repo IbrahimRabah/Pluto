@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SelectItem } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
 import { ClientService } from '../../services/client.service';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,9 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-client-home',
   templateUrl: './client-home.component.html',
-  styleUrls: ['./client-home.component.scss']
+  styleUrls: ['./client-home.component.scss'],
+  providers: [MessageService]
+
 })
 export class ClientHomeComponent {
   formClient!: FormGroup;
@@ -18,7 +20,8 @@ export class ClientHomeComponent {
   constructor(private fb: FormBuilder,
     private salesService: SalesService,
     private clientService: ClientService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private messageService: MessageService
 
   ) { }
   ngOnInit() {
@@ -52,12 +55,13 @@ export class ClientHomeComponent {
 
   onSubmit() {
     if (this.formClient.valid) {
-      debugger
+
       const clientData = this.formClient.value;
       if (this.clientId === "null" || this.clientId === undefined) {
         this.clientService.addClient(clientData).subscribe({
           next: (res) => {
-            console.log("Done =======>", res);
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Added Successfully' });
+
           }
         });
       }

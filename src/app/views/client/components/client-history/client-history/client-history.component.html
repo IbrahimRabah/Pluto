@@ -1,1 +1,135 @@
-<p>client-history works!</p>
+<div class="py-5 px-5">
+    <div class="d-flex justify-content-between mb-3">
+        <label for="StartDate" class="fw-bold mt-2"> Start Date : </label>
+        <p-calendar [(ngModel)]="StartDate" (ngModelChange)="changeClander()" [showIcon]="true"
+            inputId="StartDate"></p-calendar>
+        <label for="EndDate" class="fw-bold mt-2">End Date : </label>
+        <p-calendar [(ngModel)]="EndDate" (ngModelChange)="changeClander()" [showIcon]="true"
+            inputId="EndDate"></p-calendar>
+    </div>
+    <p-table [value]="items" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Name</th>
+                <th>National ID</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Account ID</th>
+                <th>Platform</th>
+                <th>Company</th>
+                <th>Status Name</th>
+                <th>Team Leader Name</th>
+                <th>Sales Name</th>
+                <th>Depoit</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-item>
+            <tr>
+                <td>{{item.name}}</td>
+                <td>{{item.nationalId}}</td>
+                <td>{{item.phoneNumber}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.accountId}}</td>
+                <td>{{item.platform}}</td>
+                <td>{{item.company}}</td>
+                <td>{{item.statusName}}</td>
+                <td>{{item.teamLeaderName}}</td>
+                <td>{{item.salesName}}</td>
+                <td>
+                    <button type="button" pButton icon="pi pi-external-link" (click)="showModal(item)"
+                        title="Open modal to enter a number" class="modal-open-button"></button>
+                </td>
+                <td>
+                    <button type="button" class="modal-open-button" (click)="showUpdateModal(item)">Update</button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button [disabled]="Page==1" type="button" icon="pi pi-chevron-left" (click)="Page > 1 ? prev() : null"
+                styleClass="p-button-text"></p-button>
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button [disabled]="Page == lastPage" type="button" icon="pi pi-chevron-right"
+                (click)="Page < lastPage ? next() : null" styleClass="p-button-text"></p-button>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog class="d-flex justify-content-center" header="Enter Depoit" [(visible)]="displayModal">
+    <div>
+        <input type="number" class="text-center " [(ngModel)]="selectedNumber">
+    </div>
+    <p-footer class="d-flex justify-content-center">
+        <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+            (click)="deposit(selectedNumber)"></button>
+    </p-footer>
+</p-dialog>
+<p-dialog header="Update Item" [(visible)]="displayUpdateModal" [style]="{width: '500px'}" class="modal-content">
+    <form [formGroup]="updateForm" class="update-form-container d-flex justify-content-center">
+        <div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" formControlName="name" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="nationalId">National ID:</label>
+                    <input type="text" id="nationalId" formControlName="nationalId" class="input-field">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" id="phoneNumber" formControlName="phoneNumber" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" formControlName="email" class="input-field">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="accountId">Account ID:</label>
+                    <input type="text" id="accountId" formControlName="accountId" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="platform">Platform:</label>
+                    <input type="text" id="platform" formControlName="platform" class="input-field">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="company">Company:</label>
+                    <input type="text" id="company" formControlName="company" class="input-field">
+                </div>
+
+                <div class="col-6 ">
+                    <div class="field-container">
+                        <label for="salesId">Sales ID:</label>
+                        <br>
+                        <select
+                            style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+                            formControlName="salesId" class="custom-select">
+                            <option value="" disabled selected>Select Sales ID</option>
+                            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add any additional fields here -->
+        </div>
+
+        <p-footer class="d-flex justify-content-center">
+            <button class="confirm-model-hieght" type="button" pButton label="Update"
+                (click)="updateItemDetails()"></button>
+        </p-footer>
+
+    </form>
+</p-dialog>
+<p-toast></p-toast>
