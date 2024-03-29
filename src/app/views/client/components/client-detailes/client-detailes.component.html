@@ -1,0 +1,139 @@
+<h1> Client Detailes </h1>
+<div class="d-flex">
+
+    <form [formGroup]="updateForm" class="update-form-container px-5">
+        <div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" formControlName="name" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="nationalId">National ID:</label>
+                    <input type="text" id="nationalId" formControlName="nationalId" class="input-field">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="text" id="phoneNumber" formControlName="phoneNumber" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" formControlName="email" class="input-field">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <label for="accountId">Account ID:</label>
+                    <input type="text" id="accountId" formControlName="accountId" class="input-field">
+                </div>
+                <div class="col-6">
+                    <label for="platform">Platform:</label>
+                    <input type="text" id="platform" formControlName="platform" class="input-field">
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <label for="company">Company:</label>
+                    <input type="text" id="company" formControlName="company" class="input-field">
+                </div>
+
+                <div class="col-6 ">
+                    <div class="field-container">
+                        <label for="salesId">Sales ID:</label>
+                        <br>
+                        <select
+                            style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+                            formControlName="salesId" class="custom-select">
+                            <option value="" disabled selected>Select Sales ID</option>
+                            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="row">
+
+                <div class="col-6 ">
+                    <div class="field-container">
+                        <label for="salesId">teamLeader ID:</label>
+                        <br>
+                        <select
+                            style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+                            formControlName="salesId" class="custom-select">
+                            <option value="" disabled selected>Select Sales ID</option>
+                            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-6 ">
+                    <div class="field-container">
+                        <label for="salesId">Sales ID:</label>
+                        <br>
+                        <select
+                            style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+                            formControlName="salesId" class="custom-select">
+                            <option value="" disabled selected>Select Sales ID</option>
+                            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="col-12">
+
+                <button class="confirm-model-hieght" type="button" pButton label="Update" (click)="updateItemDetails()">
+
+                </button>
+
+            </div>
+        </div>
+
+    </form>
+
+    <div class="py-3">
+
+        <button class="confirm-model-hieght" type="button" pButton label="Update" (click)="showModal()">
+            Update
+        </button>
+
+    </div>
+</div>
+
+
+<!-- ================================================= -->
+<h1> Client Deposit </h1>
+
+<!-- ================================================= -->
+
+<h1> Client Lot </h1>
+
+<p-dialog class="d-flex justify-content-center" header="Enter Depoit" [(visible)]="displayModal">
+    <div class="field-container">
+        <label for="salesId">Sales ID:</label>
+        <br>
+        <select style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
+            [(ngModel)]="retentionId" class="custom-select">
+            <option value="" disabled selected>Select Sales ID</option>
+            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
+        </select>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+        <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+            (click)="assignToRetension()"></button>
+    </p-footer>
+</p-dialog>

@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
+import { ClientDetailesComponent } from './components/client-detailes/client-detailes.component';
 
 
 
@@ -19,6 +20,7 @@ import { CalendarModule } from 'primeng/calendar';
   declarations: [
     ClientHomeComponent,
     ClientHistoryComponent,
+    ClientDetailesComponent,
   ],
   imports: [
     CommonModule,

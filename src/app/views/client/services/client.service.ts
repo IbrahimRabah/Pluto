@@ -28,4 +28,7 @@ export class ClientService {
   deleteClient(clientId: string) {
     return this.httpClient.delete(`${this.baseUrl + this.currentUrl}/${clientId}`)
   }
+  assignClientToRetention(clientId: string, retentionId: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/' + clientId + '/Retention/' + retentionId}`, {})
+  }
 }

@@ -1,0 +1,77 @@
+.modal-open-button,
+.confirm-model-hieght {
+    border: none;
+    background-color: #041c36;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-open-button:hover,
+.confirm-model-hieght:hover {
+    background-color: #0c2947;
+}
+
+.p-dialog .p-dialog-content {
+    padding: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.update-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.update-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.update-form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(50% - 10px);
+    min-width: 0;
+}
+
+.input-field {
+    width: 100%;
+}
+
+
+.update-form-container>div {
+    margin-bottom: 20px;
+}
