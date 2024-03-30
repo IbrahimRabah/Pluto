@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,7 +12,9 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  isLoading: boolean = false;
   apiError!: string;
+  @ViewChild('container') containerDiv!:ElementRef;
   constructor(private auth: AuthenticationService,private router:Router,private messageService:MessageService) { }
   ngOnInit(): void {
     this.initialization();
@@ -55,8 +57,9 @@ export class LoginComponent implements OnInit {
               }
           },
           error: (err) => {
-            this.apiError = err.message
-            console.log("error")
+            this.isLoading = false;
+            this.apiError = err.message;
+            console.log("error");
 
           }
         })
@@ -64,5 +67,17 @@ export class LoginComponent implements OnInit {
         this.apiError = "Not Valid";
       }
     }
+  }
+  toggle(action:string)
+  {
+    switch(action)
+    {
+      case 'add':
+        this.containerDiv.nativeElement.classList.add('active');
+        break;
+      default:
+        this.containerDiv.nativeElement.classList.remove('active');
+    }
+
   }
 }
