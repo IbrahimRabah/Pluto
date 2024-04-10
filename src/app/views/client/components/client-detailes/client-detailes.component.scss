@@ -9,6 +9,32 @@
     transition: background-color 0.3s ease;
 }
 
+.delete-button {
+
+    border: none;
+    background-color: rgb(59, 6, 6);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: rgb(41, 5, 5) !important;
+
+}
+
+.modal-open-details-button {
+    border: none;
+    background-color: rgb(28, 53, 7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .modal-open-button:hover,
 .confirm-model-hieght:hover {
     background-color: #0c2947;

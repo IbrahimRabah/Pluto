@@ -37,12 +37,12 @@
                 <td>{{item.teamLeaderName}}</td>
                 <td>{{item.salesName}}</td>
                 <td>
-                    <button type="button" pButton icon="pi pi-external-link" (click)="showModal(item)"
+                    <button type="button" pButton icon="pi pi-trash" (click)="delteClient(item.id)"
                         title="Open modal to enter a number" class="modal-open-button"></button>
                 </td>
                 <td>
-                    <button type="button" class="modal-open-button"
-                        routerLink="/client/clientDetailes/{{item.id}}">Update</button>
+                    <button type="button" class="modal-open-details-button"
+                        routerLink="/client/clientDetailes/{{item.id}}">Details</button>
                 </td>
             </tr>
         </ng-template>
@@ -62,8 +62,8 @@
         <input type="number" class="text-center " [(ngModel)]="selectedNumber">
     </div>
     <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
-            (click)="deposit(selectedNumber)"></button>
+        <!-- <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+            (click)="deposit(selectedNumber)"></button> -->
     </p-footer>
 </p-dialog>
 

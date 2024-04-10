@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientHomeComponent } from './components/client-home/client-home.component';
@@ -12,7 +12,6 @@ import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { ClientDetailesComponent } from './components/client-detailes/client-detailes.component';
-
 
 
 
@@ -33,8 +32,12 @@ import { ClientDetailesComponent } from './components/client-detailes/client-det
     DialogModule,
     FormsModule,
     ToastModule,
-    CalendarModule
-    
-  ]
+    CalendarModule,
+    FormsModule,
+    ButtonModule 
+
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
+
 })
 export class ClientModule { }

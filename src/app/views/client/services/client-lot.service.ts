@@ -29,7 +29,7 @@ export class ClientLotService {
   }
 
   deleteClientLot(clientId: any) {
-    return this.httpClient.get(`${this.baseUrl + this.currentUrl}/${clientId}`)
+    return this.httpClient.delete(`${this.baseUrl + this.currentUrl}/${clientId}`)
 
   }
 }

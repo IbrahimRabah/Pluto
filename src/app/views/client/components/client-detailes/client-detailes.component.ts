@@ -4,7 +4,11 @@ import { ClientService } from '../../services/client.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
-import { DepositService } from '../../services/deposit.service';
+import { RetentionService } from 'src/app/core/services/retention/retention.service';
+import { TeamLeaderService } from 'src/app/core/services/teamleader/team-leader.service';
+import { DepositService } from 'src/app/core/services/deposit/deposit.service';
+import { RedepositService } from 'src/app/core/services/redeposit/redeposit.service';
+import { ClientLotService } from '../../services/client-lot.service';
 
 @Component({
   selector: 'app-client-detailes',
@@ -21,8 +25,21 @@ export class ClientDetailesComponent implements OnInit {
   clientId: any;
   salesList!: any;
   retentionId: any;
-  displayModal!: boolean
-
+  teamLeadId: any;
+  displayRetentionModal!: boolean
+  displayTeamLeadModal!: boolean
+  expandedRows: { [key: string]: boolean } = {};
+  selectedDepositRedeposits: any[] = [];
+  displayDialog: boolean = false;
+  retentionList!: any
+  teamLeadList: any
+  displayModal: boolean = false;
+  selectedNumber: number = 0;
+  currentClient: any;
+  displayClientLotModal: boolean = false
+  displayUpdateClientLotModal: boolean = false
+  lotAmount: number = 0;
+  updatedLotId!: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +47,11 @@ export class ClientDetailesComponent implements OnInit {
     private clientService: ClientService,
     private messageService: MessageService,
     private salesService: SalesService,
-    private depositService: DepositService
+    private depositService: DepositService,
+    private retentionService: RetentionService,
+    private teamLeaderService: TeamLeaderService,
+    private redepositService: RedepositService,
+    private clientLotService: ClientLotService
   ) { }
 
   ngOnInit() {
@@ -39,6 +60,9 @@ export class ClientDetailesComponent implements OnInit {
     this.getClientData();
     this.initializeClientForm();
     this.getDepositForClient();
+    this.getRetention();
+    this.getTeamLead();
+    this.getClientLotForClient();
   }
 
   initRout() {
@@ -70,16 +94,91 @@ export class ClientDetailesComponent implements OnInit {
     });
   }
   showModal(): void {
+    this.displayRetentionModal = true;
+  }
+  showTeamdLeadModal() {
+    this.displayTeamLeadModal = true
+  }
+  showDepositModal() {
     this.displayModal = true;
   }
+  showAddClientLot() {
+    this.lotAmount = 0;
+    this.displayClientLotModal = true;
+  }
+  showUpdateClientLotModal(updatelotId: string) {
+    this.lotAmount = 0;
+    this.displayUpdateClientLotModal = true;
+    this.updatedLotId = updatelotId
+  }
+  deposit(): void {
+    if (this.clientData.status === 1) {
 
+      this.depositService.addDepositForClient({
+        deposit: this.selectedNumber,
+        clientId: this.clientId
+      }).subscribe({
+        next: (data: any) => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
+
+        }
+      })
+    }
+    else {
+      // this.redepositService.reDeposit()
+    }
+    this.displayModal = false;
+  }
+
+  addLot() {
+    this.clientLotService.addClientLot({
+      clientId: this.clientId,
+      amount: this.lotAmount
+    }).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Lot added Successfully' });
+        this.getClientLotForClient();
+        this.displayClientLotModal = false;
+      }
+    })
+  }
+
+  updateLot() {
+    this.clientLotService.updateClientLot(this.updatedLotId, {
+      amount: this.lotAmount,
+      date: new Date()
+    }).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Lot updated Successfully' });
+        this.getClientLotForClient();
+        this.displayUpdateClientLotModal = false;
+      }
+    })
+  }
+  deleteLot(lotId: string) {
+    this.clientLotService.deleteClientLot(lotId).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'error', summary: 'Deleted', detail: 'Lot deleted successfully' });
+        this.getClientLotForClient();
+      }
+    })
+  }
   assignToRetension() {
     this.clientService.assignClientToRetention(this.clientId, this.retentionId).subscribe({
       next: (data) => {
         console.log(data);
       }
     })
-    this.displayModal = false;
+    this.displayRetentionModal = false;
+
+  }
+  changeTeamLead() {
+    this.clientService.changeTeamLead(this.clientId, this.teamLeadId).subscribe({
+      next: (data) => {
+        console.log(data);
+      }
+    })
+    this.displayTeamLeadModal = false;
 
   }
   getSales() {
@@ -90,9 +189,26 @@ export class ClientDetailesComponent implements OnInit {
     })
   }
 
+  getRetention() {
+    this.retentionService.getAllRetention().subscribe({
+      next: (res) => {
+        this.retentionList = res.data;
+      }
+    })
+  }
+
+  getTeamLead() {
+    this.teamLeaderService.getAllTeamLeaders().subscribe({
+      next: (res) => {
+        this.teamLeadList = res.data;
+      }
+    })
+  }
+
   getClientData() {
     this.clientService.getClientById(this.clientId).subscribe({
       next: (res: any) => {
+        this.currentClient = res.data;
         this.updateForm.patchValue(res.data);
 
       }
@@ -108,7 +224,11 @@ export class ClientDetailesComponent implements OnInit {
   }
 
   getClientLotForClient() {
-
+    this.clientLotService.getClientLostByClient(this.clientId).subscribe({
+      next: (res) => {
+        this.clientLots = res.data;
+      }
+    })
   }
 
   updateItemDetails(): void {
@@ -119,5 +239,19 @@ export class ClientDetailesComponent implements OnInit {
         }
       })
     }
+  }
+
+  deActive() {
+    this.depositService.deActivateClient(this.clientId).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User deactivated Successfully' });
+        this.getDepositForClient();
+      }
+    })
+  }
+
+  openDialog(deposit: any): void {
+    this.selectedDepositRedeposits = deposit.redeposits;
+    this.displayDialog = true;
   }
 }
