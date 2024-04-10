@@ -14,4 +14,21 @@ export class DepositService {
   addDepositForClient(body: any): Observable<any> {
     return this.httpClient.post(`${this.baseUrl + this.currentUrl}`, body)
   }
+  getDepositById(clientId: string): Observable<any> {
+    return this.httpClient.get(`${this.baseUrl + this.currentUrl}/${clientId}`)
+  }
+  addDeposit(body: any): Observable<any> {
+    return this.httpClient.post(`${this.baseUrl + this.currentUrl}`, body)
+  }
+  updateDeposit(clientId: string, body: any): Observable<any> {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl}/${clientId}`, body)
+  }
+
+  deActivateClient(clientId: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl}/Deactivate/${clientId}`,{})
+  }
+
+  deleteClient(clientId: string) {
+    return this.httpClient.delete(`${this.baseUrl + this.currentUrl}/${clientId}`)
+  }
 }

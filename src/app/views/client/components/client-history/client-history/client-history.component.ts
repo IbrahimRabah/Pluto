@@ -71,19 +71,27 @@ export class ClientHistoryComponent implements OnInit {
     this.clientId = rowData.id;
   }
 
-  deposit(deposit: number): void {
-    this.depositService.addDepositForClient({
-      deposit: deposit,
-      clientId: this.clientId
-    }).subscribe({
-      next: (data: any) => {
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
+  // deposit(deposit: number): void {
+  //   this.depositService.addDepositForClient({
+  //     deposit: deposit,
+  //     clientId: this.clientId
+  //   }).subscribe({
+  //     next: (data: any) => {
+  //       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
 
+  //     }
+  //   })
+  //   this.displayModal = false;
+  // }
+
+  delteClient(clientId:string) {
+    this.clientService.deleteClient(clientId).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'error', summary: 'Deleted', detail: 'Client Deleted successfully' });
+        this.getClientHistory();
       }
     })
-    this.displayModal = false;
   }
-
   initializeClientForm() {
     this.updateForm = this.formBuilder.group({
       name: ['', Validators.required],

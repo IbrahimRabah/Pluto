@@ -31,4 +31,7 @@ export class ClientService {
   assignClientToRetention(clientId: string, retentionId: string) {
     return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/' + clientId + '/Retention/' + retentionId}`, {})
   }
+  changeTeamLead(clientId: string, teamleadId: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/' + clientId + '/TeamLeader/' + teamleadId}`, {})
+  }
 }
