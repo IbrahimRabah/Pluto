@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from '../services/sales.service';
-import { SalesHistoryResponse, SalesItem } from 'src/app/core/models/Sales.model';
+import { MemberResponse, SalesItem } from 'src/app/core/models/Sales.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 interface PageEvent {
@@ -42,13 +42,12 @@ export class SalesHistoryComponent implements OnInit {
     this.getSalesHistory();
   }
 
-  
+
   getSalesHistory() {
     const queryURL = `?SalesMan=${this.SalesMan}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
     this.salesService.getSalesDayBy(queryURL).subscribe({
-      next: (response: SalesHistoryResponse) => {
+      next: (response: MemberResponse) => {
         this.salesHistory = response.data.items;
-        // debugger
         this.totalCount=Math.ceil(response.data.count)
         console.log("total",this.totalCount)
       },
@@ -71,7 +70,7 @@ export class SalesHistoryComponent implements OnInit {
   update() {
     if (this.salesHome.valid) {
       const salesHomeData = this.salesHome.value;
-      
+
         salesHomeData['salesId'] = this.x;
         salesHomeData['date'] = this.addedDate;
         this.salesService.updateSalesDay(this.x, salesHomeData ).subscribe({

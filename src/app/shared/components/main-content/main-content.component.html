@@ -19,70 +19,70 @@
                                 <span class="text-light">Sections</span>
                             </h5>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a routerLink="/admin/dashboard/managers" routerLinkActive="active"
+                        <li routerLink="/admin/dashboard/managers" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin'">
+                            <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-tie fa-lg  text-primary m-3"></i> <span
                                     class="d-none d-sm-inline text-light">
                                     Manger </span>
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a routerLink="/admin/dashboard/leaders" routerLinkActive="active"
+                        <li routerLink="/admin/dashboard/leaders" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                            <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-group fa-lg text-success m-3"></i>
                                 <span class="ms-1 d-none d-sm-inline  text-light"> Team Leaders
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a routerLink="/admin/dashboard/sales" routerLinkActive="active"
+                        <li routerLink="/admin/dashboard/sales" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                            <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-users fa-lg text-warning m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Sellers
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a href="#" routerLinkActive="active" class="nav-link align-middle px-0">
-                                <i class="fa-regular fa-user fa-lg text-danger m-3 text-center p-2"></i>
-                                <span class="ms-1 d-none d-sm-inline  text-light text-center">
-                                    Hr
-                                </span>
-                            </a>
-                        </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a routerLink="/admin/dashboard/sales" routerLinkActive="active"
+                        <li routerLink="/admin/dashboard/clients" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                            <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-people-group fa-lg text-primary m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Clients
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a href="#" routerLinkActive="active" class="nav-link align-middle px-0">
+                        <li routerLink="/admin/dashboard/retentions" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                            <a class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-person-rays fa-lg text-danger m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Retention
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item" *ngIf="userRole=='Admin'">
-                            <a href="#" class="nav-link align-middle px-0">
+                        <li routerLink="/admin/dashboard/interviewees" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                            <a  class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-tie fa-lg  text-success m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Interviewee
                                 </span>
                             </a>
                         </li>
+                        <li routerLink="/admin/dashboard/hrs" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                          <a  class="nav-link align-middle px-0">
+                              <i class="fa-regular fa-user fa-lg text-danger m-3 text-center"></i>
+                              <span class="ms-1 d-none d-sm-inline  text-light text-center">
+                                  HRs
+                              </span>
+                          </a>
+                      </li>
                         <!-- ******************** seller ****************************** -->
-                        <li class="nav-item" *ngIf="userRole=='Sales'">
-                            <a routerLink="/sales/salesHome" routerLinkActive="active" class="nav-link align-middle px-0">
+                        <li routerLink="/sales/salesHome" routerLinkActive="active"  class="nav-item" *ngIf="userRole=='Sales'">
+                            <a class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-home fa-lg  text-primary m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Home
                                 </span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a routerLink="/sales/salesHistory" routerLinkActive="active" class="nav-link align-middle px-0">
+                        <li routerLink="/sales/salesHistory" routerLinkActive="active"  class="nav-item">
+                            <a class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-tie fa-lg  text-warning m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> History
                                 </span>

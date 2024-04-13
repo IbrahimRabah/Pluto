@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { AdminService } from '../../services/admin.service';
+import { MemberResponse } from 'src/app/core/models/Sales.model';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-sales-section-details',
@@ -8,66 +10,58 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./sales-section-details.component.scss']
 })
 export class SalesSectionDetailsComponent {
-  customers!: any[];
-
-  totalRecords!: number;
-
-  loading: boolean = false;
-
-  representatives!: any[];
-
-  selectAll: boolean = false;
-
-  selectedCustomers!: any[];
-
-  constructor(private customerService: AdminService) {}
-
-  ngOnInit() {
-      this.representatives = [
-          { name: 'Amy Elsner', image: 'amyelsner.png' },
-          { name: 'Anna Fali', image: 'annafali.png' },
-          { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-          { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-          { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-          { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-          { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-          { name: 'Onyama Limba', image: 'onyamalimba.png' },
-          { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-          { name: 'Xuxue Feng', image: 'xuxuefeng.png' }
-      ];
-
-      this.loading = true;
+getSalesById(arg0: any) {
+throw new Error('Method not implemented.');
+}
+  allSellers!:MemberResponse[];
+  Page: number = 1;
+  PageSize: number = 10;
+  numberOfPage:number[]=[];
+  totalCount:number=0;
+  private searchSubject = new Subject<string>();
+  constructor(private admin:AdminService){
+    this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
+      this.filter(value);
+    });
   }
-
-  loadCustomers(event: any) {
-      this.loading = true;
-
-      setTimeout(() => {
-          this.customerService.getCustomers({ lazyEvent: JSON.stringify(event) }).then((res:any) => {
-              this.customers = res.customers;
-              this.totalRecords = res.totalRecords;
-              this.loading = false;
-          });
-      }, 1000);
+  ngOnInit(): void {
+    this.getAllSellers();
   }
-
-  onSelectionChange(value = []) {
-      this.selectAll = value.length === this.totalRecords;
-      this.selectedCustomers = value;
+  getAllSellers(SalesName?:string):void {
+    let queryURL;
+    if(SalesName){
+     queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SalesName=${SalesName}`;
+    }
+    else
+    {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
+    this.admin.getAllSellers(queryURL).subscribe({
+      next:(response:any)=>{this.allSellers = response.data.items;console.log(this.allSellers);;
+        this.totalCount=Math.ceil(response.data.count);
+      },
+      error:(error)=>{console.log(error);}
+    })
   }
-
-  onSelectAllChange(event: any) {
-      const checked = event.checked;
-
-      if (checked) {
-          this.customerService.getCustomers().then((res:any) => {
-              this.selectedCustomers = res.customers;
-              this.selectAll = true;
-          });
-      } else {
-          this.selectedCustomers = [];
-          this.selectAll = false;
-      }
+  filter(event:any){
+    console.log(event)
+    this.getAllSellers(event);
   }
+  onInputChange(event: any) {
+    this.searchSubject.next(event.target.value);
+  }
+  returnPages(pageReturn:number){
+    this.Page=pageReturn;
+    this.getAllSellers()
+  }
+  nextPage() {
+    this.Page = ++ this.Page ;
+    this.getAllSellers();
+   }
 
+ previousPage() {
+    this.Page = -- this.Page ;
+    this.getAllSellers()
+
+  }
 }

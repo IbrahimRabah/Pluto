@@ -1,4 +1,4 @@
-export interface SalesHistoryResponse {
+export interface MemberResponse {
     statusCode: number;
     status: string;
     message: string;
