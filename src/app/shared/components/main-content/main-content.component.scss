@@ -10,10 +10,8 @@ nav{
     background-image: url("../../../../assets/images/pattern_h.png");;
     transition: width 0.3s;
   }
-  #sidebarInAdmin.collapsed {
-  }
-  #sidebarInAdmin.expanded {
-  
+  li{
+    cursor: pointer;
   }
   .sidebar-icon , .fa-x{
     color: white;
@@ -32,3 +30,7 @@ nav{
     background-color: #4d6892;
     border-radius: 15px;
   }
+.active{
+  background-color: #302e2e;
+  border-radius: 15px;
+}

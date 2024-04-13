@@ -5,6 +5,9 @@ import { MangmentSectionDetailsComponent } from './components/mangment-section-d
 import { LeaderSectionDetailsComponent } from './components/leader-section-details/leader-section-details.component';
 import { SalesSectionDetailsComponent } from './components/sales-section-details/sales-section-details.component';
 import { ClientsSectionDetailsComponent } from './components/clients-section-details/clients-section-details.component';
+import { RetentionSectionComponent } from './components/retention-section/retention-section.component';
+import { IntervieeSectionComponent } from './components/interviee-section/interviee-section.component';
+import { HrSectionComponent } from './components/hr-section/hr-section.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'dashboard', pathMatch:'full'},
@@ -21,6 +24,15 @@ const routes: Routes = [
     },
     {
       path:'clients',component:ClientsSectionDetailsComponent
+    },
+    {
+      path:'retentions',component:RetentionSectionComponent
+    },
+    {
+      path:'interviewees',component:IntervieeSectionComponent
+    },
+    {
+      path:'hrs',component:HrSectionComponent
     }
   ]
 },

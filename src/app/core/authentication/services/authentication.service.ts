@@ -27,7 +27,6 @@ export class AuthenticationService {
   }
 
   login(loginObj: any): Observable<any> {
-    console.log("LOginn")
     const url = `${this.baseUrl + this.currentUrl}Login`;
     return this.http.post(url, loginObj).pipe(
       tap(() => {
@@ -36,8 +35,8 @@ export class AuthenticationService {
     );
   }
   logout() {
+    localStorage.clear();
     this.isAuthenticatedSubject.next(false);
-    localStorage.removeItem('userData');
     this.router.navigate(["/auth/login"])
   }
   isAuthenticatedUser() {
@@ -49,8 +48,6 @@ export class AuthenticationService {
     const userData = localStorage.getItem('userData');
     const token = userData ? JSON.parse(userData).token : '';
     return token;
-
-
   }
   getUserRole() {
     const userData = localStorage.getItem('userData');

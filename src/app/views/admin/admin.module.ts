@@ -13,6 +13,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormsModule } from '@angular/forms';
+import { HrSectionComponent } from './components/hr-section/hr-section.component';
+import { RetentionSectionComponent } from './components/retention-section/retention-section.component';
+import { IntervieeSectionComponent } from './components/interviee-section/interviee-section.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { FormsModule } from '@angular/forms';
     MangmentSectionDetailsComponent,
     ClientsSectionDetailsComponent,
     LeaderSectionDetailsComponent,
+    HrSectionComponent,
+    RetentionSectionComponent,
+    IntervieeSectionComponent,
   ],
   imports: [
     CommonModule,

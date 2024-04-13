@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from './core/authentication/services/authentication.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { AuthenticationService } from './core/authentication/services/authentica
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit,OnDestroy{
   title = 'dashboard';
   isLogin:boolean=false;
   constructor(private authenticationService:AuthenticationService){}
@@ -16,5 +16,8 @@ export class AppComponent implements OnInit{
       next:(response)=>{this.isLogin=response},
       error:(error)=>{console.log(error)}
     })
+  }
+  ngOnDestroy(): void {
+  this.authenticationService.logout();
   }
 }
