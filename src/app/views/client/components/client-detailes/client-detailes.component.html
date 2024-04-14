@@ -97,7 +97,7 @@
 <div class="d-flex justify-content-between">
 
     <h1 class="ms-3 mb-2"> Client Deposit </h1>
-    <button type="button" *ngIf="currentClient.status ===1" pButton icon="pi pi-plus" (click)="showDepositModal()"
+    <button type="button"  pButton icon="pi pi-plus" (click)="showDepositModal()"
         title="Open modal to enter a number" class="modal-open-button me-3 mb-2"> Add deposit </button>
     <!-- <button type="button" *ngIf="currentClient.status ===0" pButton icon="pi pi-replay" (click)="showDepositModal()"
         title="Open modal to enter a number" class="modal-open-button me-3 mb-2"> Redeposit deposit </button>
@@ -130,7 +130,7 @@
         <input type="number" class="text-center " [(ngModel)]="selectedNumber">
     </div>
     <p-footer class="d-flex justify-content-center">
-        <button *ngIf="currentClient.status ===1" type="button" pButton label="Enter Deposit" icon="pi pi-check"
+        <button  type="button" pButton label="Enter Deposit" icon="pi pi-check"
             class="modal-open-button" (click)="deposit()"></button>
         <!-- <button *ngIf="currentClient.status ===0" type="button" pButton label="Re Deposit" icon="pi pi-check"
             class="modal-open-button" (click)="deposit()"></button> -->
@@ -170,7 +170,7 @@
             <td>
                 <button type="button" pButton icon="pi pi-file-edit" class="modal-open-details-button"
                     (click)="showUpdateClientLotModal(rowData.id)"
-                
+
                 ></button>
             </td>
         </tr>

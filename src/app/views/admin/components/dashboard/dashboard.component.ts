@@ -21,7 +21,7 @@ export class DashboardComponent{
   initializeItems()
   {
     this.items = [
-      { name: 'Admin', num: 1, icon: 'fa-solid fa-comments' },
+      { name: 'Admin', num: 1, icon: 'fa-solid fa-user-gear' },
       { name: 'Manger', num: 1, icon: 'fa-solid fa-user-tie' },
       { name: 'Team Leaders', num:this.statistics.data.totalTeamLeaders, icon: 'fa-solid fa-user-group' },
       { name: 'Sellers', num: this.statistics.data.totalSalesMen, icon: 'fa-solid fa-users' },

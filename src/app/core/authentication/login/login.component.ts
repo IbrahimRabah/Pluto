@@ -29,13 +29,10 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     {
-
       if (!this.loginForm.invalid) {
         this.auth.login(this.loginForm.value).subscribe({
           next: (response) => {
-            console.log("res");
             if (response.statusCode == 200) {
-              console.log(response.message);
                 let role = response.data.roleName;
                 let tenantId = response.data.tenantId;
                 let token = response.data.token;
@@ -49,12 +46,21 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['/admin/dashboard']);
                     break;
                   case 'Sales':
-                    this.router.navigate(['/sales/salesHome'])
+                    this.router.navigate(['/sales/salesHome']);
+                    break;
+                  case 'TeamLeader':
+                    this.router.navigate(['/client/clientHome']);
+                    break;
+                  case 'Retention':
+                    this.router.navigate(['/client/clientHistory']);
+                    break;
+                  case 'Sales':
+                    this.router.navigate(['/sales/salesHome']);
+                    break;
                 }
             }
             else{
               this.messageService.add({ severity: 'error', summary: 'error', detail: 'Error' });
-                console.log(response.message);
                 this.apiError = response.message;
                 console.log("else")
               }

@@ -1,10 +1,30 @@
 <div class="py-5 d-flex justify-content-center">
-  <div class="row" style="width: 100%;">
+  <div class="row" style="width: 100%">
     <div class="text-center mb-4">
       <h2 class="text-primary">All Hrs <i class="fa-regular fa-user"></i></h2>
     </div>
-    <p-table class="custom-table py-2" [value]="allHrs" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true"
-             [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
+    <p-table
+      class="custom-table py-2"
+      [value]="allHrs"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalCount"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'max-width': '100%' }"
+      [responsive]="true"
+    >
+      <ng-template pTemplate="caption">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            id="search-hr"
+            placeholder="Search keyword"
+            (input)="onInputChange($event)"
+          />
+        </span>
+      </ng-template>
       <ng-template pTemplate="header">
         <tr>
           <th>Name <i class="fas fa-user"></i></th>
@@ -19,24 +39,36 @@
       </ng-template>
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{item.name}}</td>
-          <td>{{item.phoneNumber}}</td>
-          <td>{{item.email}}</td>
-          <td>{{item.nationalId}}</td>
-          <td>{{item.teamLeaderName}}</td>
-          <td>{{item.salesName}}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.phoneNumber }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.nationalId }}</td>
+          <td>{{ item.teamLeaderName }}</td>
+          <td>{{ item.salesName }}</td>
           <td *ngIf="item.retentionName">
-            {{item.retentionName}}
+            {{ item.retentionName }}
           </td>
           <td *ngIf="!item.retentionName">Not-Registered</td>
-          <td>{{item.statusName}}</td>
+          <td>{{ item.statusName }}</td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
-        <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text"  label="Previous"></p-button>
+        <p-button
+          type="button"
+          icon="pi pi-chevron-left"
+          (click)="previousPage()"
+          styleClass="p-button-text"
+          label="Previous"
+        ></p-button>
       </ng-template>
       <ng-template pTemplate="paginatorright">
-        <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()" styleClass="p-button-text fw-bold">Next</p-button>
+        <p-button
+          type="button"
+          icon="pi pi-chevron-right"
+          (click)="nextPage()"
+          styleClass="p-button-text fw-bold"
+          >Next</p-button
+        >
       </ng-template>
     </p-table>
   </div>

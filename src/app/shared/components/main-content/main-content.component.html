@@ -27,7 +27,7 @@
                                     Manger </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/leaders" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/leaders" routerLinkActive="active" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                             <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-group fa-lg text-success m-3"></i>
@@ -35,7 +35,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/sales" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/sales" routerLinkActive="active" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                             <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-users fa-lg text-warning m-3"></i> <span
@@ -43,7 +43,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/clients" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/clients" routerLinkActive="active" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                             <a
                                 class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-people-group fa-lg text-primary m-3"></i> <span
@@ -51,21 +51,21 @@
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/retentions" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/retentions" routerLinkActive="active" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                             <a class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-person-rays fa-lg text-danger m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Retention
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/interviewees" routerLinkActive="active" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/interviewees" routerLinkActive="active" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                             <a  class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-tie fa-lg  text-success m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> Interviewee
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/admin/dashboard/hrs" class="nav-item" *ngIf="userRole=='Admin' || 'Manager'">
+                        <li routerLink="/admin/dashboard/hrs" class="nav-item" *ngIf="userRole === 'Admin' || userRole === 'Manager'">
                           <a  class="nav-link align-middle px-0">
                               <i class="fa-regular fa-user fa-lg text-danger m-3 text-center"></i>
                               <span class="ms-1 d-none d-sm-inline  text-light text-center">
@@ -81,13 +81,29 @@
                                 </span>
                             </a>
                         </li>
-                        <li routerLink="/sales/salesHistory" routerLinkActive="active"  class="nav-item">
+                        <li routerLink="/sales/salesHistory" routerLinkActive="active"  class="nav-item" *ngIf="userRole=='Sales'">
                             <a class="nav-link align-middle px-0">
                                 <i class="fa-solid fa-user-tie fa-lg  text-warning m-3"></i> <span
                                     class="ms-1 d-none d-sm-inline  text-light"> History
                                 </span>
                             </a>
                         </li>
+
+                         <!-- ******************** TeamLead  && Retention ****************************** -->
+                         <li routerLink="/client/clientHome" routerLinkActive="active"  class="nav-item" *ngIf="userRole=='TeamLeader'">
+                          <a class="nav-link align-middle px-0">
+                              <i class="fa-solid fa-home fa-lg  text-primary m-3"></i> <span
+                                  class="ms-1 d-none d-sm-inline  text-light"> Home
+                              </span>
+                          </a>
+                      </li>
+                      <li routerLink="/client/clientHistory" routerLinkActive="active"  class="nav-item" *ngIf="userRole=='TeamLeader' || userRole=='Retention' ">
+                          <a class="nav-link align-middle px-0">
+                              <i class="fa-solid fa-user-tie fa-lg  text-warning m-3"></i> <span
+                                  class="ms-1 d-none d-sm-inline  text-light"> History
+                              </span>
+                          </a>
+                      </li>
                     </ul>
                 </div>
             </div>
@@ -111,12 +127,10 @@
                                 alt="Avatar" loading="lazy" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> My profile</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> Settings</a>
-                            </li>
+                          <li>
+                            <a class="dropdown-item" style="cursor:pointer;" routerLink="/auth/register"><i
+                            class="fa-solid fa-plus"></i> Add User</a>
+                        </li>
                             <li>
                                 <a class="dropdown-item" style="cursor:pointer;" (click)="logout()"><i
                                 class="fa-solid fa-right-from-bracket"></i> Logout</a>

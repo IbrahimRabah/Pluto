@@ -1,36 +1,70 @@
 <div class="py-5 d-flex justify-content-center">
-    <div class="row" style="width: 100%;">
-      <div class="text-center mb-4">
-        <h2 class="text-primary">All Interviewees <i class="fa-solid fa-user-tie"></i></h2>
-      </div>
-      <p-table class="custom-table py-2" [value]="allInterviewees" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true"
-               [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Name <i class="fas fa-user"></i></th>
-            <th>PhoneNumber <i class="fas fa-phone"></i></th>
-            <th>Company Phone <i class="fas fa-building"></i></th>
-            <th>Email <i class="fas fa-envelope"></i></th>
-            <th>National_ID <i class="fas fa-id-card"></i></th>
-            <th>Total_Clients <i class="fas fa-calculator"></i></th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-item>
-          <tr>
-            <td>{{item.name}}</td>
-            <td>{{item.phoneNumber}}</td>
-            <td>{{item.companyPhoneNumber}}</td>
-            <td>{{item.email}}</td>
-            <td>{{item.nationalId}}</td>
-            <td>{{item.numberOfClients}}</td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="paginatorleft">
-          <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text"  label="Previous"></p-button>
-        </ng-template>
-        <ng-template pTemplate="paginatorright">
-          <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()" styleClass="p-button-text fw-bold">Next</p-button>
-        </ng-template>
-      </p-table>
+  <div class="row" style="width: 100%">
+    <div class="text-center mb-4">
+      <h2 class="text-primary">
+        All Interviewees <i class="fa-solid fa-user-tie"></i>
+      </h2>
     </div>
+    <p-table
+      class="custom-table py-2"
+      [value]="allInterviewees"
+      [paginator]="true"
+      [rows]="10"
+      [totalRecords]="totalCount"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{ 'max-width': '100%' }"
+      [responsive]="true"
+    >
+      <ng-template pTemplate="caption">
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            id="search-interviewee"
+            placeholder="Search keyword"
+            (input)="onInputChange($event)"
+          />
+        </span>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name <i class="fas fa-user"></i></th>
+          <th>PhoneNumber <i class="fas fa-phone"></i></th>
+          <th>Company Phone <i class="fas fa-building"></i></th>
+          <th>Email <i class="fas fa-envelope"></i></th>
+          <th>National_ID <i class="fas fa-id-card"></i></th>
+          <th>Total_Clients <i class="fas fa-calculator"></i></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-item>
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.phoneNumber }}</td>
+          <td>{{ item.companyPhoneNumber }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.nationalId }}</td>
+          <td>{{ item.numberOfClients }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <p-button
+          type="button"
+          icon="pi pi-chevron-left"
+          (click)="previousPage()"
+          styleClass="p-button-text"
+          label="Previous"
+        ></p-button>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <p-button
+          type="button"
+          icon="pi pi-chevron-right"
+          (click)="nextPage()"
+          styleClass="p-button-text fw-bold"
+          >Next</p-button
+        >
+      </ng-template>
+    </p-table>
   </div>
+</div>
