@@ -35,6 +35,5 @@ export class MainContentComponent implements OnInit{
   }
   getUserRole(){
     this.userRole= this.auth.getUserRole()
-    console.log("hhhhhh",this.userRole)
   }
 }

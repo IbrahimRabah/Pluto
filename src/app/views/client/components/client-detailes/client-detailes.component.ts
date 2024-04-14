@@ -112,7 +112,7 @@ export class ClientDetailesComponent implements OnInit {
     this.updatedLotId = updatelotId
   }
   deposit(): void {
-    if (this.clientData.status === 1) {
+    // if (this.clientData.status === 1) {
 
       this.depositService.addDepositForClient({
         deposit: this.selectedNumber,
@@ -120,13 +120,13 @@ export class ClientDetailesComponent implements OnInit {
       }).subscribe({
         next: (data: any) => {
           this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
-
+          this.getDepositForClient();
         }
       })
-    }
-    else {
-      // this.redepositService.reDeposit()
-    }
+    // }
+    // else {
+    //   // this.redepositService.reDeposit()
+    // }
     this.displayModal = false;
   }
 
