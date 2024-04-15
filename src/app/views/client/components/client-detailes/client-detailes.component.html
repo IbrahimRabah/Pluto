@@ -1,345 +1,443 @@
-<!-- <h1> Client Detailes </h1>
-<div class="d-flex">
-
-    <form [formGroup]="updateForm" class="update-form-container px-5">
-        <div>
-            <div class="row">
-
-                <div class="col-6">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" formControlName="name" class="input-field">
-                </div>
-                <div class="col-6">
-                    <label for="nationalId">National ID:</label>
-                    <input type="text" id="nationalId" formControlName="nationalId" class="input-field">
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-6">
-                    <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" formControlName="phoneNumber" class="input-field">
-                </div>
-                <div class="col-6">
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" formControlName="email" class="input-field">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-6">
-                    <label for="accountId">Account ID:</label>
-                    <input type="text" id="accountId" formControlName="accountId" class="input-field">
-                </div>
-                <div class="col-6">
-                    <label for="platform">Platform:</label>
-                    <input type="text" id="platform" formControlName="platform" class="input-field">
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col-6">
-                    <label for="company">Company:</label>
-                    <input type="text" id="company" formControlName="company" class="input-field">
-                </div>
-
-                <div class="col-6 ">
-                    <div class="field-container">
-                        <label for="salesId">Sales ID:</label>
-                        <br>
-                        <select
-                            style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
-                            formControlName="salesId" class="custom-select">
-                            <option value="" disabled selected>Select Sales ID</option>
-                            <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
-                        </select>
-                    </div>
-
-                </div>
-
-
-
-            </div>
-
-            <div class="col-12">
-
-                <button class="confirm-model-hieght" type="button" pButton label="Update" (click)="updateItemDetails()">
-
-                </button>
-
-            </div>
-        </div>
-    </form>
-
-    <div class="row">
-        <div class="col-4">
-            <button class="confirm-model-hieght" type="button" pButton label="Change teamleader"
-                (click)="showTeamdLeadModal()">
-
-            </button>
-        </div>
-        <div class="col-4">
-
-            <button class="confirm-model-hieght" type="button" pButton label="Assign to retention"
-                (click)="showModal()">
-
-            </button>
-        </div>
-        <div class="col-4">
-            <button class="confirm-model-hieght" type="button" pButton label="Deactive " (click)="deActive()">
-            </button>
-        </div>
-
-    </div>
-</div> -->
 <div class="px-4 pb-2">
-<div id="registerDiv">
-    <form [formGroup]="updateForm" (ngSubmit)="updateItemDetails()" class="registration-form mb-4">
-        <h2 class="form-title"><i class="fas fa-user-plus"></i>Client Detailes</h2>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="name"><i class="fas fa-user"></i> Name:</label>
-                <input id="name" type="text" pInputText formControlName="name" placeholder="Name" class="form-control" />
-            </div>
-            <div class="input-group">
-                <label for="nationalId"><i class="fas fa-id-card"></i> National ID:</label>
-                <input id="nationalId" type="text" pInputText formControlName="nationalId" placeholder="National ID" class="form-control" />
-            </div>
+  <div id="registerDiv">
+    <form
+      [formGroup]="updateForm"
+      (ngSubmit)="updateItemDetails()"
+      class="registration-form mb-4"
+    >
+      <h2 class="form-title"><i class="fas fa-user me-2"></i>Client Details</h2>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="name"><i class="fas fa-user"></i> Name:</label>
+          <input
+            id="name"
+            type="text"
+            pInputText
+            formControlName="name"
+            placeholder="Name"
+            class="form-control"
+          />
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="phoneNumber"><i class="fas fa-phone"></i> Phone Number:</label>
-                <input id="phoneNumber" type="text" pInputText formControlName="phoneNumber" placeholder="Phone Number" class="form-control"/>
-            </div>
-            <div class="input-group">
-                <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-                <input id="email" type="email" pInputText formControlName="email" placeholder="Email" class="form-control" />
-            </div>
+        <div class="input-group">
+          <label for="nationalId"
+            ><i class="fas fa-id-card"></i> National ID:</label
+          >
+          <input
+            id="nationalId"
+            type="text"
+            pInputText
+            formControlName="nationalId"
+            placeholder="National ID"
+            class="form-control"
+          />
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="accountId"><i class="fas fa-id-badge"></i> Account ID:</label>
-                <input id="accountId" type="text" pInputText formControlName="accountId" placeholder="Account ID" class="form-control"/>
-            </div>
-            <div class="input-group">
-                <label for="platform"><i class="fas fa-desktop"></i> Platform:</label>
-                <input id="platform" type="text" pInputText formControlName="platform" placeholder="Platform" class="form-control"/>
-            </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="phoneNumber"
+            ><i class="fas fa-phone"></i> Phone Number:</label
+          >
+          <input
+            id="phoneNumber"
+            type="text"
+            pInputText
+            formControlName="phoneNumber"
+            placeholder="Phone Number"
+            class="form-control"
+          />
         </div>
-        <div class="form-group">
-            <div class="input-group">
-                <label for="company"><i class="fas fa-building"></i> Company:</label>
-                <input id="company" type="text" pInputText formControlName="company" placeholder="Company" class="form-control"/>
-            </div>
-            <div class="input-group">
-                <label for="salesId"><i class="fas fa-user-tag"></i> Sales ID:</label>
-                <select class="form-control" formControlName="salesId">
-                    <option value="" disabled selected>Select Sales ID</option>
-                    <option *ngFor="let salesId of salesList" [value]="salesId.id">{{ salesId.name }}</option>
-                </select>
-            </div>
+        <div class="input-group">
+          <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+          <input
+            id="email"
+            type="email"
+            pInputText
+            formControlName="email"
+            placeholder="Email"
+            class="form-control"
+          />
         </div>
-        <button type="submit" pButton label="Update" [disabled]="!updateForm.valid"></button>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="accountId"
+            ><i class="fas fa-id-badge"></i> Account ID:</label
+          >
+          <input
+            id="accountId"
+            type="text"
+            pInputText
+            formControlName="accountId"
+            placeholder="Account ID"
+            class="form-control"
+          />
+        </div>
+        <div class="input-group">
+          <label for="platform"><i class="fas fa-desktop"></i> Platform:</label>
+          <input
+            id="platform"
+            type="text"
+            pInputText
+            formControlName="platform"
+            placeholder="Platform"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <label for="company"><i class="fas fa-building"></i> Company:</label>
+          <input
+            id="company"
+            type="text"
+            pInputText
+            formControlName="company"
+            placeholder="Company"
+            class="form-control"
+          />
+        </div>
+        <div class="input-group">
+          <label for="salesId"><i class="fas fa-user-tag"></i> Sales ID:</label>
+          <select class="form-control" formControlName="salesId">
+            <option value="" disabled selected>Select Sales ID</option>
+            <option *ngFor="let salesId of salesList" [value]="salesId.id">
+              {{ salesId.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <button
+        type="submit"
+        pButton
+        label="Update"
+        [disabled]="!updateForm.valid"
+      ></button>
     </form>
     <div class="row">
-        <div class="col-5">
-            <button class="confirm-model-hieght" type="button" pButton label="Change teamleader"
-                (click)="showTeamdLeadModal()">
-
-            </button>
-        </div>
-        <div class="col-5">
-
-            <button class="confirm-model-hieght" type="button" pButton label="Assign to retention"
-                (click)="showModal()">
-
-            </button>
-        </div>
-        <div class="col-2">
-            <button class="confirm-model-hieght" type="button" pButton label="Deactive " (click)="deActive()">
-            </button>
-        </div>
-
+      <div class="col-4">
+        <button
+          class="btn btn-primary btn-block confirm-model-height btn-confirm"
+          type="button"
+          (click)="showTeamdLeadModal()"
+        >
+          <i class="fas fa-user-plus me-1"></i> Change TeamLeader
+        </button>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-success btn-block confirm-model-height btn-confirm"
+          type="button"
+          (click)="showModal()"
+        >
+          <i class="fas fa-handshake me-1"></i> Assign to Retention
+        </button>
+      </div>
+      <div class="col-4">
+        <button
+          class="btn btn-danger btn-block confirm-model-height btn-confirm"
+          type="button"
+          (click)="deActive()"
+        >
+          <i class="fas fa-ban me-1"></i> Deactivate
+        </button>
+      </div>
     </div>
   </div>
+  <!-- ================================================= -->
+  <div
+    class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded"
+  >
+    <h2 class="ms-3 mb-0">
+      <i class="fas fa-money-bill-wave me-2"></i>Client Deposit
+    </h2>
+    <button
+      type="button"
+      class="btn btn-primary me-3"
+      (click)="showDepositModal()"
+    >
+      <i class="fas fa-plus me-1"></i> Add Deposit
+    </button>
+  </div>
 
-<!-- ================================================= -->
-<div class="d-flex justify-content-between">
-
-    <h2 class="ms-3 mb-2"> Client Deposit </h2>
-    <button type="button"  pButton icon="pi pi-plus" (click)="showDepositModal()"
-        title="Open modal to enter a number" class="modal-open-button me-3 mb-2"> Add deposit </button>
-    <!-- <button type="button" *ngIf="currentClient.status ===0" pButton icon="pi pi-replay" (click)="showDepositModal()"
-        title="Open modal to enter a number" class="modal-open-button me-3 mb-2"> Redeposit deposit </button>
-    Main Deposits Table -->
-</div>
-
-<p-table [value]="clientDeposit">
-    <ng-template pTemplate="header">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="bg-primary text-white">
         <tr>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Depositor Name</th>
-            <th>Total</th>
-            <th>Active</th>
+          <th><i class="fas fa-dollar-sign me-1"></i> Amount</th>
+          <th><i class="fas fa-calendar-alt me-1"></i> Date</th>
+          <th><i class="fas fa-user me-1"></i> Depositor Name</th>
+          <th><i class="fas fa-chart-line me-1"></i> Total</th>
+          <th><i class="fas fa-toggle-on me-1"></i> Active</th>
         </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-deposit>
-        <tr (click)="openDialog(deposit)">
-            <td>{{deposit.amount}}</td>
-            <td>{{deposit.date | date}}</td>
-            <td>{{deposit.depositorName}}</td>
-            <td>{{deposit.total}}</td>
-            <td>{{deposit.isActive}}</td>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deposit of clientDeposit" (click)="openDialog(deposit)">
+          <td>{{ deposit.amount }}</td>
+          <td>{{ deposit.date | date }}</td>
+          <td>{{ deposit.depositorName }}</td>
+          <td>{{ deposit.total }}</td>
+          <td>
+            <i
+              class="fas"
+              [ngClass]="{
+                'fa-check-circle text-success': deposit.isActive,
+                'fa-times-circle text-danger': !deposit.isActive
+              }"
+            ></i>
+          </td>
         </tr>
-    </ng-template>
-</p-table>
+      </tbody>
+    </table>
+  </div>
 
-<p-dialog class="d-flex justify-content-center" header="Enter Depoit" [(visible)]="displayModal">
-    <div>
-        <input type="number" class="text-center " [(ngModel)]="selectedNumber">
+  <p-dialog
+  class="d-flex justify-content-center"
+  header="Enter Deposit"
+  [style]="{ width: '30vw' }"
+  [modal]="true"
+  [(visible)]="displayModal"
+>
+  <div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fas fa-dollar-sign text-danger"> D e p o s i t </i>
+      </span>
+      <input
+        type="number"
+        min="0"
+        class="form-control"
+        [(ngModel)]="selectedNumber"
+        placeholder="Enter Deposit Amount"
+      />
     </div>
-    <p-footer class="d-flex justify-content-center">
-        <button  type="button" pButton label="Enter Deposit" icon="pi pi-check"
-            class="modal-open-button" (click)="deposit()"></button>
-        <!-- <button *ngIf="currentClient.status ===0" type="button" pButton label="Re Deposit" icon="pi pi-check"
-            class="modal-open-button" (click)="deposit()"></button> -->
-    </p-footer>
+  </div>
+  <p-footer class="d-flex justify-content-center">
+    <button
+      type="button"
+      pButton
+      label="Enter Deposit"
+      icon="pi pi-check"
+      class="modal-open-button"
+      (click)="deposit()"
+    ></button>
+  </p-footer>
 </p-dialog>
 
 
-<div class="d-flex justify-content-between ">
-    <h2 class="ms-3 mb-2 mt-2"> Client Lot </h2>
+  <div
+    class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded"
+  >
+    <h2 class="ms-3 mb-2 mt-2">
+      <i class="fas fa-money-check-alt me-2"></i>Client Lot
+    </h2>
+    <button
+      type="button"
+      class="btn btn-primary me-3 my-2"
+      (click)="showAddClientLot()"
+    >
+      <i class="fas fa-plus me-1"></i> Add Lot
+    </button>
+  </div>
 
-    <button type="button" pButton icon="pi pi-plus" (click)="showAddClientLot()" title="Open modal to enter a number"
-        class="modal-open-button me-3 my-2 "> Add Lot </button>
-
-    <!-- Main Deposits Table -->
-</div>
-
-<p-table [value]="clientLots">
-    <ng-template pTemplate="header">
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="bg-primary text-white">
         <tr>
-            <th>Amount</th>
-            <th>Date</th>
-            <th>Retention Name</th>
-            <th> Delete </th>
-            <th> Update </th>
-
+          <th><i class="fas fa-dollar-sign me-1"></i>Amount</th>
+          <th><i class="fas fa-calendar-alt me-1"></i>Date</th>
+          <th><i class="fas fa-user me-1"></i>Retention Name</th>
+          <th><i class="fas fa-trash me-1"></i>Delete</th>
+          <th><i class="fas fa-edit me-1"></i>Update</th>
         </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rowData of clientLots">
+          <td>{{ rowData.amount }}</td>
+          <td>{{ rowData.date | date : "short" }}</td>
+          <td>{{ rowData.retentionName }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              title="Delete"
+              (click)="deleteLot(rowData.id)"
+            >
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info"
+              title="Update"
+              (click)="showUpdateClientLotModal(rowData.id)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============================== Dialogs ============================= -->
+  <!-- Dialog for Redeposits -->
+  <p-dialog
+  [(visible)]="displayDialog"
+  [style]="{ width: '35vw' }"
+  [modal]="true"
+  [closable]="true"
+  [resizable]="false"
+  header="Details"
+>
+  <div *ngIf="selectedDepositRedeposits.length; else noRedeposits">
+    <p-table [value]="selectedDepositRedeposits">
+      <ng-template pTemplate="header">
         <tr>
-            <td>{{rowData.amount}}</td>
-            <td>{{rowData.date | date: 'short'}}</td>
-            <td>{{rowData.retentionName}}</td>
-            <td>
-                <button type="button" pButton icon="pi pi-trash" title="Open modal to enter a number"
-                    class="modal-open-button delete-button" (click)="deleteLot(rowData.id)"></button>
-            </td>
-            <td>
-                <button type="button" pButton icon="pi pi-file-edit" class="modal-open-details-button"
-                    (click)="showUpdateClientLotModal(rowData.id)"
-
-                ></button>
-            </td>
+          <th><i class="fas fa-dollar-sign"></i> Amount</th>
+          <th><i class="fas fa-calendar-alt"></i> Date</th>
+          <th><i class="fas fa-user"></i> Depositor Name</th>
+          <th><i class="fas fa-user-tag"></i> Depositor Role Name</th>
         </tr>
-    </ng-template>
-</p-table>
-
-
-
-
-
-<!-- ============================== Dialogs ============================= -->
-
-<!-- Dialog for Redeposits -->
-
-
-
-<p-dialog [(visible)]="displayDialog" [style]="{width: '50vw'}" [modal]="true" [closable]="true" [resizable]="false"
-    header="Detail">
-    <div *ngIf="selectedDepositRedeposits.length; else noRedeposits">
-        <p-table [value]="selectedDepositRedeposits">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Depositor Name</th>
-                    <th>Depositor Role Name</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-redeposit>
-                <tr>
-                    <td>{{redeposit.amount}}</td>
-                    <td>{{redeposit.date | date}}</td>
-                    <td>{{redeposit.depositorName}}</td>
-                    <td>{{redeposit.depositorRoleName}}</td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="empty">
-                <tr>
-                    <td colspan="3">No redeposits found.</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-    <ng-template #noRedeposits>
-        <div>No redeposits available.</div>
-    </ng-template>
+      </ng-template>
+      <ng-template pTemplate="body" let-redeposit>
+        <tr>
+          <td>{{ redeposit.amount }}</td>
+          <td>{{ redeposit.date | date }}</td>
+          <td>{{ redeposit.depositorName }}</td>
+          <td>{{ redeposit.depositorRoleName }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="empty">
+        <tr>
+          <td colspan="4">No redeposits found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  <ng-template #noRedeposits>
+    <div>No redeposits available.</div>
+  </ng-template>
 </p-dialog>
 
-<!-- ========================= Dialog for assign retention ============================== -->
-<p-dialog class="d-flex justify-content-center" header="Select retention" [(visible)]="displayRetentionModal">
+
+  <!-- ========================= Dialog for assign retention ============================== -->
+  <p-dialog
+    class="d-flex justify-content-center"
+    [modal]="true"
+    [style]="{ width: '30vw' }"
+    header="Select retention"
+    [(visible)]="displayRetentionModal"
+  >
     <div class="field-container">
-        <label for="salesId">Sales ID:</label>
-        <br>
-        <select style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
-            [(ngModel)]="retentionId" class="custom-select">
-            <option value="" disabled selected>Select Retention ID</option>
-            <option *ngFor="let retention of retentionList" [value]="retention.id">{{ retention.name }}</option>
-        </select>
+      <label for="salesId"><i class="fas fa-user-tag"></i> Sales ID:</label>
+      <select
+        class="custom-select"
+        [(ngModel)]="retentionId"
+        class="custom-select"
+      >
+        <option value="" disabled selected>Select Retention ID</option>
+        <option *ngFor="let retention of retentionList" [value]="retention.id">
+          {{ retention.name }}
+        </option>
+      </select>
     </div>
     <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add Retention" icon="pi pi-check" class="modal-open-button"
-            (click)="assignToRetension()"></button>
+      <button
+        type="button"
+        pButton
+        label="Add Retention"
+        icon="pi pi-check"
+        class="modal-open-button"
+        (click)="assignToRetention()"
+      ></button>
     </p-footer>
-</p-dialog>
-<!-- =========================== Dialog for change team lead ======================================== -->
-<p-dialog class="d-flex justify-content-center" header="Select  teamleader" [(visible)]="displayTeamLeadModal">
+  </p-dialog>
+  <!-- =========================== Dialog for change team lead ======================================== -->
+
+  <p-dialog
+    class="d-flex justify-content-center"
+    [modal]="true"
+    [style]="{ width: '30vw' }"
+    header="Select  teamleader"
+    [(visible)]="displayTeamLeadModal"
+  >
     <div class="field-container">
-        <label for="teamlead">TeamLead : </label>
-        <br>
-        <select style="height: 45px; width:100%; border-radius: 5px; border: 1px solid rgb(199, 199, 236);"
-            [(ngModel)]="teamLeadId" class="custom-select">
-            <option value="" disabled selected>Select TeamLead ID</option>
-            <option *ngFor="let teamlead of teamLeadList" [value]="teamlead.id">{{ teamlead.name }}</option>
-        </select>
+      <label for="teamlead"><i class="fa-solid fa-user"></i> TeamLead : </label>
+      <br />
+      <select
+        class="custom-select"
+        [(ngModel)]="teamLeadId"
+        class="custom-select"
+      >
+        <option value="" disabled selected>Select TeamLead ID</option>
+        <option *ngFor="let teamlead of teamLeadList" [value]="teamlead.id">
+          {{ teamlead.name }}
+        </option>
+      </select>
     </div>
     <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add teamlead" icon="pi pi-check" class="modal-open-button"
-            (click)="changeTeamLead()"></button>
+      <button
+        type="button"
+        pButton
+        label="Add teamlead"
+        icon="pi pi-check"
+        class="modal-open-button"
+        (click)="changeTeamLead()"
+      ></button>
     </p-footer>
-</p-dialog>
-<!-- ======================== Add Lot Modal ========================= -->
-<p-dialog class="d-flex justify-content-center" header="Enter Lot" [(visible)]="displayClientLotModal">
-    <div>
-        <input type="number" class="text-center " [(ngModel)]="lotAmount">
+  </p-dialog>
+  <!-- ======================== Add Lot Modal ========================= -->
+  <p-dialog
+  class="d-flex justify-content-center"
+  header="Enter Lot"
+  [modal]="true"
+  [style]="{ width: '30vw' }"
+  [(visible)]="displayClientLotModal"
+>
+  <div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fas fa-money-check-alt text-danger"> L o t </i>
+      </span>
+      <input
+      min="0"
+        type="number"
+        class="form-control"
+        [(ngModel)]="lotAmount"
+        placeholder="Enter Lot Amount"
+      />
     </div>
-    <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add Lot" icon="pi pi-check" class="modal-open-button"
-            (click)="addLot()"></button>
+  </div>
+  <p-footer class="d-flex justify-content-center">
+    <button
+      type="button"
+      pButton
+      label="Add Lot"
+      icon="pi pi-check"
+      class="modal-open-button"
+      (click)="addLot()"
+    ></button>
+  </p-footer>
+</p-dialog>
 
-    </p-footer>
-</p-dialog>
-<p-dialog class="d-flex justify-content-center" header="Enter a new Lot" [(visible)]="displayUpdateClientLotModal">
+  <p-dialog
+    class="d-flex justify-content-center"
+    header="Enter a new Lot"
+    [(visible)]="displayUpdateClientLotModal"
+  >
     <div>
-        <input type="number" class="text-center " [(ngModel)]="lotAmount">
+      <input type="number" class="text-center" [(ngModel)]="lotAmount" />
     </div>
     <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="update Lot" icon="pi pi-check" class="modal-open-button"
-            (click)="updateLot()"></button>
-
+      <button
+        type="button"
+        pButton
+        label="update Lot"
+        icon="pi pi-check"
+        class="modal-open-button"
+        (click)="updateLot()"
+      ></button>
     </p-footer>
-</p-dialog>
+  </p-dialog>
 </div>

@@ -9,22 +9,6 @@
     transition: background-color 0.3s ease;
 }
 
-.delete-button {
-
-    border: none;
-    background-color: rgb(59, 6, 6);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.delete-button:hover {
-    background-color: rgb(41, 5, 5) !important;
-
-}
-
 .modal-open-details-button {
     border: none;
     background-color: rgb(28, 53, 7);
@@ -39,10 +23,18 @@
 .confirm-model-hieght:hover {
     background-color: #0c2947;
 }
-
+.custom-select {
+  height: 45px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(199, 199, 236);
+}
+.p-dialog{
+  width: 45% !important;
+}
 .p-dialog .p-dialog-content {
     padding: 20px;
-}
+  }
 
 .input-field {
     width: 100%;
@@ -97,19 +89,9 @@
     width: 100%;
 }
 
-
 .update-form-container>div {
     margin-bottom: 20px;
 }
-
-
-
-
-
-
-
-
-
 #registerDiv {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
@@ -117,19 +99,17 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 94vh;
+    height: 70vh;
   }
-  
+
   .registration-form {
   width: 80%;
-//   margin: 50px 80px 22px  80px;
   padding: 20px;
-//   border: 2px solid #336297;
   border: 2px solid #15273b;
   border-radius: 30px;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
   }
-  
+
   .form-title {
   text-align: center;
   font-size: 24px;
@@ -137,17 +117,17 @@
   font-weight: bolder;
   margin-bottom: 20px;
   }
-  
+
   .form-group {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
   }
-  
+
   .input-group {
-  flex: 0 0 48%; /* Adjust width as needed */
+  flex: 0 0 48%;
   }
-  
+
   label {
   display: block;
   font-size: 16px;
@@ -155,32 +135,34 @@
   margin-bottom: 5px;
   font-weight: bold;
   }
-  
+
   .form-control {
   width: 100%;
   font-size: 16px;
   border: 1px solid #63b8ff;
   border-radius: 5px;
   }
-  
+
   .btn-register {
   display: block;
   width: 100%;
-  background-color: #ff6600; /* Orange background color */
-  color: #fff; /* White text color */
+  background-color: #ff6600;
+  color: #fff;
   font-size: 18px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
   }
-  
+
   .btn-register:hover {
-  background-color: orangered; /* Slightly darker orange on hover */
+  background-color: orangered;
   }
-  
+
   .error-message {
   font-size: 14px;
   margin-top: 5px;
   }
-  
+  .btn-confirm {
+    height: 60px;
+}
