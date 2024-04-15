@@ -1,87 +1,54 @@
-.modal-open-button,
-.confirm-model-hieght {
-    border: none;
-    background-color: rgb(59, 6, 6);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Custom Table Styles */
+.custom-table .p-datatable-tbody > tr {
+  background-color: #f4f4f4; /* Light grey background */
 }
 
-.modal-open-details-button {
-    border: none;
-    background-color: rgb(28, 53, 7);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.custom-table th {
+  text-align: center;
+  background-color: #007bff; /* Blue header */
+  color: #ffffff;
 }
 
-.modal-open-button:hover,
-.confirm-model-hieght:hover {
-    background-color: rgb(41, 5, 5);
+.custom-table td {
+  text-align: center;
+  vertical-align: middle;
 }
 
-.p-dialog .p-dialog-content {
-    padding: 20px;
+.btn-details {
+  background-color: #007bff; /* Blue button */
+  color: #ffffff;
+  border: none;
 }
 
-.input-field {
-    width: 100%;
-    padding: 8px 12px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.form-label {
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-table .p-datatable-tbody > tr > td,
+  .custom-table .p-datatable-thead > tr > th {
+    text-align: left;
     display: block;
-    margin-bottom: 5px;
-    color: #333;
-    font-weight: bold;
-}
+  }
 
-.update-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 10px;
+  .custom-table .p-datatable-tbody > tr {
+    border-bottom: 1px solid #dee2e6;
+  }
 }
-
-.update-button:hover {
-    background-color: #0056b3;
-}
-
-.modal-content {
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.update-form-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.form-field-container {
-    display: flex;
-    flex-direction: column;
-    flex-basis: calc(50% - 10px);
-    min-width: 0;
-}
-
-.input-field {
-    width: 100%;
+.custom-table th,
+.custom-table td {
+  white-space: nowrap; /* Ensure text in th and td is displayed on one line */
+  border: 1px solid #ccc; /* Add border between th and td */
 }
 
 
-.update-form-container>div {
-    margin-bottom: 20px;
+
+/* Remove background color change on hover for deposit buttons */
+.btn.btn-danger:hover {
+  background-color: rgb(97, 20, 20) !important;
+}
+.input-group-text{
+  border-radius: 20px;
+}
+.search-text{
+  font-family: "Playball", cursive;
+  font-weight: 150;
+  font-size: large;
 }

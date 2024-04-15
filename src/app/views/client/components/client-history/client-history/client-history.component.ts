@@ -4,6 +4,7 @@ import { DepositService } from 'src/app/core/services/deposit/deposit.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
 import { MessageService } from 'primeng/api';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-client-history',
@@ -15,26 +16,31 @@ import { MessageService } from 'primeng/api';
 export class ClientHistoryComponent implements OnInit {
   updateForm!: FormGroup;
   displayUpdateModal!: boolean;
-  constructor(private salesService: SalesService, private messageService: MessageService, private clientService: ClientService, private formBuilder: FormBuilder, private depositService: DepositService) { }
   TeamLeaderId: string = "";
   ClientNationalId: string = "";
   ClientName: string = "";
   SalesId: string = "";
   StartDate: Date = new Date(new Date().setDate(new Date().getDate() - 60));
   EndDate: Date = new Date();
-  Page: number = 1
-  PageSize: number = 10
-  IsSortingAscending!: boolean
-  Take!: number
-  Skip!: number
+  Page: number = 1;
+  PageSize: number = 10;
+  IsSortingAscending!: boolean;
+  Take!: number;
+  Skip!: number;
   OrderByDirection!: string
-  items: any
+  items: any;
   displayModal: boolean = false;
   selectedNumber!: number;
   clientId!: string
   salesList!: any;
-  totalCount!: number
-  lastPage !: number
+  totalCount!: number;
+  lastPage !: number;
+  private searchSubject = new Subject<string>();
+  constructor(private salesService: SalesService, private messageService: MessageService, private clientService: ClientService, private formBuilder: FormBuilder, private depositService: DepositService) {
+    this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
+      this.filter(value);
+    });
+  }
   ngOnInit(): void {
     this.getClientHistory();
     this.initializeClientForm();
@@ -49,8 +55,14 @@ export class ClientHistoryComponent implements OnInit {
       }
     })
   }
-  getClientHistory() {
-    const queryString = `?TeamLeaderId=${this.TeamLeaderId}&ClientNationalId=${this.ClientNationalId}&ClientName=${this.ClientName}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
+  getClientHistory(clientName?: string) {
+    let queryString;
+    if (clientName) {
+      queryString = `?TeamLeaderId=${this.TeamLeaderId}&ClientNationalId=${this.ClientNationalId}&ClientName=${clientName}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
+    }
+    else {
+      queryString = `?TeamLeaderId=${this.TeamLeaderId}&ClientNationalId=${this.ClientNationalId}&ClientName=${this.ClientName}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
+    }
 
     this.clientService.getAllClients(queryString).subscribe({
       next: (response) => {
@@ -63,7 +75,12 @@ export class ClientHistoryComponent implements OnInit {
     })
   }
 
-
+  filter(event: any) {
+    this.getClientHistory(event);
+  }
+  onInputChange(event: any) {
+    this.searchSubject.next(event.target.value);
+  }
 
   showModal(rowData: any): void {
     this.displayModal = true;
@@ -84,7 +101,7 @@ export class ClientHistoryComponent implements OnInit {
   //   this.displayModal = false;
   // }
 
-  delteClient(clientId:string) {
+  delteClient(clientId: string) {
     this.clientService.deleteClient(clientId).subscribe({
       next: () => {
         this.messageService.add({ severity: 'error', summary: 'Deleted', detail: 'Client Deleted successfully' });

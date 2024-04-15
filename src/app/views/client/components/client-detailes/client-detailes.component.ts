@@ -163,7 +163,7 @@ export class ClientDetailesComponent implements OnInit {
       }
     })
   }
-  assignToRetension() {
+  assignToRetention() {
     this.clientService.assignClientToRetention(this.clientId, this.retentionId).subscribe({
       next: (data) => {
         console.log(data);
