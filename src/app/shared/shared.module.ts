@@ -32,7 +32,7 @@ import { MainContentComponent } from './components/main-content/main-content.com
     SideBarComponent,
     ButtonModule,
     SidebarModule,
-    MainContentComponent
+    MainContentComponent,
   ]
 })
 export class SharedModule { }

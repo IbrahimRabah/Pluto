@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,16 @@ export class AuthenticationService {
     console.log("role", role)
     return role;
   }
-
+  isTokenExpired(token: string): boolean {
+    if (!token) {
+      return true;
+    }
+    const decodedToken: any = jwtDecode(token);
+    if (!decodedToken || !decodedToken.exp) {
+      return true;
+     }
+    const expirationTime = decodedToken.exp;
+    const now = new Date().getTime() / 1000;
+    return expirationTime < now;
+  }
 }

@@ -8,6 +8,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { GlobalErrorInterceptor } from './core/interceptors/global-error.interceptor';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -20,14 +23,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     HttpClientModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,ToastModule,
+
   ],
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalErrorInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })

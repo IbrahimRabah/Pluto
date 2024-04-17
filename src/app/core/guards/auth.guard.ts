@@ -11,6 +11,8 @@ canActivate(
   next:ActivatedRouteSnapshot,
   state:RouterStateSnapshot
 ): boolean {
+    const userToken = this.auth.getToken();
+    const isExpired = this.auth.isTokenExpired(userToken);
     const roles = next.data['roles'] as Array<string>;
     const userRole = this.auth.getUserRole();
     let logged;
@@ -18,7 +20,7 @@ canActivate(
     this.auth.isAuthenticated$.subscribe((res)=>{
       logged = res
     })
-    if (logged && userRole && roles.includes(userRole) ) {
+    if (logged && !isExpired && userRole && roles.includes(userRole) ) {
       return true;
     }
     else{
