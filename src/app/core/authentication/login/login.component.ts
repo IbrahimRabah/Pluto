@@ -29,9 +29,11 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     {
+      
       if (!this.loginForm.invalid) {
         this.auth.login(this.loginForm.value).subscribe({
           next: (response) => {
+            
             if (response.statusCode == 200) {
                 let role = response.data.roleName;
                 let tenantId = response.data.tenantId;
@@ -77,6 +79,8 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+
+
   toggle(action:string)
   {
     switch(action)
