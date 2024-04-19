@@ -37,6 +37,7 @@
           <th>Seller <i class="fa-solid fa-users"></i></th>
           <th>Retention <i class="fa-solid fa-person-rays"></i></th>
           <th>Status</th>
+          <th>Detailes <i class="fa-solid fa-info"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -52,6 +53,15 @@
           </td>
           <td *ngIf="!item.retentionName">Not-Registered</td>
           <td>{{ item.statusName }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-success"
+              routerLink="/client/clientDetailes/{{ item.id }}"
+            >
+              Details
+            </button>
+          </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
