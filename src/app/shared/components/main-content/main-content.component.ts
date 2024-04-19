@@ -7,10 +7,10 @@ import { AuthenticationService } from 'src/app/core/authentication/services/auth
   templateUrl: './main-content.component.html',
   styleUrls: ['./main-content.component.scss']
 })
-export class MainContentComponent implements OnInit{
+export class MainContentComponent implements OnInit {
   isCollapsed = false;
   showItem: boolean = false;
-  userRole:string='';
+  userRole: string = '';
   items = [
     { name: 'Admin', num: 54, icon: 'fa-solid fa-comments' },
     { name: 'Manger', num: 2500, icon: 'fa-solid fa-user-tie' },
@@ -21,19 +21,22 @@ export class MainContentComponent implements OnInit{
     { name: 'Retention', num: 54, icon: 'fa-solid fa-person-rays' },
     { name: 'Interviewee', num: 54, icon: 'fa-solid fa-user-tie' }
   ];
-  constructor(private router:Router, private auth:AuthenticationService){}
+  constructor(private router: Router, private auth: AuthenticationService) { }
   ngOnInit(): void {
-  this.getUserRole()
+
+    this.auth.isAuthenticated$.subscribe({
+      next: () => { this.getUserRole(); }
+    })
   }
-  toggleSidebar () {
+  toggleSidebar() {
     this.isCollapsed = !this.isCollapsed
     this.showItem = !this.showItem
   }
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/auth/login']);
   }
-  getUserRole(){
-    this.userRole= this.auth.getUserRole()
+  getUserRole() {
+    this.userRole = this.auth.getUserRole()
   }
 }

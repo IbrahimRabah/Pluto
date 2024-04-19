@@ -9,6 +9,7 @@ import { TeamLeaderService } from 'src/app/core/services/teamleader/team-leader.
 import { DepositService } from 'src/app/core/services/deposit/deposit.service';
 import { RedepositService } from 'src/app/core/services/redeposit/redeposit.service';
 import { ClientLotService } from '../../services/client-lot.service';
+import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
 
 @Component({
   selector: 'app-client-detailes',
@@ -28,6 +29,10 @@ export class ClientDetailesComponent implements OnInit {
   teamLeadId: any;
   displayRetentionModal!: boolean
   displayTeamLeadModal!: boolean
+  displayRedepositModal!: boolean
+  displayUpdateRedepositModal!: boolean
+  redepositAmount!: number
+  updateRedepositAmount!: number
   expandedRows: { [key: string]: boolean } = {};
   selectedDepositRedeposits: any[] = [];
   displayDialog: boolean = false;
@@ -40,7 +45,9 @@ export class ClientDetailesComponent implements OnInit {
   displayUpdateClientLotModal: boolean = false
   lotAmount: number = 0;
   updatedLotId!: string
-
+  depositId!: string
+  reDepositId!: string
+  userRole: string = ""
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -51,18 +58,30 @@ export class ClientDetailesComponent implements OnInit {
     private retentionService: RetentionService,
     private teamLeaderService: TeamLeaderService,
     private redepositService: RedepositService,
-    private clientLotService: ClientLotService
+    private clientLotService: ClientLotService,
+    private auth: AuthenticationService
   ) { }
 
   ngOnInit() {
+    this.getUserRole();
     this.initRout();
-    this.getSales();
     this.getClientData();
     this.initializeClientForm();
     this.getDepositForClient();
-    this.getRetention();
+    
+    if (this.userRole !== 'Retention') {
+      this.getSales();
+    }
+
+    if (this.userRole === 'Manager') {
+      this.getRetention();
+    }
+
     this.getTeamLead();
     this.getClientLotForClient();
+  }
+  getUserRole() {
+    this.userRole = this.auth.getUserRole()
   }
 
   initRout() {
@@ -114,15 +133,15 @@ export class ClientDetailesComponent implements OnInit {
   deposit(): void {
     // if (this.clientData.status === 1) {
 
-      this.depositService.addDepositForClient({
-        deposit: this.selectedNumber,
-        clientId: this.clientId
-      }).subscribe({
-        next: (data: any) => {
-          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
-          this.getDepositForClient();
-        }
-      })
+    this.depositService.addDepositForClient({
+      deposit: this.selectedNumber,
+      clientId: this.clientId
+    }).subscribe({
+      next: (data: any) => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
+        this.getDepositForClient();
+      }
+    })
     // }
     // else {
     //   // this.redepositService.reDeposit()
@@ -130,6 +149,47 @@ export class ClientDetailesComponent implements OnInit {
     this.displayModal = false;
   }
 
+  reDeposit(depositId: string) {
+    this.displayRedepositModal = true;
+    this.redepositAmount = 0;
+    this.depositId = depositId;
+  }
+
+  openUpdateRedeposit(redepositId: string, redepositAmount: number) {
+    this.displayUpdateRedepositModal = true;
+    this.updateRedepositAmount = redepositAmount;
+    this.reDepositId = redepositId;
+  }
+
+  updateRedeposit() {
+    this.redepositService.updateReDeposit(this.reDepositId, {
+      amount: this.updateRedepositAmount
+    }).subscribe({
+      next: () => {
+        this.getDepositForClient();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Redeposit Done' });
+        this.displayUpdateRedepositModal = false;
+        this.displayDialog = false;
+
+      }
+    })
+    this.updateRedepositAmount = 0;
+  }
+
+  redeposit() {
+    this.redepositService.reDeposit({
+      depositId: this.depositId,
+      clientId: this.clientId,
+      amount: this.redepositAmount
+    }).subscribe({
+      next: () => {
+        this.getDepositForClient();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Redeposit Done' });
+        this.displayRedepositModal = false;
+
+      }
+    })
+  }
   addLot() {
     this.clientLotService.addClientLot({
       clientId: this.clientId,
@@ -241,11 +301,12 @@ export class ClientDetailesComponent implements OnInit {
     }
   }
 
-  deActive() {
-    this.depositService.deActivateClient(this.clientId).subscribe({
+  deActive(depositId: string) {
+    this.depositService.deActivateClient(depositId).subscribe({
       next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'User deactivated Successfully' });
         this.getDepositForClient();
+        this.getClientData();
       }
     })
   }

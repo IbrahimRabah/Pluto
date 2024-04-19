@@ -7,15 +7,15 @@ import { environment } from 'src/environment';
 })
 export class RedepositService {
   baseUrl = environment.baseUrl;
-  currentUrl = "Deposit";
+  currentUrl = "Redeposit";
   constructor(private httpClient: HttpClient) { }
 
   reDeposit(body: any) {
-    this.httpClient.post(`${this.baseUrl + this.currentUrl}`, body);
+    return this.httpClient.post(`${this.baseUrl + this.currentUrl}`, body);
   }
 
   updateReDeposit(redepositId: any, body: any) {
-    this.httpClient.put(`${this.baseUrl + this.currentUrl}/${redepositId}`, body);
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl}/${redepositId}`, body);
   }
 
 }
