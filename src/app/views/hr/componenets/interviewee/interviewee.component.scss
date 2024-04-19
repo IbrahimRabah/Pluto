@@ -1,0 +1,76 @@
+@import "primeicons/primeicons.css";
+#registerDiv {
+  background-color: #c9d6ff;
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 94vh;
+}
+
+.registration-form {
+width: 80%;
+margin: 50px 80px 22px  80px;
+padding: 20px;
+border: 2px solid #336297;
+border-radius: 30px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+text-align: center;
+font-size: 24px;
+color: #15273b;
+font-weight: bolder;
+margin-bottom: 20px;
+}
+
+.form-group {
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+}
+
+.input-group {
+flex: 0 0 48%; /* Adjust width as needed */
+}
+
+label {
+display: block;
+font-size: 16px;
+color: #002f65;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+.form-control {
+width: 100%;
+font-size: 16px;
+border: 1px solid #63b8ff;
+border-radius: 5px;
+}
+
+.btn-register {
+display: block;
+width: 100%;
+background-color: #ff6600; /* Orange background color */
+color: #fff; /* White text color */
+font-size: 18px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.btn-register:hover {
+background-color: orangered; /* Slightly darker orange on hover */
+}
+
+.error-message {
+font-size: 14px;
+margin-top: 5px;
+}
+::ng-deep .p-calendar {
+  width: 100%;
+}

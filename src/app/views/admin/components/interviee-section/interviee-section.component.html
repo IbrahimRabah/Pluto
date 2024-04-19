@@ -29,22 +29,26 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Name <i class="fas fa-user"></i></th>
-          <th>PhoneNumber <i class="fas fa-phone"></i></th>
-          <th>Company Phone <i class="fas fa-building"></i></th>
-          <th>Email <i class="fas fa-envelope"></i></th>
-          <th>National_ID <i class="fas fa-id-card"></i></th>
-          <th>Total_Clients <i class="fas fa-calculator"></i></th>
+          <th class="border">Name <i class="fas fa-user"></i></th>
+          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+          <th class="border">Email <i class="fas fa-envelope"></i></th>
+          <th class="border">National_ID <i class="fas fa-id-card"></i></th>
+          <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
+          <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
+          <th class="border">Hr_Name <i class="fas fa-user"></i></th>
+          <th class="border">Change_Hr <i class="fas fa-edit"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <td>{{ item.companyPhoneNumber }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.nationalId }}</td>
-          <td>{{ item.numberOfClients }}</td>
+          <td class="border">{{ item.name }}</td>
+          <td class="border">{{ item.phoneNumber }}</td>
+          <td class="border">{{ item.email }}</td>
+          <td class="border">{{ item.nationalId }}</td>
+          <td class="border">{{ item.dateOfBirth }}</td>
+          <td class="border">{{ item.addedDate }}</td>
+          <td class="border">{{ item.hrName }}</td>
+          <th (click)="showHrModal(item.id)" class="border bg-success"><button><i class="fas fa-edit"></i></button></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -68,3 +72,37 @@
     </p-table>
   </div>
 </div>
+
+
+<p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+[style]="{ width: '30vw' }"
+header="Select  Hr"
+[(visible)]="displayHrModal"
+>
+<div class="field-container">
+  <label for="hr"><i class="fa-solid fa-user"></i> Hr : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="hrId"
+  >
+    <option value="" disabled selected>Select Hr ID</option>
+    <option *ngFor="let hr of allHrs"  [value]="hr.id">
+      {{ hr.name }}
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="changeHr()"
+  ></button>
+</p-footer>
+</p-dialog>
+<p-toast></p-toast>

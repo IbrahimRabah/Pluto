@@ -37,6 +37,10 @@ export class AdminService {
   {
     return this.http.get<any>(`${this.baseUrl +'Interviewee?'+query}`);
   }
+  changeIntervieweeHr(query:string):Observable<any>
+  {
+    return this.http.put<any>(`${this.baseUrl}Interviewee/${query}`,{})
+  }
 
 
 };

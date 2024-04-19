@@ -124,6 +124,31 @@
                 </span>
               </a>
             </li>
+            <!-- ******************** Hr ****************************** -->
+            <li
+              routerLink="/hr/home"
+              routerLinkActive="active"
+              class="nav-item"
+              *ngIf="userRole == 'Hr'"
+            >
+              <a class="nav-link align-middle px-0">
+                <i class="fa-solid fa-home fa-lg text-primary m-3"></i>
+                <span class="ms-1 d-none d-sm-inline text-light"> Home </span>
+              </a>
+            </li>
+            <li
+              routerLink="/hr/add-interviewee"
+              routerLinkActive="active"
+              class="nav-item"
+              *ngIf="userRole == 'Hr'"
+            >
+              <a class="nav-link align-middle px-0">
+                <i class="fa-solid fa-user fa-lg text-warning m-3"></i>
+                <span class="ms-1 d-none d-sm-inline text-light">
+                  Add-Interviewee
+                </span>
+              </a>
+            </li>
             <!-- ******************** seller ****************************** -->
             <li
               routerLink="/sales/salesHome"
@@ -149,7 +174,6 @@
                 </span>
               </a>
             </li>
-
             <!-- ******************** TeamLead  && Retention ****************************** -->
             <li
               routerLink="/client/clientHome"

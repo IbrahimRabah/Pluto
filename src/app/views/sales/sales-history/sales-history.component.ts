@@ -29,7 +29,6 @@ export class SalesHistoryComponent implements OnInit {
   Take!: number
   Skip!: number
   OrderByDirection!: string
-
   salesHome!: FormGroup
   slaesId: string = "";
   addedDate!: Date
