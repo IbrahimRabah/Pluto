@@ -16,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { HrSectionComponent } from './components/hr-section/hr-section.component';
 import { RetentionSectionComponent } from './components/retention-section/retention-section.component';
 import { IntervieeSectionComponent } from './components/interviee-section/interviee-section.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { IntervieeSectionComponent } from './components/interviee-section/interv
     InputTextModule,
     ButtonModule,
     MultiSelectModule,
-    FormsModule
+    FormsModule,
+    DropdownModule,
+    DialogModule,
+    ToastModule
   ]
 })
 export class AdminModule { }
