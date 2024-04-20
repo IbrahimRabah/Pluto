@@ -10,10 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
+import { SalesListComponent } from './sales-list/sales-list.component';
 @NgModule({
   declarations: [
     SalesHistoryComponent,
-    SalesHomeComponent
+    SalesHomeComponent,
+    SalesListComponent
   ],
   imports: [
     CommonModule,

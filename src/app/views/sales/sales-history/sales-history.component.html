@@ -2,13 +2,25 @@
     <div class="row ">
         <div class="d-flex justify-content-between mb-3">
             <label for="StartDate" class="fw-bold mt-2"> Start Date : </label>
-            <p-calendar [(ngModel)]="StartDate" (ngModelChange)="changeClander()" [showIcon]="true" inputId="StartDate"></p-calendar>
+            <p-calendar [(ngModel)]="StartDate" (ngModelChange)="changeClander()" [showIcon]="true"
+                inputId="StartDate"></p-calendar>
             <label for="EndDate" class="fw-bold mt-2">End Date : </label>
-            <p-calendar [(ngModel)]="EndDate" (ngModelChange)="changeClander()" [showIcon]="true" inputId="EndDate"></p-calendar>
+            <p-calendar [(ngModel)]="EndDate" (ngModelChange)="changeClander()" [showIcon]="true"
+                inputId="EndDate"></p-calendar>
         </div>
-        <p-table class="py-2" [value]="salesHistory" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true"
-            [tableStyle]="{ 'max-width': '100%' }" [responsive]="true"
-            >
+
+        <div class="field-container">
+            <label for="hr"><i class="fa-solid fa-user"></i> Seller : </label>
+            <br />
+            <select class="custom-select" [(ngModel)]="SalesId" (change)="getSalesHistory()">
+                <option value="" disabled selected>Select Hr ID</option>
+                <option *ngFor="let seller of salesList" [value]="seller.id">
+                    {{ seller.name }}
+                </option>
+            </select>
+        </div>
+        <p-table class="py-2" [value]="salesHistory" [paginator]="true" [rows]="10" [totalRecords]="totalCount"
+            [showCurrentPageReport]="true" [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
             <ng-template pTemplate="header">
                 <tr>
                     <th>Name</th>
@@ -43,10 +55,12 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">
-                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()" styleClass="p-button-text"></p-button>
+                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()"
+                    styleClass="p-button-text"></p-button>
             </ng-template>
             <ng-template pTemplate="paginatorright">
-                <p-button type="button" icon="pi pi-chevron-right" (click)="next()" styleClass="p-button-text"></p-button>
+                <p-button type="button" icon="pi pi-chevron-right" (click)="next()"
+                    styleClass="p-button-text"></p-button>
             </ng-template>
         </p-table>
     </div>

@@ -1,12 +1,63 @@
-.btn{
-    border:2px  solid #214162;
+.btn {
+    border: 2px solid #214162;
     color: #214162;
     background-color: aliceblue;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #214162;
     color: white;
 }
-.row{
-     width: 80%;
+
+.row {
+    width: 80%;
+}
+
+.field-container {
+    margin-bottom: 20px;
+}
+
+.field-container label {
+    font-size: 16px;
+    color: #333;
+}
+
+.field-container select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.field-container select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.field-container {
+    margin-bottom: 20px;
+}
+
+.field-container label {
+    font-weight: bold;
+}
+
+.field-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.field-container select:focus {
+    outline: none;
+    border-color: #007bff;
+    /* Adjust the color as needed */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+    /* Adjust the color as needed */
 }
