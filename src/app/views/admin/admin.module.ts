@@ -19,6 +19,7 @@ import { IntervieeSectionComponent } from './components/interviee-section/interv
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ToastModule } from 'primeng/toast';
     FormsModule,
     DropdownModule,
     DialogModule,
-    ToastModule
+    ToastModule,
+    ToggleButtonModule
   ]
 })
 export class AdminModule { }

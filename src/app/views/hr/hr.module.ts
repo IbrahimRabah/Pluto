@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CalendarModule } from 'primeng/calendar';
     HrRoutingModule,
     FormsModule,ReactiveFormsModule,TableModule,ToastModule,
     CalendarModule,ButtonModule,
+    DialogModule,
   ]
 })
 export class HrModule { }

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Role } from '../../models/Role';
 import { HttpClient } from '@angular/common/http';
 import { TeamLeaderService } from '../../services/teamleader/team-leader.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +21,7 @@ export class RegistrationComponent implements OnInit {
   managerRoleOptions: Role[] = [{ id: 2, name: "TeamLeader" }, { id: 3, name: "Sales" }, { id: 4, name: "Hr" }, { id: 5, name: "Retention" }]
   teamLeaderRoleOptions: Role[] = [{ id: 3, name: "Sales" }]
   teamLeads: Role[] = [{ id: 1, name: "Ibrahim" }, { id: 2, name: "Abdallah" }, { id: 3, name: "Moeen" }, { id: 4, name: "Nour" }]
-  constructor(private auth: AuthenticationService, private teamLeaderService: TeamLeaderService) { }
+  constructor(private auth: AuthenticationService, private teamLeaderService: TeamLeaderService, private messageService:MessageService) { }
   ngOnInit(): void {
     this.initialization();
     this.getTeamLead();
@@ -64,6 +65,7 @@ export class RegistrationComponent implements OnInit {
         {
           next: (response) => {
             console.log(response);
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Added Successfully' });
           },
           error: (err) => {
             console.log(err.message);

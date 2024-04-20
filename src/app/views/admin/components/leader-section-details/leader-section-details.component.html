@@ -29,32 +29,45 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Name <i class="fas fa-user"></i></th>
-          <th>PhoneNumber <i class="fas fa-phone"></i></th>
-          <th>Company Phone <i class="fas fa-building"></i></th>
-          <th>Email <i class="fas fa-envelope"></i></th>
-          <th>National ID <i class="fas fa-id-card"></i></th>
-          <th>Sellers <i class="fas fa-users"></i></th>
-          <th>Clients <i class="fas fa-user-tie"></i></th>
-          <th>Details <i class="fas fa-info-circle"></i></th>
+          <th class="border">Name <i class="fas fa-user"></i></th>
+          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+          <th class="border">Company Phone <i class="fas fa-building"></i></th>
+          <th class="border">Email <i class="fas fa-envelope"></i></th>
+          <th class="border">National ID <i class="fas fa-id-card"></i></th>
+          <th class="border">Sellers <i class="fas fa-users"></i></th>
+          <th class="border">Clients <i class="fas fa-user-tie"></i></th>
+          <th class="border">Sellers <i class="fas fa-users"></i></th>
+          <th class="border">Interviewees <i class="fas fa-users"></i></th>
+
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <td>{{ item.companyPhoneNumber }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.nationalId }}</td>
-          <td>{{ item.numberOfSales }}</td>
-          <td>{{ item.numberOfClients }}</td>
-          <td>
+          <td class="border">{{ item.name }}</td>
+          <td class="border">{{ item.phoneNumber }}</td>
+          <td class="border">{{ item.companyPhoneNumber }}</td>
+          <td class="border">{{ item.email }}</td>
+          <td class="border">{{ item.nationalId }}</td>
+          <td class="border">{{ item.numberOfSales }}</td>
+          <td class="border">{{ item.numberOfClients }}</td>
+          <td class="border">
             <button
               type="button"
               class="btn btn-xs btn-details"
               data-bs-toggle="modal"
               href="#exampleModalToggle"
               (click)="getSalesById(item.id)"
+            >
+              <i class="fas fa-eye"></i> View
+            </button>
+          </td>
+          <td class="border">
+            <button
+              type="button"
+              class="btn btn-xs btn-details"
+              data-bs-toggle="modal"
+              href="#teamLeaderInterviewees"
+              (click)="getIntervieweesByLeaderId(item.id)"
             >
               <i class="fas fa-eye"></i> View
             </button>
@@ -82,80 +95,98 @@
     </p-table>
   </div>
 </div>
-<div
-  class="modal fade w-100"
-  id="exampleModalToggle"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" [style]="{ width: '100vw' }">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
-          Team_Leader_Sellers <i class="fas fa-users"></i>
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body m-0 p-0">
-        <div class="py-5 d-flex justify-content-center">
-          <div class="row" style="width: 100%">
-            <p-table
-              class="custom-table py-2"
-              [value]="allTeamLeadersSellers"
-              [paginator]="true"
-              [rows]="10"
-              [totalRecords]="totalCount"
-              [showCurrentPageReport]="true"
-              [tableStyle]="{ 'max-width': '100%' }"
-              [responsive]="true"
-            >
-              <ng-template pTemplate="header">
-                <tr>
-                  <th>Name <i class="fas fa-user"></i></th>
-                  <th>PhoneNumber <i class="fas fa-phone"></i></th>
-                  <th>Company Phone <i class="fas fa-building"></i></th>
-                  <th>Email <i class="fas fa-envelope"></i></th>
-                  <th>National ID <i class="fas fa-id-card"></i></th>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="body" let-item>
-                <tr>
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.phoneNumber }}</td>
-                  <td>{{ item.companyPhoneNumber }}</td>
-                  <td>{{ item.email }}</td>
-                  <td>{{ item.nationalId }}</td>
-                </tr>
-              </ng-template>
-              <ng-template pTemplate="paginatorleft">
-                <p-button
-                  type="button"
-                  icon="pi pi-chevron-left"
-                  (click)="previousPage()"
-                  styleClass="p-button-text"
-                  label="Previous"
-                ></p-button>
-              </ng-template>
-              <ng-template pTemplate="paginatorright">
-                <p-button
-                  type="button"
-                  icon="pi pi-chevron-right"
-                  (click)="nextPage()"
-                  styleClass="p-button-text fw-bold"
-                  >Next</p-button
-                >
-              </ng-template>
-            </p-table>
+<div class="modal fade" id="exampleModalToggle" tabindex="-1" aria-labelledby="exampleModalToggleLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+                  Team_Leader_Sellers <i class="fas fa-users"></i>
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
+          <div class="modal-body m-0 p-0">
+              <div class="py-5 d-flex justify-content-center">
+                  <div class="row" style="width: 100%">
+                      <p-table class="custom-table py-2" [value]="allTeamLeadersSellers" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true" [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
+                          <ng-template pTemplate="header">
+                              <tr>
+                                  <th class="border">Name <i class="fas fa-user"></i></th>
+                                  <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+                                  <th class="border">Company Phone <i class="fas fa-building"></i></th>
+                                  <th class="border">Email <i class="fas fa-envelope"></i></th>
+                                  <th class="border">National ID <i class="fas fa-id-card"></i></th>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-item>
+                              <tr>
+                                  <td class="border">{{ item.name }}</td>
+                                  <td class="border">{{ item.phoneNumber }}</td>
+                                  <td class="border">{{ item.companyPhoneNumber }}</td>
+                                  <td class="border">{{ item.email }}</td>
+                                  <td class="border">{{ item.nationalId }}</td>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="paginatorleft">
+                              <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text" label="Previous"></p-button>
+                          </ng-template>
+                          <ng-template pTemplate="paginatorright">
+                              <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()" styleClass="p-button-text fw-bold">Next</p-button>
+                          </ng-template>
+                      </p-table>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer"></div>
       </div>
-      <div class="modal-footer"></div>
-    </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="teamLeaderInterviewees" tabindex="-1" aria-labelledby="teamLeaderIntervieweesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="teamLeaderIntervieweesLabel">
+                  Team_Leader_Interviewees <i class="fas fa-users"></i>
+              </h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body m-0 p-0">
+              <div class="py-5 d-flex justify-content-center">
+                  <div class="row" style="overflow-x: auto; width: 100%;">
+                      <p-table class="custom-table py-2" [value]="allTeamLeadersInterviewees" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '800px' }" [responsive]="true">
+                          <ng-template pTemplate="header">
+                              <tr>
+                                  <th class="border">Name <i class="fas fa-user"></i></th>
+                                  <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+                                  <th class="border">Email <i class="fas fa-envelope"></i></th>
+                                  <th class="border">National_ID <i class="fas fa-id-card"></i></th>
+                                  <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
+                                  <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="body" let-item>
+                              <tr *ngIf="allTeamLeadersInterviewees.length > 0">
+                                  <td class="border">{{ item.name }}</td>
+                                  <td class="border">{{ item.phoneNumber }}</td>
+                                  <td class="border">{{ item.email }}</td>
+                                  <td class="border">{{ item.nationalId }}</td>
+                                  <td class="border">{{ item.dateOfBirth }}</td>
+                                  <td class="border">{{ item.addedDate }}</td>
+                              </tr>
+                          </ng-template>
+                          <ng-template pTemplate="paginatorleft">
+                              <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text" label="Previous"></p-button>
+                          </ng-template>
+                          <ng-template pTemplate="paginatorright">
+                              <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()" styleClass="p-button-text fw-bold">Next</p-button>
+                          </ng-template>
+                      </p-table>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer"></div>
+      </div>
+  </div>
+</div>
+

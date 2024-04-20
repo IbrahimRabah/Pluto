@@ -16,16 +16,24 @@
       [responsive]="true"
     >
       <ng-template pTemplate="caption">
-        <span class="p-input-icon-left ml-auto">
-          <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            id="search-interviewee"
-            placeholder="Search keyword"
-            (input)="onInputChange($event)"
-          />
-        </span>
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <!-- Search input -->
+          <span class="p-input-icon-left">
+
+            <label for="search-interviewee " class="mx-1">Search : </label>
+            <input
+              pInputText
+              type="text"
+              id="search-interviewee"
+              placeholder="Search keyword"
+              (input)="onInputChange($event)"
+            />
+          </span>
+          <!-- Toggle button for "My Interviewee" -->
+          <p-toggleButton   (onChange)="toggleInterviewees($event)"
+          onLabel="All_Interviewees" offLabel="My_Interviewee"></p-toggleButton>
+        </div>
+
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
@@ -36,6 +44,7 @@
           <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
           <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
           <th class="border">Hr_Name <i class="fas fa-user"></i></th>
+          <th class="border">Assign_To <i class="fas fa-user-tie"></i></th>
           <th class="border">Change_Hr <i class="fas fa-edit"></i></th>
         </tr>
       </ng-template>
@@ -48,7 +57,8 @@
           <td class="border">{{ item.dateOfBirth }}</td>
           <td class="border">{{ item.addedDate }}</td>
           <td class="border">{{ item.hrName }}</td>
-          <th (click)="showHrModal(item.id)" class="border bg-success"><button><i class="fas fa-edit"></i></button></th>
+          <td class="border">{{ item.superiorName }}</td>
+          <th (click)="showHrModal(item.id)" class="border bg-success"><i class="fas fa-edit"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -72,7 +82,6 @@
     </p-table>
   </div>
 </div>
-
 
 <p-dialog
 class="d-flex justify-content-center"

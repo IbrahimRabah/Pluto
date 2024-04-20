@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
 import { HrService } from '../../services/hr.service';
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interviewee',
@@ -10,7 +12,7 @@ import { HrService } from '../../services/hr.service';
 })
 export class IntervieweeComponent {
   addInterviewee!: FormGroup;
-  constructor(private hr: HrService) { }
+  constructor(private hr: HrService, private messageService:MessageService,private router:Router) { }
   ngOnInit(): void {
     this.initialization();
   }
@@ -37,6 +39,8 @@ export class IntervieweeComponent {
         {
           next: (response) => {
             console.log(response);
+            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Interviewee Added Successfully' });
+            this.router.navigate(['/hr/home']);
           },
           error: (err) => {
             console.log(err.message);
