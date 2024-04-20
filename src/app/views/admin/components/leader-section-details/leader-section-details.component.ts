@@ -10,6 +10,7 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class LeaderSectionDetailsComponent {
   allTeamLeadersSellers!: MemberResponse[];
+  allTeamLeadersInterviewees!:MemberResponse[];
   allTeamLeaders!: MemberResponse[];
   teamLeaderId!: string;
   Page: number = 1;
@@ -21,20 +22,18 @@ export class LeaderSectionDetailsComponent {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
-   }
+  }
   ngOnInit(): void {
     this.getAllTeamLeaders();
   }
-  getAllTeamLeaders(TeamLeaderName?:string ): void {
+  getAllTeamLeaders(TeamLeaderName?: string): void {
     let queryURL;
-    if(TeamLeaderName)
-      {
-         queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${TeamLeaderName}`;
-      }
-      else
-      {
-        queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
-      }
+    if (TeamLeaderName) {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${TeamLeaderName}`;
+    }
+    else {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
     this.admin.getAllTeamLeaders(queryURL).subscribe({
       next: (response: any) => {
         this.allTeamLeaders = response.data.items; console.log(this.allTeamLeaders);;
@@ -43,7 +42,7 @@ export class LeaderSectionDetailsComponent {
       error: (error) => { console.log(error); }
     })
   }
-  filter(event:any){
+  filter(event: any) {
     this.getAllTeamLeaders(event);
   }
   onInputChange(event: any) {
@@ -66,11 +65,25 @@ export class LeaderSectionDetailsComponent {
     this.teamLeaderId = id;
     this.getAllTeamLeadersSellers();
   }
+  getIntervieweesByLeaderId(id: string) {
+    this.teamLeaderId = id;
+    this.getAllTeamLeadersInterviewees();
+  }
   getAllTeamLeadersSellers() {
     const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderId=${this.teamLeaderId}`;
     this.admin.getAllSellers(queryURL).subscribe({
       next: (response: any) => {
         this.allTeamLeadersSellers = response.data.items; console.log(this.allTeamLeadersSellers);;
+        this.totalCount = Math.ceil(response.data.count);
+      },
+      error: (error) => { console.log(error); }
+    })
+  }
+  getAllTeamLeadersInterviewees() {
+    const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SuperiorId=${this.teamLeaderId}`;
+    this.admin.getAllInterviewees(queryURL).subscribe({
+      next: (response: any) => {
+        this.allTeamLeadersInterviewees = response.data.items; console.log(this.allTeamLeadersInterviewees);;
         this.totalCount = Math.ceil(response.data.count);
       },
       error: (error) => { console.log(error); }

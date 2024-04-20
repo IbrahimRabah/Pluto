@@ -23,8 +23,6 @@
           <th class="border">National_ID <i class="fas fa-id-card"></i></th>
           <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
           <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
-          <th class="border">Assign_To <i class="fas fa-user-tie"></i></th>
-          <th class="border">Assign_To_Leader <i class="fas fa-user-plus"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -35,8 +33,7 @@
           <td class="border">{{ item.nationalId }}</td>
           <td class="border">{{ item.dateOfBirth }}</td>
           <td class="border">{{ item.addedDate }}</td>
-          <td class="border">{{ item.superiorName }}</td>
-          <th (click)="showTeamLeaderModal(item.id)" class="border bg-success"><i class="fas fa-user-plus"></i></th>
+
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -61,44 +58,4 @@
     </p-table>
   </div>
 </div>
-<div
-  class="modal fade w-100"
-  id="exampleModalToggle"
-  aria-hidden="true"
-  aria-labelledby="exampleModalToggleLabel"
-  tabindex="-1"
->
-</div>
-
-<p-dialog
-class="d-flex justify-content-center"
-[modal]="true"
-[style]="{ width: '30vw' }"
-header="Select  Hr"
-[(visible)]="displayTeamLeaderModal"
->
-<div class="field-container">
-  <label for="hr"><i class="fa-solid fa-user"></i> TeamLeader : </label>
-  <br />
-  <select
-    class="custom-select"
-    [(ngModel)]="teamLeaderId"
-  >
-    <option value="b4e8df6b-f1b7-4b8c-b59f-95aafefea4cd"  selected>Manager </option>
-    <option *ngFor="let hr of allTeamLeaders"  [value]="hr.id">
-      {{ hr.name }}
-    </option>
-  </select>
-</div>
-<p-footer class="d-flex justify-content-center">
-  <button
-    type="button"
-    pButton
-    label="Save"
-    icon="pi pi-check"
-    class="modal-open-button"
-    (click)="assignToTeamLeader()"
-  ></button>
-</p-footer>
-</p-dialog>
 <p-toast></p-toast>

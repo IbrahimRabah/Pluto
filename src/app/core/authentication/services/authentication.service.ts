@@ -68,4 +68,14 @@ export class AuthenticationService {
     const now = new Date().getTime() / 1000;
     return expirationTime < now;
   }
+  getUserId() :string {
+    let token = this.getToken();
+    let userId;
+    if(token)
+      {
+        let decodedToken:any = jwtDecode(token);
+        userId = decodedToken.userId ;
+      }
+      return userId;
+  }
 }

@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { MemberResponse } from 'src/app/core/models/Sales.model';
 import { AdminService } from '../../services/admin.service';
 import { Subject, debounceTime } from 'rxjs';
-import { Hr } from 'src/app/core/models/hr';
+import { Employee } from 'src/app/core/models/hr';
 import { MessageService } from 'primeng/api';
+import { ToggleButtonChangeEvent } from 'primeng/togglebutton';
+import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
 
 @Component({
   selector: 'app-interviee-section',
@@ -11,6 +13,12 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./interviee-section.component.scss']
 })
 export class IntervieeSectionComponent {
+toggleInterviewees(event: ToggleButtonChangeEvent) {
+  if (event.checked) {
+    this.getAllManagerInterviewees()
+  } else {
+    this.getAllInterviewees();
+  }}
   getSalesById(arg0: any) {
     throw new Error('Method not implemented.');
   }
@@ -20,17 +28,19 @@ export class IntervieeSectionComponent {
   numberOfPage: number[] = [];
   totalCount: number = 0;
   displayHrModal!: boolean;
-  allHrs!:Hr[];
+  allHrs!:Employee[];
   intervieweeId!:string;
   hrId!:string;
+  userId!:string;
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService,private messageService:MessageService) {
+  constructor(private admin: AdminService,private messageService:MessageService,private auth:AuthenticationService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
   }
   ngOnInit(): void {
     this.getAllInterviewees();
+    this.getUserId();
   }
   getAllInterviewees(intervieweeName?: string): void {
     let queryURL;
@@ -87,9 +97,12 @@ export class IntervieeSectionComponent {
     this.displayHrModal = true;
     this.getAllHrs();
   }
+  getUserId() {
+    this.userId = this.auth.getUserId();
+  }
   changeHr()
   {
-    const queryURL = `${this.intervieweeId}/superior/${this.hrId}`;
+    const queryURL = `${this.intervieweeId}/Hr/${this.hrId}`;
     this.admin.changeIntervieweeHr(queryURL).subscribe({
       next:()=>{
         this.getAllInterviewees();
@@ -100,5 +113,15 @@ export class IntervieeSectionComponent {
       }
     })
     this.displayHrModal = false;
+  }
+  getAllManagerInterviewees() {
+    const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SuperiorId=${this.userId}`;
+    this.admin.getAllInterviewees(queryURL).subscribe({
+      next: (response: any) => {
+        this.allInterviewees = response.data.items; console.log(this.allInterviewees);;
+        this.totalCount = Math.ceil(response.data.count);
+      },
+      error: (error) => { console.log(error); }
+    })
   }
 }

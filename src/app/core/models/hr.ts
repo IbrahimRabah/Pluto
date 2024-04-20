@@ -1,4 +1,4 @@
-export interface Hr {
+export interface Employee {
   id: string;
   name: string;
   phoneNumber: string;

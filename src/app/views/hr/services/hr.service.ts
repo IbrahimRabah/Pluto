@@ -18,4 +18,8 @@ export class HrService {
   {
     return this.http.get<Interviewee[]>(`${this.baseUrl}Interviewee?`+queryURL);
   }
+  assignIntervieweeToLeader(query:string):Observable<any>
+  {
+    return this.http.put<any>(`${this.baseUrl}Interviewee/${query}`,{})
+  }
 }

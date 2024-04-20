@@ -1,0 +1,41 @@
+/* Custom Table Styles */
+.custom-table .p-datatable-tbody > tr {
+  background-color: #f4f4f4; /* Light grey background */
+}
+
+.custom-table th {
+  text-align: center;
+  background-color: #007bff; /* Blue header */
+  color: #ffffff;
+}
+
+.custom-table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.btn-details {
+  background-color: #007bff; /* Blue button */
+  color: #ffffff;
+  border: none;
+}
+
+.btn-details:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .custom-table .p-datatable-tbody > tr > td,
+  .custom-table .p-datatable-thead > tr > th {
+    text-align: left;
+    display: block;
+  }
+
+  .custom-table .p-datatable-tbody > tr {
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+.border {
+  border: 1px solid black;
+}
