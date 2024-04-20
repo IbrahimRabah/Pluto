@@ -68,7 +68,7 @@
           <th><i class="fas fa-info-circle"></i> Status Name</th>
           <th><i class="fas fa-user-tie"></i> Leader Name</th>
           <th><i class="fas fa-user"></i> Sales Name</th>
-          <th><i class="fas fa-trash-alt"></i> Delete</th>
+          <th *ngIf="userRole!=='Retention'"><i class="fas fa-trash-alt"></i> Delete</th>
           <th><i class="fas fa-eye"></i> View</th>
         </tr>
       </ng-template>
@@ -84,11 +84,11 @@
           <td>{{ item.statusName }}</td>
           <td>{{ item.teamLeaderName }}</td>
           <td>{{ item.salesName }}</td>
-          <td>
-            <button
+          <td *ngIf="userRole!=='Retention'">
+            <button 
               type="button"
               pButton
-              icon="pi pi-trash"
+              icon="fas fa-trash"
               (click)="delteClient(item.id)"
               title="Delete Client"
               class="btn btn-danger"

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SalesService } from '../services/sales.service';
+import { SalesDayService } from '../services/sales.service';
 import { MemberResponse, SalesItem } from 'src/app/core/models/Sales.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { SalesService } from 'src/app/core/services/sales/sales.service';
+import { ActivatedRoute } from '@angular/router';
+
 interface PageEvent {
   first: number;
   rows: number;
@@ -17,14 +20,14 @@ interface PageEvent {
 })
 export class SalesHistoryComponent implements OnInit {
   salesHistory!: SalesItem[]
-  PageEvent!:PageEvent[];
+  PageEvent!: PageEvent[];
   SalesMan: String = "";
   SalesId: string = "";
-  StartDate:Date=new Date(new Date().setDate(new Date().getDate()-60));
-  EndDate:Date=new Date(new Date().setDate(new Date().getDate()));
+  StartDate: Date = new Date(new Date().setDate(new Date().getDate() - 60));
+  EndDate: Date = new Date(new Date().setDate(new Date().getDate()));
   Page: number = 1
   PageSize: number = 10
-  numberOfPage:number[]=[];
+  numberOfPage: number[] = [];
   IsSortingAscending!: boolean
   Take!: number
   Skip!: number
@@ -33,22 +36,40 @@ export class SalesHistoryComponent implements OnInit {
   slaesId: string = "";
   addedDate!: Date
   salesId!: string
-  x!:string;
-  totalCount:number=0;
-  constructor(private salesService: SalesService,private formBuilder: FormBuilder,private messageService:MessageService) { }
+  x!: string;
+  totalCount: number = 0;
+  salesList: any;
+  constructor(private salesService: SalesDayService, private salesManService: SalesService
+    , private formBuilder: FormBuilder, private messageService: MessageService,
+    private activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
     this.initializeSalesForm();
     this.getSalesHistory();
+    this.getSales();
+    this.routerData();
   }
 
+  routerData() {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      this.SalesId = String(params.get('id'));
+      this.getSalesHistory();
+    })
+  }
 
+  getSales() {
+    this.salesManService.getAllSales().subscribe({
+      next: (ress) => {
+        this.salesList = ress.data
+      }
+    })
+  }
   getSalesHistory() {
     const queryURL = `?SalesMan=${this.SalesMan}&SalesId=${this.SalesId}&StartDate=${this.StartDate.toISOString()}&EndDate=${this.EndDate.toISOString()}&Page=${this.Page}&PageSize=${this.PageSize}&IsSortingAscending=${this.IsSortingAscending}&Take=${this.Take}&Skip=${this.Skip}&OrderByDirection=${this.OrderByDirection}`;
     this.salesService.getSalesDayBy(queryURL).subscribe({
       next: (response: MemberResponse) => {
         this.salesHistory = response.data.items;
-        this.totalCount=Math.ceil(response.data.count)
-        console.log("total",this.totalCount)
+        this.totalCount = Math.ceil(response.data.count)
+        console.log("total", this.totalCount)
       },
       error: (err) => {
         console.error(err)
@@ -70,16 +91,16 @@ export class SalesHistoryComponent implements OnInit {
     if (this.salesHome.valid) {
       const salesHomeData = this.salesHome.value;
 
-        salesHomeData['salesId'] = this.x;
-        salesHomeData['date'] = this.addedDate;
-        this.salesService.updateSalesDay(this.x, salesHomeData ).subscribe({
-          next: (res) => {
-            this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated Successfully' });
-            this.getSalesHistory();
-          },error:(err)=>{
-            this.messageService.add({ severity: 'error', summary: 'error', detail: 'Error' });
-          }
-        })
+      salesHomeData['salesId'] = this.x;
+      salesHomeData['date'] = this.addedDate;
+      this.salesService.updateSalesDay(this.x, salesHomeData).subscribe({
+        next: (res) => {
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Updated Successfully' });
+          this.getSalesHistory();
+        }, error: (err) => {
+          this.messageService.add({ severity: 'error', summary: 'error', detail: 'Error' });
+        }
+      })
     }
   }
   getSalesById(salesId: string) {
@@ -98,21 +119,21 @@ export class SalesHistoryComponent implements OnInit {
       }
     })
   }
-  returnPages(pageReturn:number){
-    this.Page=pageReturn;
+  returnPages(pageReturn: number) {
+    this.Page = pageReturn;
     this.getSalesHistory()
   }
   next() {
-    this.Page = ++ this.Page ;
+    this.Page = ++this.Page;
     this.getSalesHistory()
-   }
+  }
 
- prev() {
-    this.Page = -- this.Page ;
+  prev() {
+    this.Page = --this.Page;
     this.getSalesHistory()
 
   }
-  changeClander(){
+  changeClander() {
     this.getSalesHistory()
   }
 }

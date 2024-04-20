@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { SalesService } from '../services/sales.service';
+import { SalesDayService } from '../services/sales.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 
@@ -17,7 +17,7 @@ export class SalesHomeComponent implements OnInit {
   slaesId: string = "";
   addedDate!: Date
   salesId!: string
-  constructor(private formBuilder: FormBuilder, private salesService: SalesService, private activatedRoute: ActivatedRoute,private messageService:MessageService) { }
+  constructor(private formBuilder: FormBuilder, private salesService: SalesDayService, private activatedRoute: ActivatedRoute,private messageService:MessageService) { }
 
   ngOnInit(): void {
     this.initializeSalesForm();

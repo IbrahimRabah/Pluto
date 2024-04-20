@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
 import { MessageService } from 'primeng/api';
 import { Subject, debounceTime } from 'rxjs';
+import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
 
 @Component({
   selector: 'app-client-history',
@@ -36,7 +37,12 @@ export class ClientHistoryComponent implements OnInit {
   totalCount!: number;
   lastPage !: number;
   private searchSubject = new Subject<string>();
-  constructor(private salesService: SalesService, private messageService: MessageService, private clientService: ClientService, private formBuilder: FormBuilder, private depositService: DepositService) {
+  userRole: any;
+  constructor(private salesService: SalesService,
+     private messageService: MessageService,
+      private clientService: ClientService,
+       private formBuilder: FormBuilder,
+        private depositService: DepositService, private auth:AuthenticationService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
@@ -45,6 +51,7 @@ export class ClientHistoryComponent implements OnInit {
     this.getClientHistory();
     this.initializeClientForm();
     this.getSales();
+    this.getUserRole();
   }
 
   getSales() {
@@ -151,5 +158,9 @@ export class ClientHistoryComponent implements OnInit {
   }
   changeClander() {
     this.getClientHistory()
+  }
+
+  getUserRole() {
+    this.userRole = this.auth.getUserRole()
   }
 }

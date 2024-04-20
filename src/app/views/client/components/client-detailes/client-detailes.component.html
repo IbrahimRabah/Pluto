@@ -52,7 +52,8 @@
           </select>
         </div>
       </div>
-      <button *ngIf="userRole==='TeamLeader'" type="submit" pButton label="Update" [disabled]="!updateForm.valid"></button>
+      <button *ngIf="userRole==='TeamLeader'" type="submit" pButton label="Update"
+        [disabled]="!updateForm.valid"></button>
     </form>
     <div class="row">
       <div class="col-6">
@@ -63,7 +64,7 @@
         </button>
       </div>
       <div class="col-6">
-        <button *ngIf="userRole==='Manager'" style="width: 100%;"
+        <button *ngIf="userRole==='Manager' && currentClient.status===0" style="width: 100%;"
           class="btn btn-success btn-block confirm-model-height btn-confirm mb-5" type="button" (click)="showModal()">
           <i class="fas fa-handshake me-1"></i> Assign to Retention
         </button>
@@ -85,7 +86,7 @@
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead class="bg-primary text-white">
-        <tr>
+        <tr *ngIf="userRole==='TeamLeader' ; else otherRole">
           <th><i class="fas fa-dollar-sign me-1"></i> Amount</th>
           <th><i class="fas fa-calendar-alt me-1"></i> Date</th>
           <th><i class="fas fa-user me-1"></i> Depositor Name</th>
@@ -94,10 +95,22 @@
           <th><i class="fas fa-replay me-1"></i> Redeposit </th>
           <th><i class="fas fa-replay me-1"></i> Details </th>
           <th><i class="fas fa-replay me-1"></i> Deactivate </th>
+          <th><i class="fa-solid fa-pen-to-square"></i> update</th>
         </tr>
+        <ng-template #otherRole>
+
+          <tr>
+            <th><i class="fas fa-dollar-sign me-1"></i> Amount</th>
+            <th><i class="fas fa-calendar-alt me-1"></i> Date</th>
+            <th><i class="fas fa-user me-1"></i> Depositor Name</th>
+            <th><i class="fas fa-chart-line me-1"></i> Total</th>
+            <th><i class="fas fa-toggle-on me-1"></i> Active</th>
+          </tr>
+        </ng-template>
       </thead>
       <tbody>
-        <tr *ngFor="let deposit of clientDeposit">
+
+        <tr *ngFor="let deposit of clientDeposit; let i = index">
           <td>{{ deposit.amount }}</td>
           <td>{{ deposit.date | date }}</td>
           <td>{{ deposit.depositorName }}</td>
@@ -108,22 +121,36 @@
                 'fa-times-circle text-danger': !deposit.isActive
               }"></i>
           </td>
-          <td>
 
-            <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%;"
-              (click)="reDeposit(deposit.id)"> <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit</button>
-          </td>
-          <td>
+          <ng-container *ngIf="userRole === 'TeamLeader'">
 
-            <button type="button" class="modal-open-details-button w-100" (click)="openDialog(deposit)">Details</button>
-          </td>
-          <td>
-            <button *ngIf="deposit.isActive" class="btn btn-danger btn-block confirm-model-height btn-confirm w-75 h-100"
-              type="button" (click)="deActive(deposit.id)">
-               Deactivate
-            </button>
-          </td>
+            <td>
+              <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%;"
+                (click)="reDeposit(deposit.id)"> <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit</button>
+            </td>
+            <td>
+              <button type="button" class="modal-open-details-button w-100"
+                (click)="openDialog(deposit)">Details</button>
+            </td>
+            <td>
+              <button *ngIf="deposit.isActive"
+                class="btn btn-danger btn-block confirm-model-height btn-confirm w-75 h-100" type="button"
+                (click)="deActive(deposit.id)">
+                Deactivate
+              </button>
+            </td>
+            <td>
+              <button *ngIf="deposit.isActive"
+                class="btn btn-success btn-block confirm-model-height btn-confirm w-75 h-100" type="button"
+                (click)="showUpdateDepositModal(deposit.id,deposit.amount)">
+                Update
+              </button>
+            </td>
+          </ng-container>
+
+
         </tr>
+
 
       </tbody>
     </table>
@@ -143,6 +170,23 @@
     <p-footer class="d-flex justify-content-center">
       <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
         (click)="deposit()"></button>
+    </p-footer>
+  </p-dialog>
+
+  <p-dialog class="d-flex justify-content-center" header="Enter New Deposit" [style]="{ width: '30vw' }" [modal]="true"
+    [(visible)]="displayUpdateDepositModal">
+    <div>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fas fa-dollar-sign text-danger"> N e w D e p o s i t </i>
+        </span>
+        <input type="number" min="0" class="form-control" [(ngModel)]="updateDepositAmount"
+          placeholder="Enter Deposit Amount" />
+      </div>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+        (click)="updateDeposit()"></button>
     </p-footer>
   </p-dialog>
   <!-- <p-dialog class="d-flex justify-content-center" header="Enter Redepossit" [(visible)]="displayRedepositModal">
@@ -172,7 +216,8 @@
     <h2 class="ms-3 mb-2 mt-2">
       <i class="fas fa-money-check-alt me-2"></i>Client Lot
     </h2>
-    <button *ngIf="userRole==='Retention'" type="button" class="btn btn-primary me-3 my-2" (click)="showAddClientLot()">
+    <button *ngIf="userRole==='Retention' &&currentClient.status===0 " type="button" class="btn btn-primary me-3 my-2"
+      (click)="showAddClientLot()">
       <i class="fas fa-plus me-1"></i> Add Lot
     </button>
   </div>
@@ -184,8 +229,11 @@
           <th><i class="fas fa-dollar-sign me-1"></i>Amount</th>
           <th><i class="fas fa-calendar-alt me-1"></i>Date</th>
           <th><i class="fas fa-user me-1"></i>Retention Name</th>
-          <th><i class="fas fa-trash me-1"></i>Delete</th>
-          <th><i class="fas fa-edit me-1"></i>Update</th>
+          <ng-container *ngIf="userRole === 'Retention'">
+
+            <th><i class="fas fa-trash me-1"></i>Delete</th>
+            <th><i class="fas fa-edit me-1"></i>Update</th>
+          </ng-container>
         </tr>
       </thead>
       <tbody>
@@ -193,16 +241,18 @@
           <td>{{ rowData.amount }}</td>
           <td>{{ rowData.date | date : "short" }}</td>
           <td>{{ rowData.retentionName }}</td>
-          <td>
-            <button type="button" class="btn btn-danger" title="Delete" (click)="deleteLot(rowData.id)">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-          <td>
-            <button type="button" class="btn btn-info" title="Update" (click)="showUpdateClientLotModal(rowData.id)">
-              <i class="fas fa-edit"></i>
-            </button>
-          </td>
+          <ng-container *ngIf="userRole === 'Retention'">
+            <td>
+              <button type="button" class="btn btn-danger" title="Delete" (click)="deleteLot(rowData.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-info" title="Update" (click)="showUpdateClientLotModal(rowData.id)">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </ng-container>
         </tr>
       </tbody>
     </table>
@@ -244,8 +294,10 @@
               <td>{{redeposit.date | date}}</td>
               <td>{{redeposit.depositorName}}</td>
               <td>{{redeposit.depositorRoleName}}</td>
-              <td><button pButton icon="pi pi-replay" style="background-color: rgb(99, 61, 15);"
-                  (click)="openUpdateRedeposit(redeposit.id,redeposit.amount)"></button></td>
+              <td><button pButton style="background-color: rgb(99, 61, 15);"
+                  (click)="openUpdateRedeposit(redeposit.id,redeposit.amount)">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button></td>
             </tr>
           </ng-template>
           <ng-template pTemplate="empty">
@@ -309,8 +361,8 @@
         </div>
       </div>
       <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add Lot" icon="pi pi-check" class="modal-open-button"
-          (click)="addLot()"></button>
+        <button *ngIf="currentClient.status === 0" type="button" pButton label="Add Lot" icon="pi pi-check"
+          class="modal-open-button" (click)="addLot()"></button>
       </p-footer>
     </p-dialog>
 

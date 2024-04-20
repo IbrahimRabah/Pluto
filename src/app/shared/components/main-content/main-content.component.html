@@ -72,6 +72,19 @@
               </a>
             </li>
             <li
+              routerLink="/sales/salesList"
+              routerLinkActive="active"
+              class="nav-item"
+              *ngIf="userRole === 'TeamLeader'"
+            >
+              <a class="nav-link align-middle px-0">
+                <i class="fa-solid fa-users fa-lg text-warning m-3"></i>
+                <span class="ms-1 d-none d-sm-inline text-light">
+                  Sellers
+                </span>
+              </a>
+            </li>
+            <li
               routerLink="/admin/dashboard/clients"
               routerLinkActive="active"
               class="nav-item"
@@ -165,12 +178,12 @@
               routerLink="/sales/salesHistory"
               routerLinkActive="active"
               class="nav-item"
-              *ngIf="userRole == 'Sales'"
+              *ngIf="userRole == 'Sales' || userRole==='TeamLeader'"
             >
               <a class="nav-link align-middle px-0">
                 <i class="fa-solid fa-user-tie fa-lg text-warning m-3"></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
-                  History
+                  Sales History
                 </span>
               </a>
             </li>

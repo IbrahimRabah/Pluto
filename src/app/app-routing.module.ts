@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'sales', loadChildren: () =>
      import('../app/views/sales/sales.module').then(
       (m)=>m.SalesModule),
-      canActivate:[authGuard],data:{roles:['Sales']}
+      canActivate:[authGuard],data:{roles:['Sales','TeamLeader']}
   },
   {
     path:'auth',loadChildren:()=>

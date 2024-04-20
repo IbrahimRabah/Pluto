@@ -30,9 +30,11 @@ export class ClientDetailesComponent implements OnInit {
   displayRetentionModal!: boolean
   displayTeamLeadModal!: boolean
   displayRedepositModal!: boolean
+  displayUpdateDepositModal!: boolean
   displayUpdateRedepositModal!: boolean
-  redepositAmount!: number
-  updateRedepositAmount!: number
+  redepositAmount!: number;
+  updateDepositAmount!: number;
+  updateRedepositAmount!: number;
   expandedRows: { [key: string]: boolean } = {};
   selectedDepositRedeposits: any[] = [];
   displayDialog: boolean = false;
@@ -68,7 +70,7 @@ export class ClientDetailesComponent implements OnInit {
     this.getClientData();
     this.initializeClientForm();
     this.getDepositForClient();
-    
+
     if (this.userRole !== 'Retention') {
       this.getSales();
     }
@@ -130,22 +132,24 @@ export class ClientDetailesComponent implements OnInit {
     this.displayUpdateClientLotModal = true;
     this.updatedLotId = updatelotId
   }
+  showUpdateDepositModal(depositId: string, updateDepositAmount: number) {
+    this.updateDepositAmount = updateDepositAmount;
+    this.depositId = depositId;
+    this.displayUpdateDepositModal = true;
+  }
   deposit(): void {
-    // if (this.clientData.status === 1) {
 
     this.depositService.addDepositForClient({
       deposit: this.selectedNumber,
       clientId: this.clientId
     }).subscribe({
-      next: (data: any) => {
+      next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
         this.getDepositForClient();
+        this.getClientData();
       }
     })
-    // }
-    // else {
-    //   // this.redepositService.reDeposit()
-    // }
+
     this.displayModal = false;
   }
 
@@ -309,6 +313,17 @@ export class ClientDetailesComponent implements OnInit {
         this.getClientData();
       }
     })
+  }
+
+  updateDeposit() {
+    this.depositService.updateDeposit(this.depositId, { amount: this.updateDepositAmount }).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
+        this.getClientData();
+        this.getDepositForClient();
+      }
+    })
+    this.displayUpdateDepositModal = false;
   }
 
   openDialog(deposit: any): void {
