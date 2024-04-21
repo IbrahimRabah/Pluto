@@ -29,34 +29,34 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Name <i class="fas fa-user"></i></th>
-          <th>PhoneNumber <i class="fas fa-phone"></i></th>
-          <th>Email <i class="fas fa-envelope"></i></th>
-          <th>National ID <i class="fas fa-id-card"></i></th>
-          <th>Leader <i class="fa-solid fa-user-group"></i></th>
-          <th>Seller <i class="fa-solid fa-users"></i></th>
-          <th>Retention <i class="fa-solid fa-person-rays"></i></th>
-          <th>Status</th>
-          <th>Detailes <i class="fa-solid fa-info"></i></th>
+          <th class="border">Name <i class="fas fa-user"></i></th>
+          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+          <th class="border">Email <i class="fas fa-envelope"></i></th>
+          <th class="border">National ID <i class="fas fa-id-card"></i></th>
+          <th class="border">Leader <i class="fa-solid fa-user-group"></i></th>
+          <th class="border">Seller <i class="fa-solid fa-users"></i></th>
+          <th class="border">Retention <i class="fa-solid fa-person-rays"></i></th>
+          <th class="border">Status</th>
+          <th class="border">Details <i class="fa-solid fa-info"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{ item.name }}</td>
-          <td>{{ item.phoneNumber }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.nationalId }}</td>
-          <td>{{ item.teamLeaderName }}</td>
-          <td>{{ item.salesName }}</td>
-          <td *ngIf="item.retentionName">
+          <td class="border">{{ item.name }}</td>
+          <td class="border">{{ item.phoneNumber }}</td>
+          <td class="border">{{ item.email }}</td>
+          <td class="border">{{ item.nationalId }}</td>
+          <td class="border">{{ item.teamLeaderName }}</td>
+          <td class="border">{{ item.salesName }}</td>
+          <td *ngIf="item.retentionName" class="border" >
             {{ item.retentionName }}
           </td>
-          <td *ngIf="!item.retentionName">Not-Registered</td>
-          <td>{{ item.statusName }}</td>
-          <td>
+          <td *ngIf="!item.retentionName" class="border">Not-Registered</td>
+          <td class="border">{{ item.statusName }}</td>
+          <td class="border">
             <button
               type="button"
-              class="btn btn-success"
+              class="btn btn-success border"
               routerLink="/client/clientDetailes/{{ item.id }}"
             >
               Details

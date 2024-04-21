@@ -73,13 +73,13 @@ export class ClientDetailesComponent implements OnInit {
 
     if (this.userRole !== 'Retention') {
       this.getSales();
+      this.getTeamLead();
     }
 
     if (this.userRole === 'Manager') {
       this.getRetention();
     }
 
-    this.getTeamLead();
     this.getClientLotForClient();
   }
   getUserRole() {
@@ -329,5 +329,15 @@ export class ClientDetailesComponent implements OnInit {
   openDialog(deposit: any): void {
     this.selectedDepositRedeposits = deposit.redeposits;
     this.displayDialog = true;
+  }
+
+  deActivateClient(){
+    this.clientService.deactivateUser(this.clientId).subscribe({
+      next:()=>{
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Client Deactivated successfully' });
+        this.getClientData();
+        this.getDepositForClient();
+      }
+    })
   }
 }

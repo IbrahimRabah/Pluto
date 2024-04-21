@@ -39,19 +39,21 @@ export class ClientHistoryComponent implements OnInit {
   private searchSubject = new Subject<string>();
   userRole: any;
   constructor(private salesService: SalesService,
-     private messageService: MessageService,
-      private clientService: ClientService,
-       private formBuilder: FormBuilder,
-        private depositService: DepositService, private auth:AuthenticationService) {
+    private messageService: MessageService,
+    private clientService: ClientService,
+    private formBuilder: FormBuilder,
+    private depositService: DepositService, private auth: AuthenticationService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
   }
   ngOnInit(): void {
+    this.getUserRole();
     this.getClientHistory();
     this.initializeClientForm();
-    this.getSales();
-    this.getUserRole();
+    if (this.userRole !== 'Retention') {
+      this.getSales();
+    }
   }
 
   getSales() {

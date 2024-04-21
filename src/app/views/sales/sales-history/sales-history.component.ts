@@ -51,8 +51,11 @@ export class SalesHistoryComponent implements OnInit {
 
   routerData() {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.SalesId = String(params.get('id'));
-      this.getSalesHistory();
+      this.SalesId = String(params.get('id')) ||'';
+      if (this.SalesId !== "null") {
+
+        this.getSalesHistory();
+      }
     })
   }
 

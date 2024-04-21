@@ -34,4 +34,7 @@ export class ClientService {
   changeTeamLead(clientId: string, teamleadId: string) {
     return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/' + clientId + '/TeamLeader/' + teamleadId}`, {})
   }
+  deactivateUser(clientId: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/Deactivate/'}${clientId}`, {})
+  }
 }
