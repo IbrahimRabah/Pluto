@@ -115,10 +115,14 @@
           <th><i class="fas fa-user me-1"></i> Depositor Name</th>
           <th><i class="fas fa-chart-line me-1"></i> Total</th>
           <th><i class="fas fa-toggle-on me-1"></i> Active</th>
-          <th><i class="fas fa-replay me-1"></i> Redeposit</th>
-          <th><i class="fas fa-replay me-1"></i> Details</th>
-          <th><i class="fas fa-replay me-1"></i> Deactivate</th>
-          <th><i class="fa-solid fa-pen-to-square"></i> update</th>
+          <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
+
+
+            <th><i class="fas fa-replay me-1"></i> Redeposit</th>
+            <th><i class="fas fa-replay me-1"></i> Details</th>
+            <th><i class="fas fa-replay me-1"></i> Deactivate</th>
+            <th><i class="fa-solid fa-pen-to-square"></i> update</th>
+          </ng-container>
         </tr>
 
       </thead>
@@ -134,34 +138,38 @@
                 'fa-times-circle text-danger': !deposit.isActive
               }"></i>
           </td>
+          <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
 
-          <td>
-            <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%"
-              (click)="reDeposit(deposit.id)">
-              <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit
-            </button>
-          </td>
-          <td>
-            <button type="button" style="width: 100%;"
-              class="modal-open-details-button  btn-block confirm-model-height btn-confirm"
-              (click)="openDialog(deposit)">
-              Details
-            </button>
-          </td>
-          <td>
-            <button *ngIf="deposit.isActive" style="width: 100%;"
-              class="btn btn-danger btn-block confirm-model-height btn-confirm " type="button"
-              (click)="deActive(deposit.id)">
-              Deactivate
-            </button>
-          </td>
-          <td>
-            <button *ngIf="deposit.isActive" style="width: 100%;"
-              class="btn btn-success btn-block confirm-model-height btn-confirm" type="button"
-              (click)="showUpdateDepositModal(deposit.id, deposit.amount)">
-              Update
-            </button>
-          </td>
+
+            <td>
+              <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%"
+                (click)="reDeposit(deposit.id)">
+                <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit
+              </button>
+            </td>
+            <td>
+              <button type="button" style="width: 100%;"
+                class="modal-open-details-button  btn-block confirm-model-height btn-confirm"
+                (click)="openDialog(deposit)">
+                Details
+              </button>
+            </td>
+            <td>
+              <button *ngIf="deposit.isActive" style="width: 100%;"
+                class="btn btn-danger btn-block confirm-model-height btn-confirm " type="button"
+                (click)="deActive(deposit.id)">
+                Deactivate
+              </button>
+            </td>
+            <td>
+              <button *ngIf="deposit.isActive" style="width: 100%;"
+                class="btn btn-success btn-block confirm-model-height btn-confirm" type="button"
+                (click)="showUpdateDepositModal(deposit.id, deposit.amount)">
+                Update
+              </button>
+            </td>
+          </ng-container>
+
         </tr>
       </tbody>
     </table>
