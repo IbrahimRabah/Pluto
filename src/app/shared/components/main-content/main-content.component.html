@@ -261,7 +261,7 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
             >
-              <li>
+              <li *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
                 <a
                   class="dropdown-item"
                   style="cursor: pointer"
