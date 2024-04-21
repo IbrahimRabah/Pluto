@@ -19,20 +19,20 @@
           </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Name <i class="fas fa-user"></i></th>
-          <th>PhoneNumber <i class="fas fa-phone"></i></th>
-          <th>Company Phone <i class="fas fa-building"></i></th>
-          <th>Email <i class="fas fa-envelope"></i></th>
-          <th>National ID <i class="fas fa-id-card"></i></th>
+          <th class="border">Name <i class="fas fa-user"></i></th>
+          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
+          <th class="border">Company Phone <i class="fas fa-building"></i></th>
+          <th class="border">Email <i class="fas fa-envelope"></i></th>
+          <th class="border">National ID <i class="fas fa-id-card"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
         <tr>
-          <td>{{item.name}}</td>
-          <td>{{item.phoneNumber}}</td>
-          <td>{{item.companyPhoneNumber}}</td>
-          <td>{{item.email}}</td>
-          <td>{{item.nationalId}}</td>
+          <td class="border">{{item.name}}</td>
+          <td class="border">{{item.phoneNumber}}</td>
+          <td class="border">{{item.companyPhoneNumber}}</td>
+          <td class="border">{{item.email}}</td>
+          <td class="border">{{item.nationalId}}</td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">

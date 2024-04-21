@@ -13,7 +13,7 @@
             <label for="hr"><i class="fa-solid fa-user"></i> Seller : </label>
             <br />
             <select class="custom-select" [(ngModel)]="SalesId" (change)="getSalesHistory()">
-                <option value="" disabled selected>Select Hr ID</option>
+                <option value="" disabled selected>Select Sales ID</option>
                 <option *ngFor="let seller of salesList" [value]="seller.id">
                     {{ seller.name }}
                 </option>
