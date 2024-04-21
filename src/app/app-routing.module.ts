@@ -27,7 +27,7 @@ const routes: Routes = [
     path:'client',loadChildren:()=>
     import('../app/views/client/client.module').then(
       (m)=>m.ClientModule),
-      canActivate:[authGuard],data:{roles:['TeamLeader','Retention','Manager']}
+      canActivate:[authGuard],data:{roles:['Admin','TeamLeader','Retention','Manager']}
   },
   {
     path:'hr',loadChildren:()=>

@@ -14,7 +14,7 @@ export class AuthenticationService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private isAdminSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient,private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   get isAuthenticated$(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
@@ -30,8 +30,9 @@ export class AuthenticationService {
   login(loginObj: any): Observable<any> {
     const url = `${this.baseUrl + this.currentUrl}Login`;
     return this.http.post(url, loginObj).pipe(
-      tap(() => {
-        this.isAuthenticatedSubject.next(true);
+      tap((response: any) => {
+        if (response.isSuccess)
+          this.isAuthenticatedSubject.next(true);
       })
     );
   }
@@ -63,19 +64,18 @@ export class AuthenticationService {
     const decodedToken: any = jwtDecode(token);
     if (!decodedToken || !decodedToken.exp) {
       return true;
-     }
+    }
     const expirationTime = decodedToken.exp;
     const now = new Date().getTime() / 1000;
     return expirationTime < now;
   }
-  getUserId() :string {
+  getUserId(): string {
     let token = this.getToken();
     let userId;
-    if(token)
-      {
-        let decodedToken:any = jwtDecode(token);
-        userId = decodedToken.userId ;
-      }
-      return userId;
+    if (token) {
+      let decodedToken: any = jwtDecode(token);
+      userId = decodedToken.userId;
+    }
+    return userId;
   }
 }

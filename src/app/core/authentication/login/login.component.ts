@@ -33,8 +33,7 @@ export class LoginComponent implements OnInit {
       if (!this.loginForm.invalid) {
         this.auth.login(this.loginForm.value).subscribe({
           next: (response) => {
-
-            if (response.statusCode == 200) {
+            if (response.isSuccess == true) {
               let role = response.data.roleName;
               let tenantId = response.data.tenantId;
               let token = response.data.token;
@@ -83,10 +82,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  toggle(action:string)
-  {
-    switch(action)
-    {
+  toggle(action: string) {
+    switch (action) {
       case 'add':
         this.containerDiv.nativeElement.classList.add('active');
         break;

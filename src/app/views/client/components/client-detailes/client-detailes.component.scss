@@ -23,18 +23,21 @@
 .confirm-model-hieght:hover {
     background-color: #0c2947;
 }
+
 .custom-select {
-  height: 45px;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid rgb(199, 199, 236);
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(199, 199, 236);
 }
-.p-dialog{
-  width: 45% !important;
+
+.p-dialog {
+    width: 45% !important;
 }
+
 .p-dialog .p-dialog-content {
     padding: 20px;
-  }
+}
 
 .input-field {
     width: 100%;
@@ -92,6 +95,7 @@
 .update-form-container>div {
     margin-bottom: 20px;
 }
+
 #registerDiv {
     background-color: #c9d6ff;
     background: linear-gradient(to right, #e2e2e2, #c9d6ff);
@@ -100,69 +104,77 @@
     justify-content: center;
     flex-direction: column;
     height: 70vh;
-  }
+}
 
-  .registration-form {
-  width: 80%;
-  padding: 20px;
-  border: 2px solid #15273b;
-  border-radius: 30px;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-  }
+.registration-form {
+    width: 80%;
+    padding: 20px;
+    border: 2px solid #15273b;
+    border-radius: 30px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
 
-  .form-title {
-  text-align: center;
-  font-size: 24px;
-  color: #15273b;
-  font-weight: bolder;
-  margin-bottom: 20px;
-  }
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    color: #15273b;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
 
-  .form-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  }
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
 
-  .input-group {
-  flex: 0 0 48%;
-  }
+.input-group {
+    flex: 0 0 48%;
+}
 
-  label {
-  display: block;
-  font-size: 16px;
-  color: #002f65;
-  margin-bottom: 5px;
-  font-weight: bold;
-  }
+label {
+    display: block;
+    font-size: 16px;
+    color: #002f65;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
-  .form-control {
-  width: 100%;
-  font-size: 16px;
-  border: 1px solid #63b8ff;
-  border-radius: 5px;
-  }
+.form-control {
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #63b8ff;
+    border-radius: 5px;
+}
 
-  .btn-register {
-  display: block;
-  width: 100%;
-  background-color: #ff6600;
-  color: #fff;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  }
+.btn-register {
+    display: block;
+    width: 100%;
+    background-color: #ff6600;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-  .btn-register:hover {
-  background-color: orangered;
-  }
+.btn-register:hover {
+    background-color: orangered;
+}
 
-  .error-message {
-  font-size: 14px;
-  margin-top: 5px;
-  }
-  .btn-confirm {
+.error-message {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.btn-confirm {
     height: 60px;
+}
+
+.update-button:hover{
+    background-color: rgb(11, 71, 11);
+}
+.update-button{
+    background-color: rgb(10, 154, 10);
 }

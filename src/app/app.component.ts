@@ -6,18 +6,18 @@ import { AuthenticationService } from './core/authentication/services/authentica
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit,OnDestroy{
+export class AppComponent implements OnInit, OnDestroy {
   title = 'dashboard';
-  isLogin:boolean=false;
-  constructor(private authenticationService:AuthenticationService){}
+  isLogin: boolean = false;
+  constructor(private authenticationService: AuthenticationService) { }
   ngOnInit(): void {
     this.authenticationService.isAuthenticatedUser();
     this.authenticationService.isAuthenticated$.subscribe({
-      next:(response)=>{this.isLogin=response},
-      error:(error)=>{console.log(error)}
+      next: (response) => { this.isLogin = response;console.log(response); },
+      error: (error) => { console.log(error) }
     })
   }
   ngOnDestroy(): void {
-  this.authenticationService.logout();
+    this.authenticationService.logout();
   }
 }
