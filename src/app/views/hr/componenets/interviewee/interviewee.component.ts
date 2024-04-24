@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class IntervieweeComponent {
   addInterviewee!: FormGroup;
-  constructor(private hr: HrService, private messageService:MessageService,private router:Router) { }
+  constructor(private hr: HrService, private messageService: MessageService, private router: Router) { }
   ngOnInit(): void {
     this.initialization();
   }
@@ -29,28 +29,21 @@ export class IntervieweeComponent {
   }
   onSubmit() {
     this.addInterviewee.get('addedDate')?.setValue(new Date().toISOString());
-    console.log(this.addInterviewee.value);
     if (this.addInterviewee.valid) {
       const dateOfBirthValue = this.addInterviewee.get('dateOfBirth')?.value;
       const formattedDateOfBirth = new Date(dateOfBirthValue).toISOString();
       this.addInterviewee.get('dateOfBirth')?.setValue(formattedDateOfBirth);
-      console.log(this.addInterviewee.value);
       this.hr.addNewInterviewee(this.addInterviewee.value).subscribe(
         {
           next: (response) => {
-            console.log(response);
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Interviewee Added Successfully' });
             this.router.navigate(['/hr/home']);
-          },
-          error: (err) => {
-            console.log(err.message);
           }
         }
       )
     }
     else {
       alert("notvalid")
-      console.log("formsValue", this.addInterviewee)
 
     }
 

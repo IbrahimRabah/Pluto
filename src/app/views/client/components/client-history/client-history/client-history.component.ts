@@ -59,7 +59,6 @@ export class ClientHistoryComponent implements OnInit {
   getSales() {
     this.salesService.getAllSales().subscribe({
       next: (ress) => {
-        console.log(ress.data);
         this.salesList = ress.data
       }
     })
@@ -96,19 +95,6 @@ export class ClientHistoryComponent implements OnInit {
     this.selectedNumber = 0;
     this.clientId = rowData.id;
   }
-
-  // deposit(deposit: number): void {
-  //   this.depositService.addDepositForClient({
-  //     deposit: deposit,
-  //     clientId: this.clientId
-  //   }).subscribe({
-  //     next: (data: any) => {
-  //       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Deposit added Successfully' });
-
-  //     }
-  //   })
-  //   this.displayModal = false;
-  // }
 
   delteClient(clientId: string) {
     this.clientService.deleteClient(clientId).subscribe({

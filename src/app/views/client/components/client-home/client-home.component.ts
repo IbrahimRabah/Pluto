@@ -68,7 +68,6 @@ export class ClientHomeComponent {
       else {
         this.clientService.updateClient(this.clientId, clientData).subscribe({
           next: (res) => {
-            console.log(res);
           }
         })
       }

@@ -9,16 +9,16 @@ import { Subject, debounceTime } from 'rxjs';
   styleUrls: ['./clients-section-details.component.scss']
 })
 export class ClientsSectionDetailsComponent {
-getSalesById(arg0: any) {
-throw new Error('Method not implemented.');
-}
-  allClients!:MemberResponse[];
+  getSalesById(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+  allClients!: MemberResponse[];
   Page: number = 1;
   PageSize: number = 10;
-  numberOfPage:number[]=[];
-  totalCount:number=0;
+  numberOfPage: number[] = [];
+  totalCount: number = 0;
   private searchSubject = new Subject<string>();
-  constructor(private admin:AdminService){
+  constructor(private admin: AdminService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
@@ -26,40 +26,38 @@ throw new Error('Method not implemented.');
   ngOnInit(): void {
     this.getAllClients();
   }
-  getAllClients(clientName?:string):void {
+  getAllClients(clientName?: string): void {
     let queryURL;
-    if(clientName)
-    {
+    if (clientName) {
       queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&ClientName=${clientName}`;
 
-    }else
-    {
+    } else {
       queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
     }
     this.admin.getAllClients(queryURL).subscribe({
-      next:(response:any)=>{this.allClients = response.data.items;console.log(this.allClients);;
-        this.totalCount=Math.ceil(response.data.count);
-      },
-      error:(error)=>{console.log(error);}
+      next: (response: any) => {
+        this.allClients = response.data.items;
+        this.totalCount = Math.ceil(response.data.count);
+      }
     })
   }
-  filter(event:any){
+  filter(event: any) {
     this.getAllClients(event);
   }
   onInputChange(event: any) {
     this.searchSubject.next(event.target.value);
   }
-  returnPages(pageReturn:number){
-    this.Page=pageReturn;
+  returnPages(pageReturn: number) {
+    this.Page = pageReturn;
     this.getAllClients()
   }
   nextPage() {
-    this.Page = ++ this.Page ;
+    this.Page = ++this.Page;
     this.getAllClients();
-   }
+  }
 
- previousPage() {
-    this.Page = -- this.Page ;
+  previousPage() {
+    this.Page = --this.Page;
     this.getAllClients()
   }
 }

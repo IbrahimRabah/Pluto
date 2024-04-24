@@ -89,9 +89,6 @@ export class ClientDetailesComponent implements OnInit {
   initRout() {
     this.activatedRoute.params.subscribe(params => {
       this.clientId = params['id'];
-      if (this.clientId) {
-        console.log(`The ID from the route is: ${this.clientId}`);
-      }
     });
   }
 
@@ -229,8 +226,7 @@ export class ClientDetailesComponent implements OnInit {
   }
   assignToRetention() {
     this.clientService.assignClientToRetention(this.clientId, this.retentionId).subscribe({
-      next: (data) => {
-        console.log(data);
+      next: () => {
       }
     })
     this.displayRetentionModal = false;
@@ -239,7 +235,6 @@ export class ClientDetailesComponent implements OnInit {
   changeTeamLead() {
     this.clientService.changeTeamLead(this.clientId, this.teamLeadId).subscribe({
       next: (data) => {
-        console.log(data);
       }
     })
     this.displayTeamLeadModal = false;
@@ -331,9 +326,9 @@ export class ClientDetailesComponent implements OnInit {
     this.displayDialog = true;
   }
 
-  deActivateClient(){
+  deActivateClient() {
     this.clientService.deactivateUser(this.clientId).subscribe({
-      next:()=>{
+      next: () => {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Client Deactivated successfully' });
         this.getClientData();
         this.getDepositForClient();

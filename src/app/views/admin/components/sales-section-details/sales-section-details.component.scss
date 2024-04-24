@@ -1,11 +1,13 @@
 /* Custom Table Styles */
-.custom-table .p-datatable-tbody > tr {
-  background-color: #f4f4f4; /* Light grey background */
+.custom-table .p-datatable-tbody>tr {
+  background-color: #f4f4f4;
+  /* Light grey background */
 }
 
 .custom-table th {
   text-align: center;
-  background-color: #007bff; /* Blue header */
+  background-color: #007bff;
+  /* Blue header */
   color: #ffffff;
 }
 
@@ -15,24 +17,36 @@
 }
 
 .btn-details {
-  background-color: #007bff; /* Blue button */
+  background-color: #007bff;
+  /* Blue button */
   color: #ffffff;
   border: none;
 }
 
 .btn-details:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+  background-color: #0056b3;
+  /* Darker blue on hover */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .custom-table .p-datatable-tbody > tr > td,
-  .custom-table .p-datatable-thead > tr > th {
+
+  .custom-table .p-datatable-tbody>tr>td,
+  .custom-table .p-datatable-thead>tr>th {
     text-align: left;
     display: block;
   }
 
-  .custom-table .p-datatable-tbody > tr {
+  .custom-table .p-datatable-tbody>tr {
     border-bottom: 1px solid #dee2e6;
   }
+}
+
+.click {
+  background-color: green;
+  color: white;
+}
+
+.click:hover {
+  cursor: pointer;
 }

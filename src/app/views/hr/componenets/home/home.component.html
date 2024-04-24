@@ -78,15 +78,15 @@ header="Select  Hr"
 [(visible)]="displayTeamLeaderModal"
 >
 <div class="field-container">
-  <label for="hr"><i class="fa-solid fa-user"></i> TeamLeader : </label>
+  <label for="hr"><i class="fa-solid fa-user"></i> Superior : </label>
   <br />
   <select
     class="custom-select"
     [(ngModel)]="teamLeaderId"
   >
-    <option value="b4e8df6b-f1b7-4b8c-b59f-95aafefea4cd"  selected>Manager </option>
+    <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
     <option *ngFor="let hr of allTeamLeaders"  [value]="hr.id">
-      {{ hr.name }}
+      {{ hr.name }} (Leader)
     </option>
   </select>
 </div>

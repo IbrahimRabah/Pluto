@@ -54,7 +54,6 @@ export class AuthenticationService {
   getUserRole() {
     const userData = localStorage.getItem('userData');
     const role = userData ? JSON.parse(userData).role : '';
-    console.log("role", role)
     return role;
   }
   isTokenExpired(token: string): boolean {
