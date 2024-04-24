@@ -10,7 +10,7 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class LeaderSectionDetailsComponent {
   allTeamLeadersSellers!: MemberResponse[];
-  allTeamLeadersInterviewees!:MemberResponse[];
+  allTeamLeadersInterviewees!: MemberResponse[];
   allTeamLeaders!: MemberResponse[];
   teamLeaderId!: string;
   Page: number = 1;
@@ -36,10 +36,9 @@ export class LeaderSectionDetailsComponent {
     }
     this.admin.getAllTeamLeaders(queryURL).subscribe({
       next: (response: any) => {
-        this.allTeamLeaders = response.data.items; console.log(this.allTeamLeaders);;
+        this.allTeamLeaders = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   filter(event: any) {
@@ -73,20 +72,18 @@ export class LeaderSectionDetailsComponent {
     const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderId=${this.teamLeaderId}`;
     this.admin.getAllSellers(queryURL).subscribe({
       next: (response: any) => {
-        this.allTeamLeadersSellers = response.data.items; console.log(this.allTeamLeadersSellers);;
+        this.allTeamLeadersSellers = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   getAllTeamLeadersInterviewees() {
     const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SuperiorId=${this.teamLeaderId}`;
     this.admin.getAllInterviewees(queryURL).subscribe({
       next: (response: any) => {
-        this.allTeamLeadersInterviewees = response.data.items; console.log(this.allTeamLeadersInterviewees);;
+        this.allTeamLeadersInterviewees = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
 }

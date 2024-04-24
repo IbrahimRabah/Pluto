@@ -6,6 +6,9 @@ import { Employee } from 'src/app/core/models/hr';
 import { MessageService } from 'primeng/api';
 import { ToggleButtonChangeEvent } from 'primeng/togglebutton';
 import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
+import { HrService } from 'src/app/views/hr/services/hr.service';
+import { ManagerInfo } from 'src/app/core/models/managerInfo';
+import { ManagerService } from 'src/app/core/services/manager.service';
 
 @Component({
   selector: 'app-interviee-section',
@@ -13,27 +16,32 @@ import { AuthenticationService } from 'src/app/core/authentication/services/auth
   styleUrls: ['./interviee-section.component.scss']
 })
 export class IntervieeSectionComponent {
-toggleInterviewees(event: ToggleButtonChangeEvent) {
-  if (event.checked) {
-    this.getAllManagerInterviewees()
-  } else {
-    this.getAllInterviewees();
-  }}
+  allTeamLeaders: any;
+  displayTeamLeaderModal!: boolean;
+  teamLeaderId: any;
+  toggleInterviewees(event: ToggleButtonChangeEvent) {
+    if (event.checked) {
+      this.getAllManagerInterviewees()
+    } else {
+      this.getAllInterviewees();
+    }
+  }
   getSalesById(arg0: any) {
     throw new Error('Method not implemented.');
   }
   allInterviewees!: MemberResponse[];
+  managerData!: ManagerInfo;
   Page: number = 1;
   PageSize: number = 10;
   numberOfPage: number[] = [];
   totalCount: number = 0;
   displayHrModal!: boolean;
-  allHrs!:Employee[];
-  intervieweeId!:string;
-  hrId!:string;
-  userId!:string;
+  allHrs!: Employee[];
+  intervieweeId!: string;
+  hrId!: string;
+  userId!: string;
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService,private messageService:MessageService,private auth:AuthenticationService) {
+  constructor(private hr: HrService, private admin: AdminService, private messageService: MessageService, private auth: AuthenticationService , private manager:ManagerService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
@@ -41,6 +49,7 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
   ngOnInit(): void {
     this.getAllInterviewees();
     this.getUserId();
+    this.getManagerInfo()
   }
   getAllInterviewees(intervieweeName?: string): void {
     let queryURL;
@@ -52,10 +61,9 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
     }
     this.admin.getAllInterviewees(queryURL).subscribe({
       next: (response: any) => {
-        this.allInterviewees = response.data.items; console.log(this.allInterviewees);;
+        this.allInterviewees = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   getAllHrs(HrName?: string): void {
@@ -68,10 +76,17 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
     }
     this.admin.getAllHrs(queryURL).subscribe({
       next: (response: any) => {
-        this.allHrs = response.data.items; console.log(this.allHrs);;
+        this.allHrs = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
       },
-      error: (error) => { console.log(error); }
+    })
+  }
+  getManagerInfo():void
+  {
+    this.manager.getManagerInfo().subscribe({
+      next:(response)=>{
+        this.managerData = response;
+      }
     })
   }
   filter(event: any) {
@@ -92,7 +107,7 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
     this.Page = --this.Page;
     this.getAllInterviewees()
   }
-  showHrModal(id:string) {
+  showHrModal(id: string) {
     this.intervieweeId = id;
     this.displayHrModal = true;
     this.getAllHrs();
@@ -100,16 +115,12 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
   getUserId() {
     this.userId = this.auth.getUserId();
   }
-  changeHr()
-  {
+  changeHr() {
     const queryURL = `${this.intervieweeId}/Hr/${this.hrId}`;
     this.admin.changeIntervieweeHr(queryURL).subscribe({
-      next:()=>{
+      next: () => {
         this.getAllInterviewees();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Hr Changed successfully' });
-      },
-      error:(error)=>{
-        console.log(error)
       }
     })
     this.displayHrModal = false;
@@ -118,10 +129,45 @@ toggleInterviewees(event: ToggleButtonChangeEvent) {
     const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SuperiorId=${this.userId}`;
     this.admin.getAllInterviewees(queryURL).subscribe({
       next: (response: any) => {
-        this.allInterviewees = response.data.items; console.log(this.allInterviewees);;
+        this.allInterviewees = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
+
+  showTeamLeaderModal(id: string) {
+    this.intervieweeId = id;
+    this.displayTeamLeaderModal = true;
+    this.getAllTeamLeaders();
+  }
+
+  assignToTeamLeader() {
+    const queryURL = `${this.intervieweeId}/superior/${this.teamLeaderId}`;
+    this.hr.assignIntervieweeToLeader(queryURL).subscribe({
+      next: () => {
+        this.getAllInterviewees();
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Hr Changed successfully' });
+        this.getAllInterviewees();
+      }
+    })
+    this.displayTeamLeaderModal = false;
+  }
+
+  getAllTeamLeaders(TeamLeaderName?: string): void {
+    let queryURL;
+    if (TeamLeaderName) {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${TeamLeaderName}`;
+    }
+    else {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
+    this.admin.getAllTeamLeaders(queryURL).subscribe({
+      next: (response: any) => {
+        this.allTeamLeaders = response.data.items; 
+        this.totalCount = Math.ceil(response.data.count);
+      }
+    })
+  }
+
+
 }

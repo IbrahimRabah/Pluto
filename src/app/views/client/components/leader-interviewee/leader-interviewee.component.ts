@@ -18,33 +18,30 @@ export class LeaderIntervieweeComponent {
   numberOfPage: number[] = [];
   totalCount: number = 0;
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService, private hr:HrService, private messageService:MessageService) {
+  constructor(private admin: AdminService, private hr: HrService, private messageService: MessageService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
-   }
+  }
   ngOnInit(): void {
     this.getAllInterviewees();
   }
-  getAllInterviewees(intervieweeName?:string ): void {
+  getAllInterviewees(intervieweeName?: string): void {
     let queryURL;
-    if(intervieweeName)
-      {
-         queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${intervieweeName}`;
-      }
-      else
-      {
-        queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
-      }
+    if (intervieweeName) {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${intervieweeName}`;
+    }
+    else {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
     this.hr.getAllInterviewee(queryURL).subscribe({
       next: (response: any) => {
-        this.allInterviewees = response.data.items; console.log(this.allInterviewees);;
+        this.allInterviewees = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
       },
-      error: (error) => { console.log(error); }
     })
   }
-  filter(event:any){
+  filter(event: any) {
     this.getAllInterviewees(event);
   }
   onInputChange(event: any) {

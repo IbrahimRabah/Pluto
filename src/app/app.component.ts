@@ -13,8 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authenticationService.isAuthenticatedUser();
     this.authenticationService.isAuthenticated$.subscribe({
-      next: (response) => { this.isLogin = response;console.log(response); },
-      error: (error) => { console.log(error) }
+      next: (response) => { this.isLogin = response;},
     })
   }
   ngOnDestroy(): void {

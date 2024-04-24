@@ -44,16 +44,18 @@ export class SalesHistoryComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
     this.initializeSalesForm();
-    this.getSalesHistory();
     this.getSales();
     this.routerData();
   }
 
   routerData() {
     this.activatedRoute.paramMap.subscribe((params) => {
-      this.SalesId = String(params.get('id')) ||'';
+      this.SalesId = String(params.get('id')) || '';
       if (this.SalesId !== "null") {
 
+        this.getSalesHistory();
+      }
+      else {
         this.getSalesHistory();
       }
     })
@@ -72,10 +74,6 @@ export class SalesHistoryComponent implements OnInit {
       next: (response: MemberResponse) => {
         this.salesHistory = response.data.items;
         this.totalCount = Math.ceil(response.data.count)
-        console.log("total", this.totalCount)
-      },
-      error: (err) => {
-        console.error(err)
       }
     })
   }

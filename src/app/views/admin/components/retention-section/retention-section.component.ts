@@ -36,10 +36,9 @@ export class RetentionSectionComponent {
     }
     this.admin.getAllRetentions(queryURL).subscribe({
       next: (response: any) => {
-        this.allRetentions = response.data.items; console.log(this.allRetentions);;
+        this.allRetentions = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   filter(event: any) {

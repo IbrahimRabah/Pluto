@@ -9,21 +9,20 @@ import { statisticsResponse } from 'src/app/core/models/statistics';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent{
+export class DashboardComponent {
   isCollapsed = false;
-  statistics!:statisticsResponse;
+  statistics!: statisticsResponse;
   showItem: boolean = false;
-  items!:any[];
-  constructor(private router:Router, private auth:AuthenticationService,private admin:AdminService){}
+  items!: any[];
+  constructor(private router: Router, private auth: AuthenticationService, private admin: AdminService) { }
   ngOnInit(): void {
-  this.getAdminStatistics();
+    this.getAdminStatistics();
   }
-  initializeItems()
-  {
+  initializeItems() {
     this.items = [
       { name: 'Admin', num: 1, icon: 'fa-solid fa-user-gear' },
       { name: 'Manger', num: 1, icon: 'fa-solid fa-user-tie' },
-      { name: 'Team Leaders', num:this.statistics.data.totalTeamLeaders, icon: 'fa-solid fa-user-group' },
+      { name: 'Team Leaders', num: this.statistics.data.totalTeamLeaders, icon: 'fa-solid fa-user-group' },
       { name: 'Sellers', num: this.statistics.data.totalSalesMen, icon: 'fa-solid fa-users' },
       { name: 'Hr', num: this.statistics.data.totalHRs, icon: 'fa-regular fa-user' },
       { name: 'Clients', num: this.statistics.data.totalClients, icon: 'fa-solid fa-people-group' },
@@ -31,24 +30,21 @@ export class DashboardComponent{
       { name: 'Interviewee', num: this.statistics.data.totalInterviewees, icon: 'fa-solid fa-user-tie' }
     ];
   }
-  toggleSidebar () {
+  toggleSidebar() {
     this.isCollapsed = !this.isCollapsed
     this.showItem = !this.showItem
   }
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/auth/login']);
   }
-  getAdminStatistics():void
-  {
+  getAdminStatistics(): void {
     this.admin.getAdminStatistics().subscribe({
-      next:(response)=>{this.statistics =response;
-        console.log(this.statistics.data);
+      next: (response) => {
+        this.statistics = response;
         this.initializeItems()
 
-      },
-
-      error:(error)=>{console.log(error)}
+      }
     })
   }
 }

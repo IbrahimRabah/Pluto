@@ -57,7 +57,7 @@
           <td class="border">{{ item.dateOfBirth }}</td>
           <td class="border">{{ item.addedDate }}</td>
           <td class="border">{{ item.hrName }}</td>
-          <td class="border">{{ item.superiorName }}</td>
+          <td (click)="showTeamLeaderModal(item.id)" class="border">{{ item.superiorName }}<br><i class="fas fa-edit"></i></td>
           <th (click)="showHrModal(item.id)" class="border bg-success"><i class="fas fa-edit"></i></th>
         </tr>
       </ng-template>
@@ -111,6 +111,37 @@ header="Select  Hr"
     icon="pi pi-check"
     class="modal-open-button"
     (click)="changeHr()"
+  ></button>
+</p-footer>
+</p-dialog>
+<p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+[style]="{ width: '30vw' }"
+header="Select  Hr"
+[(visible)]="displayTeamLeaderModal"
+>
+<div class="field-container">
+  <label for="hr"><i class="fa-solid fa-user"></i> Superior : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="teamLeaderId"
+  >
+  <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
+  <option *ngFor="let hr of allTeamLeaders"  [value]="hr.id">
+      {{ hr.name }} (Leader)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="assignToTeamLeader()"
   ></button>
 </p-footer>
 </p-dialog>

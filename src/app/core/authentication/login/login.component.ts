@@ -65,13 +65,11 @@ export class LoginComponent implements OnInit {
             else {
               this.messageService.add({ severity: 'error', summary: 'error', detail: 'Error' });
               this.apiError = response.message;
-              console.log("else")
             }
           },
           error: (err) => {
             this.isLoading = false;
             this.apiError = err.message;
-            console.log("error");
 
           }
         })

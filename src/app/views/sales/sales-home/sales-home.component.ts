@@ -17,7 +17,7 @@ export class SalesHomeComponent implements OnInit {
   slaesId: string = "";
   addedDate!: Date
   salesId!: string
-  constructor(private formBuilder: FormBuilder, private salesService: SalesDayService, private activatedRoute: ActivatedRoute,private messageService:MessageService) { }
+  constructor(private formBuilder: FormBuilder, private salesService: SalesDayService, private activatedRoute: ActivatedRoute, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.initializeSalesForm();
@@ -38,7 +38,6 @@ export class SalesHomeComponent implements OnInit {
   routerData() {
     this.activatedRoute.paramMap.subscribe((params) => {
       this.slaesId = String(params.get('id'));
-      // console.log(this.productId)
       if (this.slaesId !== "null") {
         this.getSalesById(this.slaesId);
       }
@@ -48,11 +47,10 @@ export class SalesHomeComponent implements OnInit {
     if (this.salesHome.valid) {
 
       const salesHomeData = this.salesHome.value;
-      if (this.slaesId==="null") {
+      if (this.slaesId === "null") {
         this.salesService.addSalesDay(salesHomeData).subscribe({
           next: (res) => {
             this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Added Successfully' });
-            console.log("Done ======>", res);
           }
         });
       }

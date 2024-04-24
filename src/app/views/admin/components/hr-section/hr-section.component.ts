@@ -36,10 +36,9 @@ export class HrSectionComponent {
     }
     this.admin.getAllHrs(queryURL).subscribe({
       next: (response: any) => {
-        this.allHrs = response.data.items; console.log(this.allHrs);;
+        this.allHrs = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   filter(event: any) {

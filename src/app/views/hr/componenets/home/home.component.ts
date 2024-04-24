@@ -6,6 +6,8 @@ import { HrService } from '../../services/hr.service';
 import { Interviewee } from 'src/app/core/models/interviewee';
 import { MessageService } from 'primeng/api';
 import { Employee } from 'src/app/core/models/hr';
+import { ManagerInfo } from 'src/app/core/models/managerInfo';
+import { ManagerService } from 'src/app/core/services/manager.service';
 
 @Component({
   selector: 'app-home',
@@ -15,79 +17,82 @@ import { Employee } from 'src/app/core/models/hr';
 export class HomeComponent {
   allInterviewees!: Interviewee[];
   allTeamLeaders!: Employee[];
-  intervieweeId!:string;
-  teamLeaderId!:string;
+  intervieweeId!: string;
+  teamLeaderId!: string;
   Page: number = 1;
   PageSize: number = 10;
   numberOfPage: number[] = [];
   totalCount: number = 0;
+  managerData!:ManagerInfo;
   displayTeamLeaderModal!: boolean;
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService, private hr:HrService, private messageService:MessageService) {
+  constructor(private admin: AdminService, private hr: HrService,private manager: ManagerService ,private messageService: MessageService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
-   }
+  }
   ngOnInit(): void {
     this.getAllInterviewees();
+    this.getManagerInfo();
   }
-  getAllInterviewees(intervieweeName?:string ): void {
+  getAllInterviewees(intervieweeName?: string): void {
     let queryURL;
-    if(intervieweeName)
-      {
-         queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${intervieweeName}`;
-      }
-      else
-      {
-        queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
-      }
+    if (intervieweeName) {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${intervieweeName}`;
+    }
+    else {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
     this.hr.getAllInterviewee(queryURL).subscribe({
       next: (response: any) => {
-        this.allInterviewees = response.data.items; console.log(this.allInterviewees);;
+        this.allInterviewees = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
-  getAllTeamLeaders(TeamLeaderName?:string ): void {
+  getAllTeamLeaders(TeamLeaderName?: string): void {
     let queryURL;
-    if(TeamLeaderName)
-      {
-         queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${TeamLeaderName}`;
-      }
-      else
-      {
-        queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
-      }
+    if (TeamLeaderName) {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderName=${TeamLeaderName}`;
+    }
+    else {
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}`;
+    }
     this.admin.getAllTeamLeaders(queryURL).subscribe({
       next: (response: any) => {
-        this.allTeamLeaders = response.data.items; console.log(this.allTeamLeaders);;
+        this.allTeamLeaders = response.data.items; 
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
-  assignToTeamLeader()
-  {
+  assignToTeamLeader() {
     const queryURL = `${this.intervieweeId}/superior/${this.teamLeaderId}`;
     this.hr.assignIntervieweeToLeader(queryURL).subscribe({
-      next:()=>{
+      next: () => {
         this.getAllInterviewees();
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Hr Changed successfully' });
         this.getAllInterviewees();
       },
-      error:(error)=>{
+      error: (error) => {
         console.log(error)
       }
     })
     this.displayTeamLeaderModal = false;
   }
-  showTeamLeaderModal(id:string) {
+  getManagerInfo():void
+  {
+    this.manager.getManagerInfo().subscribe({
+      next:(response)=>{
+        this.managerData = response;
+      }
+    })
+  }
+  showTeamLeaderModal(id: string) {
     this.intervieweeId = id;
     this.displayTeamLeaderModal = true;
     this.getAllTeamLeaders();
   }
-  filter(event:any){
+  filter(event: any) {
     this.getAllInterviewees(event);
   }
   onInputChange(event: any) {
@@ -106,4 +111,4 @@ export class HomeComponent {
     this.Page = --this.Page;
     this.getAllInterviewees()
   }
- }
+}

@@ -5,26 +5,13 @@
         All Clients <i class="fa-solid fa-people-group"></i>
       </h2>
     </div>
-    <p-table
-      class="custom-table py-2"
-      [value]="allClients"
-      [paginator]="true"
-      [rows]="10"
-      [totalRecords]="totalCount"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'max-width': '100%' }"
-      [responsive]="true"
-    >
+    <p-table class="custom-table py-2" [value]="allClients" [paginator]="true" [rows]="10" [totalRecords]="totalCount"
+      [showCurrentPageReport]="true" [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
       <ng-template pTemplate="caption">
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            id="search-client"
-            placeholder="Search keyword"
-            (input)="onInputChange($event)"
-          />
+          <input pInputText type="text" id="search-client" placeholder="Search keyword"
+            (input)="onInputChange($event)" />
         </span>
       </ng-template>
       <ng-template pTemplate="header">
@@ -37,7 +24,7 @@
           <th class="border">Seller <i class="fa-solid fa-users"></i></th>
           <th class="border">Retention <i class="fa-solid fa-person-rays"></i></th>
           <th class="border">Status</th>
-          <th class="border">Details <i class="fa-solid fa-info"></i></th>
+          <th class="border">Details <i class="fa-solid fa-circle-info"></i></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -48,39 +35,25 @@
           <td class="border">{{ item.nationalId }}</td>
           <td class="border">{{ item.teamLeaderName }}</td>
           <td class="border">{{ item.salesName }}</td>
-          <td *ngIf="item.retentionName" class="border" >
+          <td *ngIf="item.retentionName" class="border">
             {{ item.retentionName }}
           </td>
           <td *ngIf="!item.retentionName" class="border">Not-Registered</td>
           <td class="border">{{ item.statusName }}</td>
           <td class="border">
-            <button
-              type="button"
-              class="btn btn-success border"
-              routerLink="/client/clientDetailes/{{ item.id }}"
-            >
+            <button type="button" class="btn btn-success border" routerLink="/client/clientDetailes/{{ item.id }}">
               Details
             </button>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
-        <p-button
-          type="button"
-          icon="pi pi-chevron-left"
-          (click)="previousPage()"
-          styleClass="p-button-text"
-          label="Previous"
-        ></p-button>
+        <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text"
+          label="Previous"></p-button>
       </ng-template>
       <ng-template pTemplate="paginatorright">
-        <p-button
-          type="button"
-          icon="pi pi-chevron-right"
-          (click)="nextPage()"
-          styleClass="p-button-text fw-bold"
-          >Next</p-button
-        >
+        <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()"
+          styleClass="p-button-text fw-bold">Next</p-button>
       </ng-template>
     </p-table>
   </div>

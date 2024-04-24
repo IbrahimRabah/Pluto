@@ -40,14 +40,12 @@ export class SalesListComponent {
     }
     this.admin.getAllSellers(queryURL).subscribe({
       next: (response: any) => {
-        this.allSellers = response.data.items; console.log(this.allSellers);;
+        this.allSellers = response.data.items;
         this.totalCount = Math.ceil(response.data.count);
-      },
-      error: (error) => { console.log(error); }
+      }
     })
   }
   filter(event: any) {
-    console.log(event)
     this.getAllSellers(event);
   }
   onInputChange(event: any) {
