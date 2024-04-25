@@ -41,8 +41,7 @@ export class RegistrationComponent implements OnInit {
         this.roleOptions = this.roleOptions;
     }
   }
-
-  initialization() {
+  initialization(): void {
     this.registerationForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -54,11 +53,9 @@ export class RegistrationComponent implements OnInit {
       role: new FormControl(0, [Validators.required]),
       superiorRole: new FormControl(0),
       teamLeaderId: new FormControl('0')
-
-
     });
   }
-  onSubmit() {
+  onSubmit(): void {
     if (this.registerationForm.valid) {
       this.auth.register(this.registerationForm.value).subscribe(
         {
@@ -69,7 +66,7 @@ export class RegistrationComponent implements OnInit {
       )
     }
   }
-  getTeamLead() {
+  getTeamLead(): void {
     this.teamLeaderService.getAllTeamLeaders().subscribe({
       next: (response) => {
         this.teamLeads = response.data;

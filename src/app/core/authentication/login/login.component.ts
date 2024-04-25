@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initialization();
   }
-  initialization() {
+  initialization(): void {
     this.loginForm = new FormGroup(
       {
         email: new FormControl('', [Validators.required]),
@@ -27,9 +27,8 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-  onSubmit() {
+  onSubmit(): void {
     {
-
       if (!this.loginForm.invalid) {
         this.auth.login(this.loginForm.value).subscribe({
           next: (response) => {
@@ -78,9 +77,7 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
-
-  toggle(action: string) {
+  toggle(action: string): void {
     switch (action) {
       case 'add':
         this.containerDiv.nativeElement.classList.add('active');
@@ -88,6 +85,5 @@ export class LoginComponent implements OnInit {
       default:
         this.containerDiv.nativeElement.classList.remove('active');
     }
-
   }
 }

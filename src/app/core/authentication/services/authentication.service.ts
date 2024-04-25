@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environment';
 import { jwtDecode } from 'jwt-decode';
+import { LoginResponse, UserLogin, UserRegister } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,21 +14,18 @@ export class AuthenticationService {
   currentUrl = "Account/";
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private isAdminSubject = new BehaviorSubject<boolean>(false);
-
   constructor(private http: HttpClient, private router: Router) { }
-
   get isAuthenticated$(): Observable<boolean> {
     return this.isAuthenticatedSubject.asObservable();
   }
   get isAdmin$(): Observable<boolean> {
     return this.isAdminSubject.asObservable();
   }
-  register(registerObj: any): Observable<any> {
+  register(registerObj: UserRegister): Observable<UserRegister> {
     const url = `${this.baseUrl + this.currentUrl}Register`
-    return this.http.post<any>(url, registerObj);
+    return this.http.post<UserRegister>(url, registerObj);
   }
-
-  login(loginObj: any): Observable<any> {
+  login(loginObj: UserLogin): Observable<LoginResponse> {
     const url = `${this.baseUrl + this.currentUrl}Login`;
     return this.http.post(url, loginObj).pipe(
       tap((response: any) => {

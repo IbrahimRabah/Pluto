@@ -1,28 +1,74 @@
 <div id="registerDiv">
-  <form [formGroup]="registerationForm" (ngSubmit)="onSubmit()" class="registration-form">
+  <form
+    [formGroup]="registerationForm"
+    (ngSubmit)="onSubmit()"
+    class="registration-form"
+  >
     <h2 class="form-title">Register User</h2>
     <div class="form-group">
       <div class="input-group">
         <label for="name"><i class="fas fa-user"></i> Name*</label>
-        <input type="text" id="name" formControlName="name" class="form-control" placeholder="Your Full Name">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('name')?.touched && registerationForm.get('name')?.hasError('required')">
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="form-control"
+          placeholder="Your Full Name"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('name')?.touched &&
+            registerationForm.get('name')?.hasError('required')
+          "
+        >
           Please enter your name.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('name')?.touched && registerationForm.get('name')?.hasError('minlength')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('name')?.touched &&
+            registerationForm.get('name')?.hasError('minlength')
+          "
+        >
           Name must be at least 2 characters long.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('name')?.touched && registerationForm.get('name')?.hasError('maxlength')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('name')?.touched &&
+            registerationForm.get('name')?.hasError('maxlength')
+          "
+        >
           Name must not exceed 50 characters.
         </div>
       </div>
 
       <div class="input-group">
         <label for="email"><i class="fas fa-envelope"></i> Email*</label>
-        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Your Email Address">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('email')?.touched && registerationForm.get('email')?.hasError('required')">
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          placeholder="Your Email Address"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('email')?.touched &&
+            registerationForm.get('email')?.hasError('required')
+          "
+        >
           Please enter your email address.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('email')?.touched && registerationForm.get('email')?.hasError('email')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('email')?.touched &&
+            registerationForm.get('email')?.hasError('email')
+          "
+        >
           Invalid email address format.
         </div>
       </div>
@@ -31,22 +77,60 @@
     <div class="form-group">
       <div class="input-group">
         <label for="phone"><i class="fas fa-phone"></i> Phone*</label>
-        <input type="tel" id="phone" formControlName="phoneNumber" class="form-control" placeholder="Your Phone Number">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('phoneNumber')?.touched && registerationForm.get('phoneNumber')?.hasError('required')">
+        <input
+          type="tel"
+          id="phone"
+          formControlName="phoneNumber"
+          class="form-control"
+          placeholder="Your Phone Number"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('phoneNumber')?.touched &&
+            registerationForm.get('phoneNumber')?.hasError('required')
+          "
+        >
           Please enter your phone number.
         </div>
       </div>
 
       <div class="input-group">
-        <label for="nationalId"><i class="fas fa-id-card"></i> National_Id*</label>
-        <input type="text" id="nationalId" formControlName="nationalId" class="form-control" placeholder="Your National_Id">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('nationalId')?.touched && registerationForm.get('nationalId')?.hasError('required')">
+        <label for="nationalId"
+          ><i class="fas fa-id-card"></i> National_Id*</label
+        >
+        <input
+          type="text"
+          id="nationalId"
+          formControlName="nationalId"
+          class="form-control"
+          placeholder="Your National_Id"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('nationalId')?.touched &&
+            registerationForm.get('nationalId')?.hasError('required')
+          "
+        >
           Please enter your national_Id.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('nationalId')?.touched && registerationForm.get('nationalId')?.hasError('minlength')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('nationalId')?.touched &&
+            registerationForm.get('nationalId')?.hasError('minlength')
+          "
+        >
           national_Id must be at least 2 characters long.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('nationalId')?.touched && registerationForm.get('nationalId')?.hasError('maxlength')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('nationalId')?.touched &&
+            registerationForm.get('nationalId')?.hasError('maxlength')
+          "
+        >
           national_Id must not exceed 50 characters.
         </div>
       </div>
@@ -54,19 +138,50 @@
 
     <div class="form-group">
       <div class="input-group">
-        <label for="companyPhoneNumber"><i class="fas fa-phone"></i> Company Phone Number*</label>
-        <input type="tel" id="companyPhoneNumber" formControlName="companyPhoneNumber" class="form-control" placeholder="Your Company Phone Number">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('companyPhoneNumber')?.touched && registerationForm.get('companyPhoneNumber')?.hasError('required')">
+        <label for="companyPhoneNumber"
+          ><i class="fas fa-phone"></i> Company Phone Number*</label
+        >
+        <input
+          type="tel"
+          id="companyPhoneNumber"
+          formControlName="companyPhoneNumber"
+          class="form-control"
+          placeholder="Your Company Phone Number"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('companyPhoneNumber')?.touched &&
+            registerationForm.get('companyPhoneNumber')?.hasError('required')
+          "
+        >
           Please Enter Your Company Phone Number.
         </div>
       </div>
 
       <div class="input-group">
         <label for="role"><i class="fas fa-user-tag"></i> Role*</label>
-        <select id="role" formControlName="role" class="form-control" [(ngModel)]="selectedRole">
-          <option type="number" *ngFor="let role of roleOptions" [ngValue]=role.id>{{role.name}}</option>
+        <select
+          id="role"
+          formControlName="role"
+          class="form-control"
+          [(ngModel)]="selectedRole"
+        >
+          <option
+            type="number"
+            *ngFor="let role of roleOptions"
+            [ngValue]="role.id"
+          >
+            {{ role.name }}
+          </option>
         </select>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('role')?.touched && registerationForm.get('role')?.hasError('required')">
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('role')?.touched &&
+            registerationForm.get('role')?.hasError('required')
+          "
+        >
           Please select your role.
         </div>
       </div>
@@ -74,10 +189,19 @@
 
     <div class="form-group" *ngIf="selectedRole == 3">
       <div class="input-group">
-        <label for="superiorRole"><i class="fas fa-user-friends"></i> Superior Role*</label>
-        <select id="superiorRole" formControlName="superiorRole" class="form-control" [(ngModel)]="isTeamLead">
-          <option type="number" *ngIf="userRole != 'TeamLeader'" [ngValue]=1>Manager</option>
-          <option type="number" [ngValue]=2>TeamLeader</option>
+        <label for="superiorRole"
+          ><i class="fas fa-user-friends"></i> Superior Role*</label
+        >
+        <select
+          id="superiorRole"
+          formControlName="superiorRole"
+          class="form-control"
+          [(ngModel)]="isTeamLead"
+        >
+          <option type="number" *ngIf="userRole != 'TeamLeader'" [ngValue]="1">
+            Manager
+          </option>
+          <option type="number" [ngValue]="2">TeamLeader</option>
           <!-- Add more options as needed -->
         </select>
       </div>
@@ -86,8 +210,18 @@
     <div class="form-group" *ngIf="isTeamLead == 2">
       <div class="input-group">
         <label for="teamLeader"><i class="fas fa-users"></i> TeamLeads*</label>
-        <select id="teamLeader" formControlName="teamLeaderId" class="form-control">
-          <option type="number" *ngFor="let teamLead of teamLeads" [ngValue]="teamLead.id.toString()">{{teamLead.name}}</option>
+        <select
+          id="teamLeader"
+          formControlName="teamLeaderId"
+          class="form-control"
+        >
+          <option
+            type="number"
+            *ngFor="let teamLead of teamLeads"
+            [ngValue]="teamLead.id.toString()"
+          >
+            {{ teamLead.name }}
+          </option>
         </select>
       </div>
     </div>
@@ -95,35 +229,87 @@
     <div class="form-group">
       <div class="input-group">
         <label for="password"><i class="fas fa-lock"></i> Password*</label>
-        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Choose a Password">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('password')?.touched && registerationForm.get('password')?.hasError('required')">
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          placeholder="Choose a Password"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('password')?.touched &&
+            registerationForm.get('password')?.hasError('required')
+          "
+        >
           Please enter a password.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('password')?.touched && registerationForm.get('password')?.hasError('pattern')">
-          Password must contain at least one uppercase letter, one lowercase letter, one special character, one number, and be at least 10 characters long.
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('password')?.touched &&
+            registerationForm.get('password')?.hasError('pattern')
+          "
+        >
+          Password must contain at least one uppercase letter, one lowercase
+          letter, one special character, one number, and be at least 10
+          characters long.
         </div>
       </div>
 
       <div class="input-group">
-        <label for="rePassword"><i class="fas fa-lock"></i> Re-enter Password*</label>
-        <input type="password" id="rePassword" formControlName="rePassword" class="form-control" placeholder="Confirm Password">
-        <div class="error-message text-danger" *ngIf="registerationForm.get('rePassword')?.touched && registerationForm.get('rePassword')?.hasError('required')">
+        <label for="rePassword"
+          ><i class="fas fa-lock"></i> Re-enter Password*</label
+        >
+        <input
+          type="password"
+          id="rePassword"
+          formControlName="rePassword"
+          class="form-control"
+          placeholder="Confirm Password"
+        />
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('rePassword')?.touched &&
+            registerationForm.get('rePassword')?.hasError('required')
+          "
+        >
           Please confirm your password.
         </div>
-        <div class="error-message text-danger" *ngIf="registerationForm.get('rePassword')?.touched && registerationForm.get('rePassword')?.hasError('pattern')">
-          Password must contain at least one uppercase letter, one lowercase letter, one special character, one number, and be at least 10 characters long.
+        <div
+          class="error-message text-danger"
+          *ngIf="
+            registerationForm.get('rePassword')?.touched &&
+            registerationForm.get('rePassword')?.hasError('pattern')
+          "
+        >
+          Password must contain at least one uppercase letter, one lowercase
+          letter, one special character, one number, and be at least 10
+          characters long.
         </div>
       </div>
     </div>
 
-    <div class="alert alert-danger text-dark" *ngIf="registerationForm.get('rePassword')?.touched && registerationForm.get('password')?.touched && registerationForm.hasError('passwordMismatch')">
+    <div
+      class="alert alert-danger text-dark"
+      *ngIf="
+        registerationForm.get('rePassword')?.touched &&
+        registerationForm.get('password')?.touched &&
+        registerationForm.hasError('passwordMismatch')
+      "
+    >
       Passwords do not match.
     </div>
 
-    <button [disabled]="registerationForm.invalid" type="submit" class="btn btn-register mt-4">
+    <button
+      [disabled]="registerationForm.invalid"
+      type="submit"
+      class="btn btn-register mt-4"
+    >
       <span>Save</span>
     </button>
-
   </form>
 </div>
 <p-toast></p-toast>

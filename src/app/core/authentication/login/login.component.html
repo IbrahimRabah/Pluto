@@ -1,57 +1,93 @@
 <div class="main">
-<div class="container" id="container" #container>
-  <div class="form-container sign-up">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h1>Sign In</h1>
-      <input type="email" placeholder="Email" formControlName="email">
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message text-danger">
-        Please enter a valid email.
-      </div>
-      <input type="password" placeholder="Password" formControlName="password">
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message text-danger">
-        Please enter a valid password.
-      </div>
-      <div class="text-danger error-message" *ngIf="apiError">
-        {{apiError}}
-      </div>
-      <button type="submit">
-        <i class="fas fa-spinner" *ngIf="isLoading"></i>
-       <span *ngIf="!isLoading">Sign In</span></button>
-  </form>
-  </div>
-  <div class="form-container sign-in">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <h1>Sign In</h1>
-      <input type="email" placeholder="Email" formControlName="email">
-      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message text-danger">
-        Please enter a valid email.
-      </div>
-      <input type="password" placeholder="Password" formControlName="password">
-      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message text-danger">
-        Please enter a valid password.
-      </div>
-      <div class="error-message text-danger" *ngIf="apiError">
-        {{apiError}}
-      </div>
-      <button type="submit">
-        <i class="fas fa-spinner" *ngIf="isLoading"></i>
-       <span *ngIf="!isLoading">Sign In</span></button>
-  </form>
-  </div>
-  <div class="toggle-container">
+  <div class="container" id="container" #container>
+    <div class="form-container sign-up">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1>Sign In</h1>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <div
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+          class="error-message text-danger"
+        >
+          Please enter a valid email.
+        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+          class="error-message text-danger"
+        >
+          Please enter a valid password.
+        </div>
+        <div class="text-danger error-message" *ngIf="apiError">
+          {{ apiError }}
+        </div>
+        <button type="submit">
+          <i class="fas fa-spinner" *ngIf="isLoading"></i>
+          <span *ngIf="!isLoading">Sign In</span>
+        </button>
+      </form>
+    </div>
+    <div class="form-container sign-in">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1>Sign In</h1>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <div
+          *ngIf="
+            loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+          "
+          class="error-message text-danger"
+        >
+          Please enter a valid email.
+        </div>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+        <div
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            loginForm.get('password')?.touched
+          "
+          class="error-message text-danger"
+        >
+          Please enter a valid password.
+        </div>
+        <div class="error-message text-danger" *ngIf="apiError">
+          {{ apiError }}
+        </div>
+        <button type="submit">
+          <i class="fas fa-spinner" *ngIf="isLoading"></i>
+          <span *ngIf="!isLoading">Sign In</span>
+        </button>
+      </form>
+    </div>
+    <div class="toggle-container">
       <div class="toggle">
-          <div class="toggle-panel toggle-left">
-              <h1>Welcome Back!</h1>
-              <p>Enter your personal details to use all of site features</p>
-              <button class="hidden" id="login" (click)="toggle('remove')">Sign In</button>
-          </div>
-          <div class="toggle-panel toggle-right">
-              <h1>Hello, Friend!</h1>
-              <p>Sign In with your personal details to use all of site features</p>
-              <button class="hidden" id="register" (click)="toggle('add')">Sign In</button>
-          </div>
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome Back!</h1>
+          <p>Enter your personal details to use all of site features</p>
+          <button class="hidden" id="login" (click)="toggle('remove')">
+            Sign In
+          </button>
+        </div>
+        <div class="toggle-panel toggle-right">
+          <h1>Hello, Friend!</h1>
+          <p>Sign In with your personal details to use all of site features</p>
+          <button class="hidden" id="register" (click)="toggle('add')">
+            Sign In
+          </button>
+        </div>
       </div>
+    </div>
   </div>
-</div>
 </div>
 <p-toast></p-toast>
