@@ -3,27 +3,31 @@
     <div class="text-center mb-4">
       <h2 class="text-primary">All Clients <i class="fas fa-users"></i></h2>
     </div>
-    <div class="d-flex justify-content-around align-items-center mb-3">
-      <label for="StartDate" class="fw-bold mb-0">
-        <i class="fas fa-calendar-alt"></i> Start Date :
-      </label>
-      <p-calendar
-        [(ngModel)]="StartDate"
-        (onChange)="onInputChange($event)"
-        (ngModelChange)="changeClander()"
-        [showIcon]="true"
-        inputId="StartDate"
-      ></p-calendar>
-      <label for="EndDate" class="fw-bold mb-0">
-        <i class="fas fa-calendar-alt"></i> End Date :
-      </label>
-      <p-calendar
-        [(ngModel)]="EndDate"
-        (ngModelChange)="changeClander()"
-        (onChange)="onInputChange($event)"
-        [showIcon]="true"
-        inputId="EndDate"
-      ></p-calendar>
+    <div class="row mb-3">
+      <div class="col-12 col-md-6 d-flex justify-content-around align-items-center mb-2">
+        <label for="StartDate" class="fw-bold mb-0 pr-2">
+          <i class="fas fa-calendar-alt"></i> Start Date :
+        </label>
+        <p-calendar
+          [(ngModel)]="StartDate"
+          (onChange)="onInputChange($event)"
+          (ngModelChange)="changeClander()"
+          [showIcon]="true"
+          inputId="StartDate"
+        ></p-calendar>
+      </div>
+      <div class="col-12 col-md-6 d-flex justify-content-around align-items-center">
+        <label for="EndDate" class="fw-bold mb-0">
+          <i class="fas fa-calendar-alt"></i> End Date :
+        </label>
+        <p-calendar
+          [(ngModel)]="EndDate"
+          (ngModelChange)="changeClander()"
+          (onChange)="onInputChange($event)"
+          [showIcon]="true"
+          inputId="EndDate"
+        ></p-calendar>
+      </div>
     </div>
     <div class="d-flex justify-content-center mb-3"> <!-- Centered Search Input -->
       <div class="input-group">
@@ -37,7 +41,7 @@
           (input)="onInputChange($event)"
         />
         <button
-          class="btn btn-outline-primary bg-primary my-2 my-sm-0 search-text text-white"
+          class="btn btn-outline-primary bg-primary search-text text-white"
           type="submit"
           (click)="onInputChange($event)"
         >

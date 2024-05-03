@@ -1,5 +1,5 @@
-<div class="px-4 pb-2">
-  <div id="registerDiv">
+<div class="container d-flex justify-content-center">
+  <section class="my-3">
     <form [formGroup]="updateForm" (ngSubmit)="updateItemDetails()" class="registration-form mb-4">
       <h2 class="form-title"><i class="fas fa-user me-2"></i>Client Details</h2>
       <div class="form-group">
@@ -65,150 +65,150 @@
         label="Update" [disabled]="!updateForm.valid"></button>
     </form>
     <div class="row">
-      <div class="col">
-        <button *ngIf="
-            (currentClient.status === 1 || currentClient.status === 2) &&
-            userRole === 'Manager'||userRole === 'Admin'" style="width: 100% ;height: inherit;"
-          class="btn btn-primary btn-block confirm-model-height btn-confirm" type="button"
-          (click)="showTeamdLeadModal()">
+      <div class="col mb-1" *ngIf="
+      (currentClient.status === 1 || currentClient.status === 2) &&
+      userRole === 'Manager'||userRole === 'Admin'">
+        <button style="width: 100% ;height: inherit;" class="btn btn-primary btn-block confirm-model-height btn-confirm"
+          type="button" (click)="showTeamdLeadModal()">
           <i class="fas fa-user-plus me-1"></i> Change&nbsp;TeamLeader
         </button>
       </div>
-      <div class="col">
-        <button *ngIf="
-            (userRole === 'Manager'||userRole==='Admin') &&
-            currentClient.status === 0 &&
-            currentClient.retentionId === null
-          " style="width: 100% ;height: inherit;"
-          class="btn btn-success btn-block confirm-model-height btn-confirm mb-5" type="button" (click)="showModal()">
+      <div class="col mb-1" *ngIf="
+      (userRole === 'Manager'||userRole==='Admin') &&
+      currentClient.status === 0 &&
+      currentClient.retentionId === null
+    ">
+        <button style="width: 100% ;height: inherit;"
+          class="btn btn-success btn-block confirm-model-height btn-confirm mb-2" type="button" (click)="showModal()">
           <i class="fas fa-handshake me-1"></i> Assign&nbsp;to&nbsp;Retention
         </button>
       </div>
 
-      <div class="col">
-        <button *ngIf="
-            (userRole === 'Manager' || userRole==='Retention') &&
-            currentClient.status === 0
-          " style="width: 100% ;height: inherit;"
-          class="btn btn-danger btn-block confirm-model-height btn-confirm mb-5 " type="button"
+      <div class="col mb-1" *ngIf="
+      (userRole === 'Manager' || userRole==='Retention') &&
+      currentClient.status === 0
+    ">
+        <button style="width: 100% ;height: inherit;"
+          class="btn btn-danger btn-block confirm-model-height btn-confirm " type="button"
           (click)="deActivateClient()">
           <i class="fas fa-handshake"></i> Deactivated&nbsp;User</button>
       </div>
     </div>
-  </div>
-  <!-- ================================================= -->
-  <div class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
-    <h2 class="ms-3 mb-0">
-      <i class="fas fa-money-bill-wave me-2"></i>Client Deposit
-    </h2>
-    <button *ngIf="currentClient.status === 1 || currentClient.status === 2" type="button" class="btn btn-primary me-3"
-      (click)="showDepositModal()">
-      <i class="fas fa-plus me-1"></i> Add Deposit </button>
-  </div>
+  </section>
+</div>
+<!-- ================================================= -->
+<div class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded mx-2">
+  <h2 class="ms-3 mb-0">
+    <i class="fas fa-money-bill-wave me-2"></i>Client Deposit
+  </h2>
+  <button *ngIf="currentClient.status === 1 || currentClient.status === 2" type="button" class="btn btn-primary me-3"
+    (click)="showDepositModal()">
+    <i class="fas fa-plus me-1"></i> Add Deposit </button>
+</div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-      <thead class="bg-primary text-white">
-        <tr>
-          <th><i class="fas fa-dollar-sign me-1"></i> Amount</th>
-          <th><i class="fas fa-calendar-alt me-1"></i> Date</th>
-          <th><i class="fas fa-user me-1"></i> Depositor Name</th>
-          <th><i class="fas fa-chart-line me-1"></i> Total</th>
-          <th><i class="fas fa-toggle-on me-1"></i> Active</th>
-          <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
+<div class="table-responsive mx-2">
+  <table class="table table-bordered">
+    <thead class="bg-primary text-white">
+      <tr>
+        <th><i class="fas fa-dollar-sign me-1"></i> Amount</th>
+        <th><i class="fas fa-calendar-alt me-1"></i> Date</th>
+        <th><i class="fas fa-user me-1"></i> Depositor Name</th>
+        <th><i class="fas fa-chart-line me-1"></i> Total</th>
+        <th><i class="fas fa-toggle-on me-1"></i> Active</th>
+        <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
 
 
-            <th><i class="fas fa-replay me-1"></i> Redeposit</th>
-            <th><i class="fas fa-replay me-1"></i> Details</th>
-            <th><i class="fas fa-replay me-1"></i> Deactivate</th>
-            <th><i class="fa-solid fa-pen-to-square"></i> update</th>
-          </ng-container>
-        </tr>
+          <th><i class="fas fa-replay me-1"></i> Redeposit</th>
+          <th><i class="fas fa-replay me-1"></i> Details</th>
+          <th><i class="fas fa-replay me-1"></i> Deactivate</th>
+          <th><i class="fa-solid fa-pen-to-square"></i> update</th>
+        </ng-container>
+      </tr>
 
-      </thead>
-      <tbody>
-        <tr *ngFor="let deposit of clientDeposit; let i = index">
-          <td>{{ deposit.amount }}</td>
-          <td>{{ deposit.date | date }}</td>
-          <td>{{ deposit.depositorName }}</td>
-          <td>{{ deposit.total }}</td>
-          <td>
-            <i class="fas" [ngClass]="{
+    </thead>
+    <tbody>
+      <tr *ngFor="let deposit of clientDeposit; let i = index">
+        <td>{{ deposit.amount }}</td>
+        <td>{{ deposit.date | date }}</td>
+        <td>{{ deposit.depositorName }}</td>
+        <td>{{ deposit.total }}</td>
+        <td>
+          <i class="fas" [ngClass]="{
                 'fa-check-circle text-success': deposit.isActive,
                 'fa-times-circle text-danger': !deposit.isActive
               }"></i>
+        </td>
+        <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
+
+
+          <td>
+            <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%"
+              (click)="reDeposit(deposit.id)">
+              <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit
+            </button>
           </td>
-          <ng-container *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
+          <td>
+            <button type="button" style="width: 100%;"
+              class="modal-open-details-button  btn-block confirm-model-height btn-confirm"
+              (click)="openDialog(deposit)">
+              Details
+            </button>
+          </td>
+          <td>
+            <button *ngIf="deposit.isActive" style="width: 100%;"
+              class="btn btn-danger btn-block confirm-model-height btn-confirm " type="button"
+              (click)="deActive(deposit.id)">
+              Deactivate
+            </button>
+          </td>
+          <td>
+            <button *ngIf="deposit.isActive" style="width: 100%;"
+              class="btn btn-success btn-block confirm-model-height btn-confirm" type="button"
+              (click)="showUpdateDepositModal(deposit.id, deposit.amount)">
+              Update
+            </button>
+          </td>
+        </ng-container>
 
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-            <td>
-              <button *ngIf="deposit.isActive" pButton style="background-color: rgb(99, 61, 15); width: 100%"
-                (click)="reDeposit(deposit.id)">
-                <i class="fa-solid fa-money-bill-wave me-2"></i> Redeposit
-              </button>
-            </td>
-            <td>
-              <button type="button" style="width: 100%;"
-                class="modal-open-details-button  btn-block confirm-model-height btn-confirm"
-                (click)="openDialog(deposit)">
-                Details
-              </button>
-            </td>
-            <td>
-              <button *ngIf="deposit.isActive" style="width: 100%;"
-                class="btn btn-danger btn-block confirm-model-height btn-confirm " type="button"
-                (click)="deActive(deposit.id)">
-                Deactivate
-              </button>
-            </td>
-            <td>
-              <button *ngIf="deposit.isActive" style="width: 100%;"
-                class="btn btn-success btn-block confirm-model-height btn-confirm" type="button"
-                (click)="showUpdateDepositModal(deposit.id, deposit.amount)">
-                Update
-              </button>
-            </td>
-          </ng-container>
-
-        </tr>
-      </tbody>
-    </table>
+<p-dialog class="d-flex justify-content-center" header="Enter Deposit" [modal]="true"
+  [(visible)]="displayModal">
+  <div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fas fa-dollar-sign text-danger"> D e p o s i t </i>
+      </span>
+      <input type="number" min="0" class="form-control" [(ngModel)]="selectedNumber"
+        placeholder="Enter Deposit Amount" />
+    </div>
   </div>
+  <p-footer class="d-flex justify-content-center">
+    <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+      (click)="deposit()"></button>
+  </p-footer>
+</p-dialog>
 
-  <p-dialog class="d-flex justify-content-center" header="Enter Deposit" [style]="{ width: '30vw' }" [modal]="true"
-    [(visible)]="displayModal">
-    <div>
-      <div class="input-group">
-        <span class="input-group-addon">
-          <i class="fas fa-dollar-sign text-danger"> D e p o s i t </i>
-        </span>
-        <input type="number" min="0" class="form-control" [(ngModel)]="selectedNumber"
-          placeholder="Enter Deposit Amount" />
-      </div>
+<p-dialog class="d-flex justify-content-center" header="Enter New Deposit" [modal]="true"
+  [(visible)]="displayUpdateDepositModal">
+  <div>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <i class="fas fa-dollar-sign text-danger"> N e w D e p o s i t </i>
+      </span>
+      <input type="number" min="0" class="form-control" [(ngModel)]="updateDepositAmount"
+        placeholder="Enter Deposit Amount" />
     </div>
-    <p-footer class="d-flex justify-content-center">
-      <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
-        (click)="deposit()"></button>
-    </p-footer>
-  </p-dialog>
-
-  <p-dialog class="d-flex justify-content-center" header="Enter New Deposit" [style]="{ width: '30vw' }" [modal]="true"
-    [(visible)]="displayUpdateDepositModal">
-    <div>
-      <div class="input-group">
-        <span class="input-group-addon">
-          <i class="fas fa-dollar-sign text-danger"> N e w D e p o s i t </i>
-        </span>
-        <input type="number" min="0" class="form-control" [(ngModel)]="updateDepositAmount"
-          placeholder="Enter Deposit Amount" />
-      </div>
-    </div>
-    <p-footer class="d-flex justify-content-center">
-      <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
-        (click)="updateDeposit()"></button>
-    </p-footer>
-  </p-dialog>
-  <!-- <p-dialog class="d-flex justify-content-center" header="Enter Redepossit" [(visible)]="displayRedepositModal">
+  </div>
+  <p-footer class="d-flex justify-content-center">
+    <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
+      (click)="updateDeposit()"></button>
+  </p-footer>
+</p-dialog>
+<!-- <p-dialog class="d-flex justify-content-center" header="Enter Redepossit" [(visible)]="displayRedepositModal">
     <div>
         <input type="number" class="text-center " [(ngModel)]="redepositAmount">
     </div>
@@ -217,9 +217,9 @@
             (click)="deposit()"></button>
         <button *ngIf="currentClient.status ===0" type="button" pButton label="Re Deposit" icon="pi pi-check"
             class="modal-open-button" (click)="deposit()"></button> -->
-  <!-- </p-footer>
+<!-- </p-footer>
 </p-dialog> -->
-  <!-- <p-dialog class="d-flex justify-content-center" header="Enter Redeposit" [(visible)]="displayRedepositModal">
+<!-- <p-dialog class="d-flex justify-content-center" header="Enter Redeposit" [(visible)]="displayRedepositModal">
     <div>
         <input type="number" class="text-center " [(ngModel)]="redepositAmount">
     </div>
@@ -230,176 +230,174 @@
     </p-footer>
 </p-dialog> -->
 
-  <div class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
-    <h2 class="ms-3 mb-2 mt-2">
-      <i class="fas fa-money-check-alt me-2"></i>Client Lot
-    </h2>
-    <button *ngIf="userRole === 'Retention' && currentClient.status === 0" type="button"
-      class="btn btn-primary me-3 my-2" (click)="showAddClientLot()">
-      <i class="fas fa-plus me-1"></i> Add Lot
-    </button>
-  </div>
+<div class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
+  <h2 class="ms-3 mb-2 mt-2">
+    <i class="fas fa-money-check-alt me-2"></i>Client Lot
+  </h2>
+  <button *ngIf="userRole === 'Retention' && currentClient.status === 0" type="button" class="btn btn-primary me-3 my-2"
+    (click)="showAddClientLot()">
+    <i class="fas fa-plus me-1"></i> Add Lot
+  </button>
+</div>
 
-  <div class="table-responsive">
-    <table *ngIf="clientLots.length" class="table table-bordered">
-      <thead class="bg-primary text-white">
-        <tr>
-          <th><i class="fas fa-dollar-sign me-1"></i>Amount</th>
-          <th><i class="fas fa-calendar-alt me-1"></i>Date</th>
-          <th><i class="fas fa-user me-1"></i>Retention Name</th>
-          <ng-container *ngIf="userRole === 'Retention'">
-            <th><i class="fas fa-trash me-1"></i>Delete</th>
-            <th><i class="fas fa-edit me-1"></i>Update</th>
-          </ng-container>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let rowData of clientLots">
-          <td>{{ rowData.amount }}</td>
-          <td>{{ rowData.date | date : "short" }}</td>
-          <td>{{ rowData.retentionName }}</td>
-          <ng-container *ngIf="userRole === 'Retention'">
+<div class="table-responsive">
+  <table *ngIf="clientLots.length" class="table table-bordered">
+    <thead class="bg-primary text-white">
+      <tr>
+        <th><i class="fas fa-dollar-sign me-1"></i>Amount</th>
+        <th><i class="fas fa-calendar-alt me-1"></i>Date</th>
+        <th><i class="fas fa-user me-1"></i>Retention Name</th>
+        <ng-container *ngIf="userRole === 'Retention'">
+          <th><i class="fas fa-trash me-1"></i>Delete</th>
+          <th><i class="fas fa-edit me-1"></i>Update</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rowData of clientLots">
+        <td>{{ rowData.amount }}</td>
+        <td>{{ rowData.date | date : "short" }}</td>
+        <td>{{ rowData.retentionName }}</td>
+        <ng-container *ngIf="userRole === 'Retention'">
+          <td>
+            <button type="button" class="btn btn-danger" title="Delete" (click)="deleteLot(rowData.id)">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-info" title="Update" (click)="showUpdateClientLotModal(rowData.id)">
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <p-dialog class="d-flex justify-content-center" header="Enter Redeposit" [(visible)]="displayRedepositModal">
+    <div class="input-group">
+      <input type="number" class="text-center" [(ngModel)]="redepositAmount" />
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="Add Redeposit" icon="pi pi-check" class="modal-open-button"
+        (click)="redeposit()"></button>
+    </p-footer>
+  </p-dialog>
+
+  <!-- ============================== Dialogs ============================= -->
+
+  <!-- Dialog for Redeposits -->
+
+  <p-dialog [(visible)]="displayDialog" [style]="{ width: '90vw' }" [modal]="true" [closable]="true" [resizable]="false"
+    header="Detail">
+    <div *ngIf="selectedDepositRedeposits.length; else noRedeposits">
+      <p-table [value]="selectedDepositRedeposits">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Amount</th>
+            <th>Date</th>
+            <th>Depositor Name</th>
+            <th>Depositor Role Name</th>
+            <th>Update Redeposit</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-redeposit>
+          <tr>
+            <td>{{ redeposit.amount }}</td>
+            <td>{{ redeposit.date | date }}</td>
+            <td>{{ redeposit.depositorName }}</td>
+            <td>{{ redeposit.depositorRoleName }}</td>
             <td>
-              <button type="button" class="btn btn-danger" title="Delete" (click)="deleteLot(rowData.id)">
-                <i class="fas fa-trash"></i>
+              <button pButton style="background-color: rgb(99, 61, 15)"
+                (click)="openUpdateRedeposit(redeposit.id, redeposit.amount)">
+                <i class="fa-solid fa-pen-to-square"></i>
               </button>
             </td>
-            <td>
-              <button type="button" class="btn btn-info" title="Update" (click)="showUpdateClientLotModal(rowData.id)">
-                <i class="fas fa-edit"></i>
-              </button>
-            </td>
-          </ng-container>
-        </tr>
-      </tbody>
-    </table>
-    <p-dialog class="d-flex justify-content-center" header="Enter Redeposit" [(visible)]="displayRedepositModal">
-      <div>
-        <input type="number" class="text-center" [(ngModel)]="redepositAmount" />
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add Redeposit" icon="pi pi-check" class="modal-open-button"
-          (click)="redeposit()"></button>
-      </p-footer>
-    </p-dialog>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="empty">
+          <tr>
+            <td colspan="3">No redeposits found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <ng-template #noRedeposits>
+      <div>No redeposits available.</div>
+    </ng-template>
+  </p-dialog>
 
-    <!-- ============================== Dialogs ============================= -->
+  <!-- ========================= Dialog for assign retention ============================== -->
+  <p-dialog class="d-flex justify-content-center" [modal]="true" header="Select retention"
+    [(visible)]="displayRetentionModal">
+    <div class="field-container">
+      <label for="salesId"><i class="fas fa-user-tag"></i> Retention ID:</label>
+      <select class="custom-select" [(ngModel)]="retentionId" class="custom-select">
+        <option value="" disabled selected>Select Retention ID</option>
+        <option *ngFor="let retention of retentionList" [value]="retention.id">
+          {{ retention.name }}
+        </option>
+      </select>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="Add Retention" icon="pi pi-check" class="modal-open-button"
+        (click)="assignToRetention()"></button>
+    </p-footer>
+  </p-dialog>
+  <!-- =========================== Dialog for change team lead ======================================== -->
 
-    <!-- Dialog for Redeposits -->
+  <p-dialog class="d-flex justify-content-center" [modal]="true" header="Select  teamleader"
+    [(visible)]="displayTeamLeadModal">
+    <div class="field-container">
+      <label for="teamlead"><i class="fa-solid fa-user"></i> TeamLead :
+      </label>
+      <br />
+      <select class="custom-select" [(ngModel)]="teamLeadId" class="custom-select">
+        <option value="" disabled selected>Select TeamLead ID</option>
+        <option *ngFor="let teamlead of teamLeadList" [value]="teamlead.id">
+          {{ teamlead.name }}
+        </option>
+      </select>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="Add teamlead" icon="pi pi-check" class="modal-open-button"
+        (click)="changeTeamLead()"></button>
+    </p-footer>
+  </p-dialog>
+  <!-- ======================== Add Lot Modal ========================= -->
+  <p-dialog class="d-flex justify-content-center" header="Enter Lot" [modal]="true" 
+    [(visible)]="displayClientLotModal">
+    <div>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="fas fa-money-check-alt text-danger"> L o t </i>
+        </span>
+        <input min="0" type="number" class="form-control" [(ngModel)]="lotAmount" placeholder="Enter Lot Amount" />
+      </div>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button *ngIf="currentClient.status === 0" type="button" pButton label="Add Lot" icon="pi pi-check"
+        class="modal-open-button" (click)="addLot()"></button>
+    </p-footer>
+  </p-dialog>
 
-    <p-dialog [(visible)]="displayDialog" [style]="{ width: '50vw' }" [modal]="true" [closable]="true"
-      [resizable]="false" header="Detail">
-      <div *ngIf="selectedDepositRedeposits.length; else noRedeposits">
-        <p-table [value]="selectedDepositRedeposits">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Amount</th>
-              <th>Date</th>
-              <th>Depositor Name</th>
-              <th>Depositor Role Name</th>
-              <th>Update Redeposit</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-redeposit>
-            <tr>
-              <td>{{ redeposit.amount }}</td>
-              <td>{{ redeposit.date | date }}</td>
-              <td>{{ redeposit.depositorName }}</td>
-              <td>{{ redeposit.depositorRoleName }}</td>
-              <td>
-                <button pButton style="background-color: rgb(99, 61, 15)"
-                  (click)="openUpdateRedeposit(redeposit.id, redeposit.amount)">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="empty">
-            <tr>
-              <td colspan="3">No redeposits found.</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-      <ng-template #noRedeposits>
-        <div>No redeposits available.</div>
-      </ng-template>
-    </p-dialog>
-
-    <!-- ========================= Dialog for assign retention ============================== -->
-    <p-dialog class="d-flex justify-content-center" [modal]="true" [style]="{ width: '30vw' }" header="Select retention"
-      [(visible)]="displayRetentionModal">
-      <div class="field-container">
-        <label for="salesId"><i class="fas fa-user-tag"></i> Retention ID:</label>
-        <select class="custom-select" [(ngModel)]="retentionId" class="custom-select">
-          <option value="" disabled selected>Select Retention ID</option>
-          <option *ngFor="let retention of retentionList" [value]="retention.id">
-            {{ retention.name }}
-          </option>
-        </select>
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add Retention" icon="pi pi-check" class="modal-open-button"
-          (click)="assignToRetention()"></button>
-      </p-footer>
-    </p-dialog>
-    <!-- =========================== Dialog for change team lead ======================================== -->
-
-    <p-dialog class="d-flex justify-content-center" [modal]="true" [style]="{ width: '30vw' }"
-      header="Select  teamleader" [(visible)]="displayTeamLeadModal">
-      <div class="field-container">
-        <label for="teamlead"><i class="fa-solid fa-user"></i> TeamLead :
-        </label>
-        <br />
-        <select class="custom-select" [(ngModel)]="teamLeadId" class="custom-select">
-          <option value="" disabled selected>Select TeamLead ID</option>
-          <option *ngFor="let teamlead of teamLeadList" [value]="teamlead.id">
-            {{ teamlead.name }}
-          </option>
-        </select>
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Add teamlead" icon="pi pi-check" class="modal-open-button"
-          (click)="changeTeamLead()"></button>
-      </p-footer>
-    </p-dialog>
-    <!-- ======================== Add Lot Modal ========================= -->
-    <p-dialog class="d-flex justify-content-center" header="Enter Lot" [modal]="true" [style]="{ width: '30vw' }"
-      [(visible)]="displayClientLotModal">
-      <div>
-        <div class="input-group">
-          <span class="input-group-addon">
-            <i class="fas fa-money-check-alt text-danger"> L o t </i>
-          </span>
-          <input min="0" type="number" class="form-control" [(ngModel)]="lotAmount" placeholder="Enter Lot Amount" />
-        </div>
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button *ngIf="currentClient.status === 0" type="button" pButton label="Add Lot" icon="pi pi-check"
-          class="modal-open-button" (click)="addLot()"></button>
-      </p-footer>
-    </p-dialog>
-
-    <p-dialog class="d-flex justify-content-center" header="Enter a new Lot" [(visible)]="displayUpdateClientLotModal">
-      <div>
-        <input type="number" class="text-center" [(ngModel)]="lotAmount" />
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="update Lot" icon="pi pi-check" class="modal-open-button"
-          (click)="updateLot()"></button>
-      </p-footer>
-    </p-dialog>
-    <p-dialog class="d-flex justify-content-center" header="Enter a new redeposit"
-      [(visible)]="displayUpdateRedepositModal">
-      <div>
-        <input type="number" class="text-center" [(ngModel)]="updateRedepositAmount" />
-      </div>
-      <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="update redeposit" icon="pi pi-check" class="modal-open-button"
-          (click)="updateRedeposit()"></button>
-      </p-footer>
-    </p-dialog>
-
-    <p-toast></p-toast>
-  </div>
+  <p-dialog class="d-flex justify-content-center" header="Enter a new Lot" [(visible)]="displayUpdateClientLotModal">
+    <div>
+      <input type="number" class="text-center" [(ngModel)]="lotAmount" />
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="update Lot" icon="pi pi-check" class="modal-open-button"
+        (click)="updateLot()"></button>
+    </p-footer>
+  </p-dialog>
+  <p-dialog  header="Enter a new redeposit"
+    [(visible)]="displayUpdateRedepositModal">
+    <div class="d-flex justify-content-center">
+      <input type="number" class="text-center" [(ngModel)]="updateRedepositAmount" />
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="update redeposit" icon="pi pi-check" class="modal-open-button"
+        (click)="updateRedeposit()"></button>
+    </p-footer>
+  </p-dialog>
+  <p-toast></p-toast>
 </div>

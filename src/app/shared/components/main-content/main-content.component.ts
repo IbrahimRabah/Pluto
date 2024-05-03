@@ -22,7 +22,9 @@ export class MainContentComponent implements OnInit {
     { name: 'Interviewee', num: 54, icon: 'fa-solid fa-user-tie' }
   ];
   constructor(private router: Router, private auth: AuthenticationService) { }
+  isSmallScreen: boolean = window.innerWidth < 768;
   ngOnInit(): void {
+    window.addEventListener('resize', this.checkScreenSize);
 
     this.auth.isAuthenticated$.subscribe({
       next: () => { this.getUserRole(); }
@@ -38,5 +40,8 @@ export class MainContentComponent implements OnInit {
   }
   getUserRole() {
     this.userRole = this.auth.getUserRole()
+  }
+  checkScreenSize = () => {
+    this.isSmallScreen = window.innerWidth < 768;
   }
 }
