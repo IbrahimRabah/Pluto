@@ -12,7 +12,7 @@ import { LoginResponse, UserLogin, UserRegister } from '../../models/user';
 export class AuthenticationService {
   baseUrl = environment.baseUrl;
   currentUrl = "Account/";
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   private isAdminSubject = new BehaviorSubject<boolean>(false);
   constructor(private http: HttpClient, private router: Router) { }
   get isAuthenticated$(): Observable<boolean> {

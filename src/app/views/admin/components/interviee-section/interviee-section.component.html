@@ -16,10 +16,10 @@
       [responsive]="true"
     >
       <ng-template pTemplate="caption">
-        <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="mb-3 d-flex flex-column flex-sm-row justify-content-between"
+        >
           <!-- Search input -->
-          <span class="p-input-icon-left">
-
+          <span class="p-input-icon-left mb-3">
             <label for="search-interviewee " class="mx-1">Search : </label>
             <input
               pInputText
@@ -86,7 +86,6 @@
 <p-dialog
 class="d-flex justify-content-center"
 [modal]="true"
-[style]="{ width: '30vw' }"
 header="Select  Hr"
 [(visible)]="displayHrModal"
 >
@@ -117,8 +116,7 @@ header="Select  Hr"
 <p-dialog
 class="d-flex justify-content-center"
 [modal]="true"
-[style]="{ width: '30vw' }"
-header="Select  Hr"
+header="Select  Leader"
 [(visible)]="displayTeamLeaderModal"
 >
 <div class="field-container">

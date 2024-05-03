@@ -1,36 +1,36 @@
 <div class="row p-0 m-0 rowall">
   <div
     class="p-0 m-0 nav-bar"
-    [ngClass]="{ 'col-1': isCollapsed, 'col-2': !isCollapsed }"
-  >
+    [ngClass]="{'col-1': isCollapsed, 'col-2': !isCollapsed, 'd-none d-md-block': isCollapsed}"
+      >
     <!-- Sidebar -->
     <div id="sidebarInAdmin" class="text-center">
       <div class="p-0 m-0 row">
         <div class="py-4" style="background-color: #214162">
-          <div style="display: flex; justify-content: space-evenly">
-            <img
-              *ngIf="!showItem"
-              src="https://cdn-icons-png.freepik.com/256/8955/8955147.png"
-              alt=""
-              style="border-radius: 50px; max-width: 70px"
-            />
-            <h5
-              class="card-text text-light"
-              style="display: flex; align-items: center"
-            >
-              {{ userRole }}
-            </h5>
+          <div class="row d-flex flex-column align-items-center">
+            <div class="col mb-3 d-flex justify-content-center">
+              <img
+                *ngIf="!showItem"
+                src="https://cdn-icons-png.freepik.com/256/8955/8955147.png"
+                alt=""
+                style="border-radius: 50px; max-width: 70px"
+                class="img-fluid d-none d-md-block"
+              />
+            </div>
+            <div class="col d-flex justify-content-center p-1">
+              <p class="text-light fw-bold" id="userRole">{{ userRole }}</p>
+            </div>
           </div>
         </div>
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
             <li
-              class="nav-itemm mb-2"
+              class="nav-itemm mb-1"
               style="border-bottom: 2px solid #ff5722"
               *ngIf="userRole == 'Admin'"
             >
-              <h5>
-                <i class="fa fa-dashboard yellow_color py-3 px-2"></i>
+              <h5 class="d-none d-md-block">
+                <i class="fa fa-dashboard yellow_color px-2"></i>
                 <span class="text-light">Sections</span>
               </h5>
             </li>
@@ -40,8 +40,8 @@
               class="nav-item"
               *ngIf="userRole == 'Admin'"
             >
-              <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-user-tie fa-lg text-primary m-3"></i>
+              <a class="nav-link">
+                <i class="fa-solid fa-user-tie fa-lg text-primary"></i>
                 <span class="d-none d-sm-inline text-light"> Manger </span>
               </a>
             </li>
@@ -51,8 +51,8 @@
               class="nav-item"
               *ngIf="userRole === 'Admin' || userRole === 'Manager'"
             >
-              <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-user-group fa-lg text-success m-3"></i>
+              <a class="nav-link">
+                <i class="fa-solid fa-user-group fa-lg text-success"></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Team Leaders
                 </span>
@@ -65,12 +65,23 @@
               *ngIf="userRole === 'Admin' || userRole === 'Manager'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-users fa-lg text-warning m-3"></i>
+                <i class="fa-solid fa-users fa-lg text-warning "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Sellers
                 </span>
               </a>
             </li>
+            <li
+            routerLink="/client/clientHome"
+            routerLinkActive="active"
+            class="nav-item"
+            *ngIf="userRole == 'TeamLeader'"
+          >
+            <a class="nav-link align-middle px-0">
+              <i class="fa-solid fa-home fa-lg text-primary"></i>
+              <span class="ms-1 d-none d-sm-inline text-light"> Home </span>
+            </a>
+          </li>
             <li
               routerLink="/sales/salesList"
               routerLinkActive="active"
@@ -78,7 +89,7 @@
               *ngIf="userRole === 'TeamLeader'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-users fa-lg text-warning m-3"></i>
+                <i class="fa-solid fa-users fa-lg text-warning "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Sellers
                 </span>
@@ -91,7 +102,7 @@
               *ngIf="userRole === 'Admin' || userRole === 'Manager'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-people-group fa-lg text-primary m-3"></i>
+                <i class="fa-solid fa-people-group fa-lg text-primary "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Clients
                 </span>
@@ -104,7 +115,7 @@
               *ngIf="userRole === 'Admin' || userRole === 'Manager'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-person-rays fa-lg text-danger m-3"></i>
+                <i class="fa-solid fa-person-rays fa-lg text-danger "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Retention
                 </span>
@@ -117,7 +128,7 @@
               *ngIf="userRole === 'Admin' || userRole === 'Manager'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-user-tie fa-lg text-success m-3"></i>
+                <i class="fa-solid fa-user-tie fa-lg text-success "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Interviewee
                 </span>
@@ -130,7 +141,7 @@
             >
               <a class="nav-link align-middle px-0">
                 <i
-                  class="fa-regular fa-user fa-lg text-danger m-3 text-center"
+                  class="fa-regular fa-user fa-lg text-danger text-center"
                 ></i>
                 <span class="ms-1 d-none d-sm-inline text-light text-center">
                   HRs
@@ -145,7 +156,7 @@
               *ngIf="userRole == 'Hr'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-home fa-lg text-primary m-3"></i>
+                <i class="fa-solid fa-home fa-lg text-primary "></i>
                 <span class="ms-1 d-none d-sm-inline text-light"> Home </span>
               </a>
             </li>
@@ -156,7 +167,7 @@
               *ngIf="userRole == 'Hr'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-user fa-lg text-warning m-3"></i>
+                <i class="fa-solid fa-user fa-lg text-warning "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Add-Interviewee
                 </span>
@@ -170,7 +181,7 @@
               *ngIf="userRole == 'Sales'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-home fa-lg text-primary m-3"></i>
+                <i class="fa-solid fa-home fa-lg text-primary"></i>
                 <span class="ms-1 d-none d-sm-inline text-light"> Home </span>
               </a>
             </li>
@@ -181,7 +192,7 @@
               *ngIf="userRole == 'Sales' || userRole==='TeamLeader'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-user-tie fa-lg text-warning m-3"></i>
+                <i class="fa-solid fa-user-tie fa-lg text-warning"></i>
                 <span class="ms-1 d-none d-sm-inline text-light">
                   Sales History
                 </span>
@@ -189,24 +200,13 @@
             </li>
             <!-- ******************** TeamLead  && Retention ****************************** -->
             <li
-              routerLink="/client/clientHome"
-              routerLinkActive="active"
-              class="nav-item"
-              *ngIf="userRole == 'TeamLeader'"
-            >
-              <a class="nav-link align-middle px-0">
-                <i class="fa-solid fa-home fa-lg text-primary m-3"></i>
-                <span class="ms-1 d-none d-sm-inline text-light"> Home </span>
-              </a>
-            </li>
-            <li
               routerLink="/client/leader-interviewees"
               routerLinkActive="active"
               class="nav-item"
               *ngIf="userRole == 'TeamLeader' "
             >
               <a class="nav-link align-middle px-0">
-                <i class="fas fa-user fa-lg text-warning m-3"></i>
+                <i class="fas fa-user fa-lg text-warning "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">Interviewees</span>
               </a>
             </li>
@@ -217,7 +217,7 @@
               *ngIf="userRole == 'TeamLeader' || userRole == 'Retention'"
             >
               <a class="nav-link align-middle px-0">
-                <i class="fas fa-history fa-lg text-warning m-3"></i>
+                <i class="fas fa-history fa-lg text-warning "></i>
                 <span class="ms-1 d-none d-sm-inline text-light">History</span>
               </a>
             </li>
@@ -226,13 +226,13 @@
       </div>
     </div>
   </div>
+  <!-- main page -->
   <div
     class="p-0 m-0"
-    [ngClass]="{ 'col-11': isCollapsed, 'col-10': !isCollapsed }"
-  >
-    <!-- ----------------------------- nav ------------------------------------>
+    [ngClass]="{'col-11': isCollapsed, 'col-10': !isCollapsed, 'col-12': isCollapsed && isSmallScreen}">
+        <!-- ----------------------------- nav ------------------------------------>
     <div style="background-color: #15283c">
-      <nav class="navbar navbar-expand-lg navbar-dark px-4">
+      <nav class="navbar navbar-expand-lg navbar-dark px-3 m-0 p-0">
         <span class="sidebar-icon" (click)="toggleSidebar()">
           <!-- ☰ -->
           <i class="fa-solid fa-bars fa-lg"></i>

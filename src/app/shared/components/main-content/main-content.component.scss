@@ -12,6 +12,8 @@ nav{
   }
   li{
     cursor: pointer;
+    margin: 2px;
+    padding: 5px;
   }
   .sidebar-icon , .fa-x{
     color: white;
@@ -24,7 +26,7 @@ nav{
   }
   .nav-item{
     display: flex;
-    justify-content: start;
+    justify-content:center;
   }
   .nav-item:hover{
     background-color: #4d6892;
@@ -33,4 +35,20 @@ nav{
 .active{
   background-color: #302e2e;
   border-radius: 15px;
+}
+@media (max-width: 576px) {
+  #userRole {
+    font-size: 9px; /* Adjust as needed for smaller screens */
+  }
+}
+
+@media (min-width: 577px) and (max-width: 992px) {
+  #userRole {
+    font-size: 20px; /* Adjust as needed for medium screens */
+  }
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 10;
 }
