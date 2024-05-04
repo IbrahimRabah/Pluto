@@ -31,6 +31,13 @@
   .custom-table .p-datatable-tbody > tr {
     border-bottom: 1px solid #dee2e6;
   }
+  ::ng-deep .p-paginator {
+    display: flow !important;
+    text-align: center;
+  }
+  ::ng-deep .p-paginator .p-paginator-first,::ng-deep .p-paginator .p-paginator-current,::ng-deep .p-paginator .p-paginator-last {
+    display: none !important;
+  }
 }
 .custom-table th,
 .custom-table td {
