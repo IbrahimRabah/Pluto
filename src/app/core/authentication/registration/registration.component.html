@@ -1,12 +1,12 @@
-<div id="registerDiv">
+<div class="py-4 d-flex justify-content-center">
   <form
     [formGroup]="registerationForm"
     (ngSubmit)="onSubmit()"
     class="registration-form"
   >
     <h2 class="form-title">Register User</h2>
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12">
         <label for="name"><i class="fas fa-user"></i> Name*</label>
         <input
           type="text"
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="email"><i class="fas fa-envelope"></i> Email*</label>
         <input
           type="email"
@@ -74,8 +74,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12">
         <label for="phone"><i class="fas fa-phone"></i> Phone*</label>
         <input
           type="tel"
@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="nationalId"
           ><i class="fas fa-id-card"></i> National_Id*</label
         >
@@ -136,8 +136,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12">
         <label for="companyPhoneNumber"
           ><i class="fas fa-phone"></i> Company Phone Number*</label
         >
@@ -159,7 +159,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="role"><i class="fas fa-user-tag"></i> Role*</label>
         <select
           id="role"
@@ -187,8 +187,8 @@
       </div>
     </div>
 
-    <div class="form-group" *ngIf="selectedRole == 3">
-      <div class="input-group">
+    <div class="form-group row" *ngIf="selectedRole == 3">
+      <div class="col-md-12 col-12">
         <label for="superiorRole"
           ><i class="fas fa-user-friends"></i> Superior Role*</label
         >
@@ -207,8 +207,8 @@
       </div>
     </div>
 
-    <div class="form-group" *ngIf="isTeamLead == 2">
-      <div class="input-group">
+    <div class="form-group row" *ngIf="isTeamLead == 2">
+      <div class="col-md-12 col-12">
         <label for="teamLeader"><i class="fas fa-users"></i> TeamLeads*</label>
         <select
           id="teamLeader"
@@ -226,8 +226,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12">
         <label for="password"><i class="fas fa-lock"></i> Password*</label>
         <input
           type="password"
@@ -258,7 +258,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="rePassword"
           ><i class="fas fa-lock"></i> Re-enter Password*</label
         >

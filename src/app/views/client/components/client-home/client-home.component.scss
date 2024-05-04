@@ -28,24 +28,24 @@ margin-bottom: 20px;
 .form-group {
 display: flex;
 justify-content: space-between;
-margin-bottom: 20px;
+margin-bottom: 10px;
 }
 
 .input-group {
-flex: 0 0 48%; /* Adjust width as needed */
+flex: 0 0 48%;
 }
 
 label {
 display: block;
-font-size: 16px;
+// font-size: 16px;
 color: #002f65;
-margin-bottom: 5px;
+margin: 5px 0px;
 font-weight: bold;
 }
 
 .form-control {
 width: 100%;
-font-size: 16px;
+// font-size: 16px;
 border: 1px solid #63b8ff;
 border-radius: 5px;
 }
@@ -69,4 +69,10 @@ background-color: orangered; /* Slightly darker orange on hover */
 .error-message {
 font-size: 14px;
 margin-top: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  label {
+    font-size: 13px;
+  }
 }

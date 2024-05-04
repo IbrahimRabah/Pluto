@@ -1,12 +1,12 @@
-<div id="registerDiv">
+<div class="py-4 d-flex justify-content-center">
   <form
     [formGroup]="addInterviewee"
     (ngSubmit)="onSubmit()"
     class="registration-form"
   >
     <h2 class="form-title"><i class="fa-solid fa-user"></i>+ Interviewee</h2>
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12 ">
         <label for="name"><i class="fas fa-user"></i> Name*</label>
         <input
           type="text"
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12 ">
         <label for="email"><i class="fas fa-envelope"></i> Email*</label>
         <input
           type="email"
@@ -74,8 +74,8 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12 ">
         <label for="phone"><i class="fas fa-phone"></i> Phone*</label>
         <input
         rea
@@ -96,7 +96,7 @@
         </div>
       </div>
 
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="nationalId"
           ><i class="fas fa-id-card"></i> National_Id*</label
         >
@@ -136,8 +136,8 @@
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <div class="input-group">
+    <div class="form-group row">
+      <div class="col-md-6 col-12">
         <label for="datofBirth"
           ><i class="fas fa-calendar-alt"></i> Date Of Birth*</label
         >
@@ -148,6 +148,7 @@
         formControlName="dateOfBirth"
         class="form-control"
         placeholder="Your Date oF Birth"
+        appendTo="body"
       ></p-calendar>
         <div
           class="error-message text-danger"
@@ -159,9 +160,9 @@
           Please Enter Your Date Of Birth.
         </div>
       </div>
-      <div class="input-group">
+      <div class="col-md-6 col-12">
         <label for="today's-date"
-          ><i class="fas fa-calendar-alt"></i> today's date*</label
+          ><i class="fas fa-calendar-alt"></i> Today's date*</label
         >
         <p-calendar
         [showOnFocus]="false"
