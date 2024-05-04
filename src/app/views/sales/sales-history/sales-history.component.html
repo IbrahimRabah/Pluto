@@ -57,12 +57,22 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="paginatorleft">
-                <p-button type="button" icon="pi pi-chevron-left" (click)="prev()"
-                    styleClass="p-button-text"></p-button>
+              <p-button
+                type="button"
+                icon="pi pi-chevron-left"
+                (click)="prev()"
+                styleClass="p-button-text"
+                label="Previous"
+              ></p-button>
             </ng-template>
             <ng-template pTemplate="paginatorright">
-                <p-button type="button" icon="pi pi-chevron-right" (click)="next()"
-                    styleClass="p-button-text"></p-button>
+              <p-button
+                type="button"
+                icon="pi pi-chevron-right"
+                (click)="next()"
+                styleClass="p-button-text fw-bold"
+                >Next</p-button
+              >
             </ng-template>
         </p-table>
     </div>

@@ -61,3 +61,12 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
     /* Adjust the color as needed */
 }
+@media screen and (max-width: 768px) {
+  ::ng-deep .p-paginator {
+    display: flow !important;
+    text-align: center;
+  }
+  ::ng-deep .p-paginator .p-paginator-first,::ng-deep .p-paginator .p-paginator-current,::ng-deep .p-paginator .p-paginator-last {
+    display: none !important;
+  }
+}
