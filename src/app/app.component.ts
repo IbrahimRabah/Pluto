@@ -11,10 +11,20 @@ export class AppComponent implements OnInit, OnDestroy {
   isLogin: boolean = false;
   constructor(private authenticationService: AuthenticationService) { }
   ngOnInit(): void {
-    this.authenticationService.isAuthenticatedUser();
-    this.authenticationService.isAuthenticated$.subscribe({
-      next: (response) => { this.isLogin = response;},
-    })
+    const userToken = this.authenticationService.getToken();
+    const isExpired = this.authenticationService.isTokenExpired(userToken);
+    // this.authenticationService.isAuthenticatedUser();
+    if (!isExpired){
+       this.authenticationService.isAuthenticatedUser();
+       this.authenticationService.isAuthenticated$.subscribe({
+        next: (response) => { this.isLogin = response;},
+      })
+    }
+    else
+    {
+      localStorage.clear();
+      this.isLogin = false;
+    }
   }
   ngOnDestroy(): void {
     this.authenticationService.logout();
