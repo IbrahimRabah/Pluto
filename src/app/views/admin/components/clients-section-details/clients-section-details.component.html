@@ -2,7 +2,7 @@
   <div class="row" style="width: 100%">
     <div class="text-center mb-4">
       <h2 class="text-primary">
-        All Clients <i class="fa-solid fa-people-group"></i>
+        <i class="fa-solid fa-people-group"></i> All Clients
       </h2>
     </div>
     <p-table class="custom-table py-2" [value]="allClients" [paginator]="true" [rows]="10" [totalRecords]="totalCount"
@@ -16,15 +16,17 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th class="border">Name <i class="fas fa-user"></i></th>
-          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
-          <th class="border">Email <i class="fas fa-envelope"></i></th>
-          <th class="border">National ID <i class="fas fa-id-card"></i></th>
-          <th class="border">Leader <i class="fa-solid fa-user-group"></i></th>
-          <th class="border">Seller <i class="fa-solid fa-users"></i></th>
-          <th class="border">Retention <i class="fa-solid fa-person-rays"></i></th>
-          <th class="border">Status</th>
-          <th class="border">Details <i class="fa-solid fa-circle-info"></i></th>
+          <th class="border"><i class="fas fa-user"></i> Name</th>
+          <th class="border"><i class="fas fa-phone"></i> PhoneNumber</th>
+          <th class="border"><i class="fas fa-envelope"></i> Email</th>
+          <th class="border"><i class="fas fa-id-card"></i> National ID</th>
+          <th class="border"><i class="fa-solid fa-user-group"></i> Leader</th>
+          <th class="border"><i class="fa-solid fa-users"></i> Seller</th>
+          <th class="border"><i class="fa-solid fa-person-rays"></i> Retention</th>
+          <th class="border"><i class="fas fa-check-circle"></i>Status</th>
+          <th class="border"><i class="fa-solid fa-circle-info"></i> Details</th>
+          <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
+
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -45,6 +47,7 @@
               Details
             </button>
           </td>
+          <td class="border bg-dark-subtle" (click)="deleteSpecificClient(item)"><i class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -58,3 +61,5 @@
     </p-table>
   </div>
 </div>
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

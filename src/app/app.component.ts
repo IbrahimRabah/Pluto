@@ -8,7 +8,7 @@ import { AuthenticationService } from './core/authentication/services/authentica
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'dashboard';
-  isLogin: boolean = false;
+  isLogin!: boolean;
   constructor(private authenticationService: AuthenticationService) { }
   ngOnInit(): void {
     const userToken = this.authenticationService.getToken();

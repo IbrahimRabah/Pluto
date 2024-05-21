@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { environment } from 'src/environment';
 import { jwtDecode } from 'jwt-decode';
-import { LoginResponse, UserLogin, UserRegister } from '../../models/user';
+import { LoginResponse, PasswordChange, UserLogin, UserRegister } from '../../models/user';
+import { UserInfo } from '../../models/managerInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -74,5 +75,18 @@ export class AuthenticationService {
       userId = decodedToken.userId;
     }
     return userId;
+  }
+  getUserInfo():Observable<UserInfo>
+  {
+    let userId = this.getUserId();
+    return this.http.get<UserInfo>(`${this.baseUrl+'Account/GetUserInfo?userId='+userId}`);
+  }
+  updateUserInfo(userId:string,data:UserInfo):Observable<any>
+  {
+    return this.http.put<any>(`${this.baseUrl+'Account/UpdateUserInfo?userId='+userId}`,data);
+  }
+  updateUserPassword(userId:string,data:PasswordChange):Observable<any>
+  {
+    return this.http.put<PasswordChange>(`${this.baseUrl+'Account/ChangeUserPassword?userId='+userId}`,data);
   }
 }

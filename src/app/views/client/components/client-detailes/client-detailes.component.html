@@ -208,27 +208,6 @@
       (click)="updateDeposit()"></button>
   </p-footer>
 </p-dialog>
-<!-- <p-dialog class="d-flex justify-content-center" header="Enter Redepossit" [(visible)]="displayRedepositModal">
-    <div>
-        <input type="number" class="text-center " [(ngModel)]="redepositAmount">
-    </div>
-    <p-footer class="d-flex justify-content-center">
-        <button type="button" pButton label="Enter Deposit" icon="pi pi-check" class="modal-open-button"
-            (click)="deposit()"></button>
-        <button *ngIf="currentClient.status ===0" type="button" pButton label="Re Deposit" icon="pi pi-check"
-            class="modal-open-button" (click)="deposit()"></button> -->
-<!-- </p-footer>
-</p-dialog> -->
-<!-- <p-dialog class="d-flex justify-content-center" header="Enter Redeposit" [(visible)]="displayRedepositModal">
-    <div>
-        <input type="number" class="text-center " [(ngModel)]="redepositAmount">
-    </div>
-    <p-footer class="d-flex justify-content-center">
-        <button  type="button" pButton label="Enter Redeposit" icon="pi pi-check"
-            class="modal-open-button" (click)="redeposit()"></button>
-
-    </p-footer>
-</p-dialog> -->
 
 <div class="d-flex justify-content-between align-items-center bg-light p-3 mb-4 rounded">
   <h2 class="ms-3 mb-2 mt-2">
@@ -364,7 +343,7 @@
     </p-footer>
   </p-dialog>
   <!-- ======================== Add Lot Modal ========================= -->
-  <p-dialog class="d-flex justify-content-center" header="Enter Lot" [modal]="true" 
+  <p-dialog class="d-flex justify-content-center" header="Enter Lot" [modal]="true"
     [(visible)]="displayClientLotModal">
     <div>
       <div class="input-group">

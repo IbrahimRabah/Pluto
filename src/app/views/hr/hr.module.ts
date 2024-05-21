@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,ReactiveFormsModule,TableModule,ToastModule,
     CalendarModule,ButtonModule,
     DialogModule,
+    ConfirmDialogModule
   ]
 })
 export class HrModule { }

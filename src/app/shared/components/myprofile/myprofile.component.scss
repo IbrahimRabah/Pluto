@@ -1,0 +1,347 @@
+.main-content {
+  font-family: tahoma;
+  height: 100vh;
+}
+
+.our-team {
+  padding: 30px;
+  margin-top: 10%;
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.our-team:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.edit-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #1369ce;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.password-icon {
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.password-icon:hover {
+  background-color: #218838;
+}
+.picture {
+  display: inline-block;
+  height: 130px;
+  width: 130px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.picture img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #1369ce;
+}
+
+.name {
+  font-size: 22px;
+  color: #333;
+  margin: 0;
+}
+
+.title {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.custom-table {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.custom-table th, .custom-table td {
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+@media (max-width: 576px) {
+  .our-team {
+    margin-top: 5%;
+  }
+
+  .custom-table th, .custom-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+.modal-open-button,
+.confirm-model-hieght {
+    border: none;
+    background-color: #041c36;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-open-details-button {
+    border: none;
+    background-color: rgb(28, 53, 7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-open-button:hover,
+.confirm-model-hieght:hover {
+    background-color: #0c2947;
+}
+
+.custom-select {
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(199, 199, 236);
+}
+
+.p-dialog {
+    width: 45% !important;
+}
+
+.p-dialog .p-dialog-content {
+    padding: 20px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.update-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.update-button:hover {
+    background-color: #0056b3;
+}
+
+.modal-content {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.update-form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: calc(50% - 10px);
+    min-width: 0;
+}
+
+.input-field {
+    width: 100%;
+}
+
+.update-form-container>div {
+    margin-bottom: 20px;
+}
+
+#registerDiv {
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 70vh;
+}
+
+.registration-form {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #15273b;
+    border-radius: 30px;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+    text-align: center;
+    font-size: 24px;
+    color: #15273b;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    flex: 0 0 48%;
+}
+
+label {
+    display: block;
+    font-size: 16px;
+    color: #002f65;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    font-size: 16px;
+    border: 1px solid #63b8ff;
+    border-radius: 5px;
+}
+
+.btn-register {
+    display: block;
+    width: 100%;
+    background-color: #ff6600;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-register:hover {
+    background-color: orangered;
+}
+
+.error-message {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.btn-confirm {
+    height: 60px;
+}
+
+.update-button:hover{
+    background-color: rgb(11, 71, 11);
+}
+.update-button{
+    background-color: rgb(10, 154, 10);
+}
+#registerDiv {
+  background-color: #c9d6ff;
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 94vh;
+}
+
+.registration-form {
+width: 80%;
+// margin: 50px 80px 22px  80px;
+padding: 20px;
+border: 2px solid #336297;
+border-radius: 30px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-title {
+text-align: center;
+font-size: 24px;
+color: #15273b;
+font-weight: bolder;
+margin-bottom: 20px;
+}
+
+.form-group {
+display: flex;
+justify-content: space-between;
+margin-bottom: 20px;
+}
+
+.input-group {
+flex: 0 0 48%; /* Adjust width as needed */
+}
+
+label {
+display: block;
+font-size: 16px;
+color: #002f65;
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+.form-control {
+width: 100%;
+font-size: 16px;
+border: 1px solid #63b8ff;
+border-radius: 5px;
+}
+
+.btn-register {
+display: block;
+width: 100%;
+background-color: #ff6600; /* Orange background color */
+color: #fff; /* White text color */
+font-size: 18px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.btn-register:hover {
+background-color: orangered;
+}
+
+.error-message {
+font-size: 14px;
+margin-top: 5px;
+}

@@ -28,4 +28,8 @@ export interface LoginResponse {
     id: string;
   };
 }
+export interface PasswordChange {
+  newPassword: string;
+  currentPassword: string;
+}
 

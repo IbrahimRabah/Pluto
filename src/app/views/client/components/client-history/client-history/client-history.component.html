@@ -1,7 +1,7 @@
 <div class="py-5 d-flex justify-content-center">
   <div class="row" style="width: 100%">
     <div class="text-center mb-4">
-      <h2 class="text-primary">All Clients <i class="fas fa-users"></i></h2>
+      <h2 class="text-primary"><i class="fas fa-users"></i> All Clients</h2>
     </div>
     <div class="row mb-3">
       <div class="col-12 col-md-6 d-flex justify-content-around align-items-center mb-2">
@@ -74,6 +74,7 @@
           <th><i class="fas fa-user"></i> Sales Name</th>
           <th *ngIf="userRole!=='Retention'"><i class="fas fa-trash-alt"></i> Delete</th>
           <th><i class="fas fa-eye"></i> View</th>
+          <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -89,7 +90,7 @@
           <td>{{ item.teamLeaderName }}</td>
           <td>{{ item.salesName }}</td>
           <td *ngIf="userRole!=='Retention'">
-            <button 
+            <button
               type="button"
               pButton
               icon="fas fa-trash"
@@ -109,6 +110,7 @@
               Details
             </button>
           </td>
+          <td class="border bg-dark-subtle" (click)="deleteSpecificClient(item)"><i class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -132,4 +134,5 @@
     </p-table>
   </div>
 </div>
+<p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

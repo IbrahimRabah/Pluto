@@ -2,7 +2,7 @@
   <div class="row" style="width: 100%">
     <div class="text-center mb-4">
       <h2 class="text-primary">
-        All Interviewees <i class="fas fa-users"></i>
+        <i class="fas fa-users"></i> All Interviewees
       </h2>
     </div>
     <p-table
@@ -17,12 +17,13 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th class="border">Name <i class="fas fa-user"></i></th>
-          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
-          <th class="border">Email <i class="fas fa-envelope"></i></th>
-          <th class="border">National_ID <i class="fas fa-id-card"></i></th>
-          <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
-          <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
+          <th class="border"><i class="fas fa-user"></i> Name</th>
+          <th class="border"><i class="fas fa-phone"></i> PhoneNumber</th>
+          <th class="border"><i class="fas fa-envelope"></i> Email</th>
+          <th class="border"><i class="fas fa-id-card"></i> National_ID</th>
+          <th class="border"><i class="fas fa-calendar"></i> Date_Of_Birth</th>
+          <th class="border"><i class="fas fa-calendar-plus"></i> Added_Date</th>
+          <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -33,7 +34,7 @@
           <td class="border">{{ item.nationalId }}</td>
           <td class="border">{{ item.dateOfBirth }}</td>
           <td class="border">{{ item.addedDate }}</td>
-
+          <td class="border bg-dark-subtle" (click)="deleteSpecificInterviewee(item)"><i class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -58,4 +59,5 @@
     </p-table>
   </div>
 </div>
+<p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

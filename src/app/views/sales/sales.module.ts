@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { SalesListComponent } from './sales-list/sales-list.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 @NgModule({
   declarations: [
     SalesHistoryComponent,
@@ -26,7 +27,8 @@ import { SalesListComponent } from './sales-list/sales-list.component';
     ButtonModule,
     TableModule,
     ToastModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
   ]
 })
 export class SalesModule { }

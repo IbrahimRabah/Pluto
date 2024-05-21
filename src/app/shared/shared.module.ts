@@ -9,6 +9,13 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { MyprofileComponent } from './components/myprofile/myprofile.component';
+import { TableModule } from 'primeng/table';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
+
 @NgModule({
   declarations: [
     FooterComponent,
@@ -17,12 +24,18 @@ import { MainContentComponent } from './components/main-content/main-content.com
     NotfoundComponent,
     SideBarComponent,
     MainContentComponent,
+    MyprofileComponent,
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
     ButtonModule,
-    SidebarModule
+    SidebarModule,
+    TableModule,
+    ReactiveFormsModule,
+    DialogModule,
+    ToastModule,
+    ConfirmDialogModule,
   ],
   exports:[
     FooterComponent,
@@ -33,6 +46,7 @@ import { MainContentComponent } from './components/main-content/main-content.com
     ButtonModule,
     SidebarModule,
     MainContentComponent,
+    MyprofileComponent
   ]
 })
 export class SharedModule { }

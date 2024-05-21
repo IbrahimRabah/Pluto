@@ -15,7 +15,7 @@ const routes: Routes = [
     path: 'sales', loadChildren: () =>
       import('../app/views/sales/sales.module').then(
         (m) => m.SalesModule),
-    canActivate: [authGuard], data: { roles: ['Sales', 'TeamLeader','Manager'] }
+    canActivate: [authGuard], data: { roles: ['Sales', 'TeamLeader','Manager','Admin'] }
   },
   {
     path: 'auth', loadChildren: () =>
@@ -34,6 +34,12 @@ const routes: Routes = [
       import('../app/views/hr/hr.module').then(
         (m) => m.HrModule),
     canActivate: [authGuard], data: { roles: ['Hr'] }
+  },
+  {
+    path: 'user', loadChildren: () =>
+      import('../app/shared/shared.module').then(
+        (m) => m.SharedModule
+      )
   },
   { path: 'notfound', component: NotfoundComponent },
   { path: '**', component: NotfoundComponent },

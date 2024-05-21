@@ -20,6 +20,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
     DropdownModule,
     DialogModule,
     ToastModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    ConfirmDialogModule
   ]
 })
 export class AdminModule { }
