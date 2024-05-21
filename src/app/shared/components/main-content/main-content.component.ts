@@ -25,6 +25,7 @@ export class MainContentComponent implements OnInit {
   isSmallScreen: boolean = window.innerWidth < 768;
   ngOnInit(): void {
     window.addEventListener('resize', this.checkScreenSize);
+    // this.auth.isAuthenticatedSubject.next(true);
 
     this.auth.isAuthenticated$.subscribe({
       next: () => { this.getUserRole(); }

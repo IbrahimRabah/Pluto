@@ -2,7 +2,7 @@
   <div class="row" style="width: 100%">
     <div class="text-center mb-4">
       <h2 class="text-primary">
-        All Interviewees <i class="fa-solid fa-user-tie"></i>
+        <i class="fa-solid fa-user-tie"></i> All Interviewees
       </h2>
     </div>
     <p-table
@@ -37,15 +37,16 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th class="border">Name <i class="fas fa-user"></i></th>
-          <th class="border">PhoneNumber <i class="fas fa-phone"></i></th>
-          <th class="border">Email <i class="fas fa-envelope"></i></th>
-          <th class="border">National_ID <i class="fas fa-id-card"></i></th>
-          <th class="border">Date_Of_Birth <i class="fas fa-calendar"></i></th>
-          <th class="border">Added_Date <i class="fas fa-calendar-plus"></i></th>
-          <th class="border">Hr_Name <i class="fas fa-user"></i></th>
-          <th class="border">Assign_To <i class="fas fa-user-tie"></i></th>
-          <th class="border">Change_Hr <i class="fas fa-edit"></i></th>
+          <th class="border"><i class="fas fa-user"></i> Name</th>
+          <th class="border"><i class="fas fa-phone"></i> PhoneNumber</th>
+          <th class="border"><i class="fas fa-envelope"></i> Email</th>
+          <th class="border"><i class="fas fa-id-card"></i> National_ID</th>
+          <th class="border"><i class="fas fa-calendar"></i> Date_Of_Birth</th>
+          <th class="border"><i class="fas fa-calendar-plus"></i> Added_Date</th>
+          <th class="border"><i class="fas fa-user"></i> Hr_Name</th>
+          <th class="border"><i class="fas fa-user-tie"></i> Assign_To</th>
+          <th class="border"><i class="fas fa-edit"></i> Change_Hr</th>
+          <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -58,7 +59,8 @@
           <td class="border">{{ item.addedDate }}</td>
           <td class="border">{{ item.hrName }}</td>
           <td (click)="showTeamLeaderModal(item.id)" class="border">{{ item.superiorName }}<br><i class="fas fa-edit"></i></td>
-          <th (click)="showHrModal(item.id)" class="border bg-success"><i class="fas fa-edit"></i></th>
+          <td (click)="showHrModal(item.id)" class="border bg-success"><i class="fas fa-edit text-light"></i></td>
+          <td class="border bg-dark-subtle" (click)="deleteSpecificInterviewee(item)"><i class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
@@ -143,4 +145,5 @@ header="Select  Leader"
   ></button>
 </p-footer>
 </p-dialog>
+<p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

@@ -5,7 +5,13 @@ export interface ManagerInfo {
     isSuccess: boolean;
     data: UserData;
   }
-  
+  export interface UserInfo {
+    statusCode: number;
+    status: string;
+    message: string;
+    isSuccess: boolean;
+    data: UserData;
+  }
   export interface UserData {
     id: string;
     name: string;
@@ -15,4 +21,3 @@ export interface ManagerInfo {
     email: string;
     phoneNumber: string;
   }
-  

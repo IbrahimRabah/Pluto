@@ -3,15 +3,17 @@ import { ClientService } from '../../../services/client.service';
 import { DepositService } from 'src/app/core/services/deposit/deposit.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, debounceTime } from 'rxjs';
 import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminService } from 'src/app/views/admin/services/admin.service';
 
 @Component({
   selector: 'app-client-history',
   templateUrl: './client-history.component.html',
   styleUrls: ['./client-history.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService, BrowserAnimationsModule]
 
 })
 export class ClientHistoryComponent implements OnInit {
@@ -42,7 +44,7 @@ export class ClientHistoryComponent implements OnInit {
     private messageService: MessageService,
     private clientService: ClientService,
     private formBuilder: FormBuilder,
-    private depositService: DepositService, private auth: AuthenticationService) {
+    private depositService: DepositService,private admin:AdminService, private auth: AuthenticationService,private confirmationService: ConfirmationService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
@@ -150,5 +152,32 @@ export class ClientHistoryComponent implements OnInit {
 
   getUserRole() {
     this.userRole = this.auth.getUserRole()
+  }
+  deleteSpecificClient(client:any)
+  {
+    let clientName = client.name;
+    let clientId = client.id;
+    let msg = `Are you sure you want to delete ${clientName} ?`
+    this.Confirmation(msg,clientId);
+  }
+  Confirmation(msg: any,id:string) {
+    this.confirmationService.confirm({
+      message: msg,
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      accept: () => {
+        this.admin.deleteClientById(id).subscribe({
+           next:()=>{this.getClientHistory()}
+          })
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
   }
 }

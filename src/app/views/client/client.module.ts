@@ -13,8 +13,7 @@ import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
 import { ClientDetailesComponent } from './components/client-detailes/client-detailes.component';
 import { LeaderIntervieweeComponent } from './components/leader-interviewee/leader-interviewee.component';
-
-
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 
 @NgModule({
   declarations: [
@@ -36,7 +35,8 @@ import { LeaderIntervieweeComponent } from './components/leader-interviewee/lead
     ToastModule,
     CalendarModule,
     FormsModule,
-    ButtonModule 
+    ButtonModule,
+    ConfirmDialogModule
 
   ],
   schemas: [NO_ERRORS_SCHEMA]

@@ -261,6 +261,14 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="navbarDropdownMenuLink"
             >
+            <li>
+              <a
+                class="dropdown-item"
+                style="cursor: pointer"
+                routerLink="/user/myProfile"
+                ><i class="fa-solid fa-right-from-bracket"></i> My_Profile</a
+              >
+            </li>
               <li *ngIf="userRole==='Admin'||userRole==='Manager'||userRole==='TeamLeader'">
                 <a
                   class="dropdown-item"
@@ -277,6 +285,7 @@
                   ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
                 >
               </li>
+
             </ul>
           </li>
         </ul>

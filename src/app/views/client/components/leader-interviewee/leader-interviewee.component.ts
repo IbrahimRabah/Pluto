@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subject, debounceTime } from 'rxjs';
+import { AuthenticationService } from 'src/app/core/authentication/services/authentication.service';
 import { Employee } from 'src/app/core/models/hr';
 import { Interviewee } from 'src/app/core/models/interviewee';
 import { AdminService } from 'src/app/views/admin/services/admin.service';
@@ -9,7 +11,9 @@ import { HrService } from 'src/app/views/hr/services/hr.service';
 @Component({
   selector: 'app-leader-interviewee',
   templateUrl: './leader-interviewee.component.html',
-  styleUrls: ['./leader-interviewee.component.scss']
+  styleUrls: ['./leader-interviewee.component.scss'],
+  providers: [MessageService, ConfirmationService, BrowserAnimationsModule]
+
 })
 export class LeaderIntervieweeComponent {
   allInterviewees!: Interviewee[];
@@ -18,7 +22,7 @@ export class LeaderIntervieweeComponent {
   numberOfPage: number[] = [];
   totalCount: number = 0;
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService, private hr: HrService, private messageService: MessageService) {
+  constructor(private admin: AdminService, private hr: HrService, private messageService:MessageService,private confirmationService: ConfirmationService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
     });
@@ -60,5 +64,30 @@ export class LeaderIntervieweeComponent {
     this.Page = --this.Page;
     this.getAllInterviewees()
   }
-
+  deleteSpecificInterviewee(interviewee: any) {
+    let intervieweeName = interviewee.name;
+    let intervieweeId = interviewee.id;
+    let msg = `Are you sure you want to delete ${intervieweeName} ?`
+    this.Confirmation(msg, intervieweeId);
+  }
+  Confirmation(msg: any, id: string) {
+    this.confirmationService.confirm({
+      message: msg,
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      accept: () => {
+        this.admin.deleteIntervieweeById(id).subscribe({
+          next: () => { this.getAllInterviewees() }
+        })
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
+  }
 }

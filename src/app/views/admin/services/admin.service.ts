@@ -41,6 +41,36 @@ export class AdminService {
   {
     return this.http.put<any>(`${this.baseUrl}Interviewee/${query}`,{})
   }
+  deleteTeamLeader(leaderId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `TeamLeader/${leaderId}`;
+    return this.http.delete(currentUrl);
+  }
+  deleteSellerById(sellerId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `Sales/${sellerId}`;
+    return this.http.delete(currentUrl);
+  }
+  deleteIntervieweeById(intervieweeId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `Interviewee/${intervieweeId}`;
+    return this.http.delete(currentUrl);
+  }
+  deleteClientById(clientId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `Client/${clientId}`;
+    return this.http.delete(currentUrl);
+  }
+  deleteRetentionById(retentionId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `Retention/${retentionId}`;
+    return this.http.delete(currentUrl);
+  }
+  deleteHrById(hrId:string):Observable<any>
+  {
+    const currentUrl = this.baseUrl + `Hr/${hrId}`;
+    return this.http.delete(currentUrl);
+  }
 
 
 };
