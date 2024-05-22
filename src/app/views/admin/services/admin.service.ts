@@ -71,6 +71,16 @@ export class AdminService {
     const currentUrl = this.baseUrl + `Hr/${hrId}`;
     return this.http.delete(currentUrl);
   }
+  changeClientTeamleader(clientId:string,newTeamleaderId:string):Observable<any>
+  {
+    let currentUrl = this.baseUrl +`Client/${clientId}/TeamLeader/${newTeamleaderId}`
+    return this.http.put(currentUrl,{})
+  }
+  changeClientRetention(clientId:string,newRetentionId:string):Observable<any>
+  {
+    let currentUrl = this.baseUrl +`Client/${clientId}/Retention/${newRetentionId}`
+    return this.http.put(currentUrl,{})
+  }
 
 
 };
