@@ -75,19 +75,19 @@
 <p-dialog
 class="d-flex justify-content-center"
 [modal]="true"
-header="Select  Hr"
+header="Select Leader"
 [(visible)]="displayTeamLeaderModal"
 >
 <div class="field-container">
-  <label for="hr"><i class="fa-solid fa-user"></i> Superior : </label>
+  <label for="leader"><i class="fa-solid fa-user"></i> Superior : </label>
   <br />
   <select
     class="custom-select"
     [(ngModel)]="teamLeaderId"
   >
     <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
-    <option *ngFor="let hr of allTeamLeaders"  [value]="hr.id">
-      {{ hr.name }} (Leader)
+    <option *ngFor="let leader of allTeamLeaders"  [value]="leader.id">
+      {{ leader.name }} (Leader)
     </option>
   </select>
 </div>

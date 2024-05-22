@@ -20,8 +20,8 @@
           <th class="border"><i class="fas fa-phone"></i> PhoneNumber</th>
           <th class="border"><i class="fas fa-envelope"></i> Email</th>
           <th class="border"><i class="fas fa-id-card"></i> National ID</th>
-          <th class="border"><i class="fa-solid fa-user-group"></i> Leader</th>
           <th class="border"><i class="fa-solid fa-users"></i> Seller</th>
+          <th class="border"><i class="fa-solid fa-user-group"></i> Leader</th>
           <th class="border"><i class="fa-solid fa-person-rays"></i> Retention</th>
           <th class="border"><i class="fas fa-check-circle"></i>Status</th>
           <th class="border"><i class="fa-solid fa-circle-info"></i> Details</th>
@@ -35,12 +35,12 @@
           <td class="border">{{ item.phoneNumber }}</td>
           <td class="border">{{ item.email }}</td>
           <td class="border">{{ item.nationalId }}</td>
-          <td class="border">{{ item.teamLeaderName }}</td>
           <td class="border">{{ item.salesName }}</td>
-          <td *ngIf="item.retentionName" class="border">
-            {{ item.retentionName }}
+          <td class="border"(click)="showTeamLeaderModal(item.id)">{{ item.teamLeaderName }} <i class="fas fa-edit"></i></td>
+          <td *ngIf="item.retentionName" class="border" (click)="showRetentionModal(item.id)">
+            {{ item.retentionName }}  <i class="fas fa-edit"></i>
           </td>
-          <td *ngIf="!item.retentionName" class="border">Not-Registered</td>
+          <td *ngIf="!item.retentionName" class="border" (click)="showRetentionModal(item)">Not-Registered  <i class="fas fa-edit"></i></td>
           <td class="border">{{ item.statusName }}</td>
           <td class="border">
             <button type="button" class="btn btn-success border" routerLink="/client/clientDetailes/{{ item.id }}">
@@ -61,5 +61,76 @@
     </p-table>
   </div>
 </div>
+<p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+header="Select  Leader"
+[(visible)]="displayTeamLeaderModal"
+>
+<div class="field-container">
+  <label for="teamleader"><i class="fa-solid fa-user"></i> Superior : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="newTeamleaderId"
+  >
+  <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
+  <option *ngFor="let leader of allTeamLeaders"  [value]="leader.id">
+      {{ leader.name }} (Leader)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="assignToTeamLeader()"
+  ></button>
+</p-footer>
+</p-dialog>
+<p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+header="Select  Retention"
+[(visible)]="displayRetentionModal"
+>
+<div class="field-container">
+  <label for="hr"><i class="fa-solid fa-user"></i> Retention : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="newRetentionId"
+  >
+  <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
+  <option *ngFor="let retention of allRetentions"  [value]="retention.id">
+      {{ retention.name }} (Retention)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="assignToRetention()"
+  ></button>
+</p-footer>
+</p-dialog>
+<p-dialog class="d-flex justify-content-center" header="Warning..." [modal]="true"
+  [(visible)]="preventMoving">
+  <div>
+    <div class="input-group">
+      <span class="input-group-addon">{{preventMovingMsg}}</span>
+    </div>
+  </div>
+  <p-footer class="d-flex justify-content-center">
+
+  </p-footer>
+</p-dialog>
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

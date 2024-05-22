@@ -52,7 +52,7 @@ export class IntervieeSectionComponent {
   ngOnInit(): void {
     this.getAllInterviewees();
     this.getUserId();
-    this.getManagerInfo()
+    this.getManagerInfo();
   }
   getAllInterviewees(intervieweeName?: string): void {
     let queryURL;
