@@ -106,8 +106,9 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body m-0 p-0">
-              <div class="py-5 d-flex justify-content-center">
-                  <div class="row" style="width: 100%">
+            <div class="py-5 d-flex justify-content-center">
+              <div class="row" style="width: 100%">
+                <button (click)="showMoveModal(true,'')" class="btn btn-success"> Move All </button>
                       <p-table class="custom-table py-2" [value]="allTeamLeadersSellers" [paginator]="true" [rows]="10" [totalRecords]="totalCount" [showCurrentPageReport]="true" [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
                           <ng-template pTemplate="header">
                               <tr>
@@ -117,6 +118,7 @@
                                   <th class="border"><i class="fas fa-envelope"></i> Email</th>
                                   <th class="border"><i class="fas fa-id-card"></i> National ID</th>
                                   <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
+                                  <th class="border"><i class="fas fa-trash-can"></i> Move </th>
                               </tr>
                           </ng-template>
                           <ng-template pTemplate="body" let-item>
@@ -127,6 +129,7 @@
                                   <td class="border">{{ item.email }}</td>
                                   <td class="border">{{ item.nationalId }}</td>
                                   <td class="border bg-dark-subtle" (click)="deleteSpecificSeller(item)"><i class="fas fa-trash-can text-danger"></i></td>
+                                  <td class="border bg-dark" (click)="showMoveModal(false,item.id)"><i class="fas fa-trash-can text-danger"></i></td>
                               </tr>
                           </ng-template>
                           <ng-template pTemplate="paginatorleft">
@@ -142,6 +145,35 @@
           <div class="modal-footer"></div>
       </div>
   </div>
+  <p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+header="Select new teamleader"
+[(visible)]="displayChangeTeamLeaderModel"
+>
+<div class="field-container">
+  <label for="hr"><i class="fa-solid fa-user"></i> Teamleader : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="newTeamLeaderId"
+  >
+  <option *ngFor="let teamLeader of allTeamLeadersForAssign"  [value]="teamLeader.id">
+      {{ teamLeader.name }} (Teamleader)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="moveAllSellersToOtherTeamLeader()"
+  ></button>
+</p-footer>
+</p-dialog>
 </div>
 
 

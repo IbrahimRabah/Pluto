@@ -15,4 +15,8 @@ export class SalesService {
   getAllSales(): Observable<any> {
     return this.httpClient.get(`${this.baseUrl + this.currentUrl}/SelectList`)
   }
+  changeAllTeamLeaders(oldTeamLeader: string, newTeamLeader: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/Bulk/CurrentTeamLeader/' + oldTeamLeader + '/NewTeamLeader/' + newTeamLeader}`, {})
+  }
+
 }

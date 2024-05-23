@@ -25,5 +25,8 @@ export class SalesDayService {
     return this.httpClient.put(`${this.baseUrl + this.currentUrl}/${salesDayId}`, salesDay);
   }
 
+  changeAllTeamLeaders(oldTeamLeader: string, newTeamLeader: string) {
+    return this.httpClient.put(`${this.baseUrl  + '/Bulk/CurrentTeamLeader/   ' + oldTeamLeader + '/NewTeamLeader/' + newTeamLeader}`, {})
+  }
  
 }
