@@ -81,6 +81,11 @@ export class AdminService {
     let currentUrl = this.baseUrl +`Client/${clientId}/Retention/${newRetentionId}`
     return this.http.put(currentUrl,{})
   }
+  changeSellerTeamleader(salesId:string,newTeamleaderId:string):Observable<any>
+  {
+    let currentUrl = this.baseUrl +`sales/${salesId}/TeamLeader/${newTeamleaderId}`
+    return this.http.put(currentUrl,{})
+  }
 
 
 };

@@ -34,6 +34,14 @@ export class ClientService {
   changeTeamLead(clientId: string, teamleadId: string) {
     return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/' + clientId + '/TeamLeader/' + teamleadId}`, {})
   }
+
+  changeAllRetention(oldTeamLeader: string, newTeamLeader: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/Bulk/CurrentTeamLeader/' + oldTeamLeader + '/NewTeamLeader/' + newTeamLeader}`, {})
+  }
+  changeAllTeamLeaders(oldRetention: string, newRetention: string) {
+    return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/Bulk/CurrentRetention/   ' + oldRetention + '/NewRetention/' + newRetention}`, {})
+  }
+
   deactivateUser(clientId: string) {
     return this.httpClient.put(`${this.baseUrl + this.currentUrl + '/Deactivate/'}${clientId}`, {})
   }
