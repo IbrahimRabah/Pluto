@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TeamLeaderService } from 'src/app/core/services/teamleader/team-leader.service';
 import { ClientService } from 'src/app/views/client/services/client.service';
 import { SalesService } from 'src/app/core/services/sales/sales.service';
+import { ManagerService } from 'src/app/core/services/manager.service';
 
 @Component({
   selector: 'app-leader-section-details',
@@ -16,6 +17,7 @@ import { SalesService } from 'src/app/core/services/sales/sales.service';
 })
 export class LeaderSectionDetailsComponent {
   allTeamLeadersSellers!: MemberResponse[];
+  allTeamLeadersClients!: MemberResponse[];
   allTeamLeadersInterviewees!: MemberResponse[];
   allTeamLeaders!: MemberResponse[];
   allTeamLeadersForAssign: any;
@@ -30,8 +32,17 @@ export class LeaderSectionDetailsComponent {
   newTeamLeaderId: any;
   salesId!: string
   moveAll!: boolean
+  viewAllClientsmodal = false;
+  moveAllClient!:boolean
+  clientId!:string
   private searchSubject = new Subject<string>();
-  constructor(private admin: AdminService, private confirmationService: ConfirmationService, private messageService: MessageService,
+  moveAllRetention!: boolean;
+  viewAllClientMoveRetention!: boolean;
+  client!: any;
+  intervieweeId!: string;
+  displayTeamLeaderModal!: boolean;
+  managerData: any
+  constructor(private manager:ManagerService,private admin: AdminService, private confirmationService: ConfirmationService, private messageService: MessageService,
     private teamLeaderService: TeamLeaderService, private clientService: ClientService, private salesService: SalesService
   ) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
@@ -41,7 +52,9 @@ export class LeaderSectionDetailsComponent {
   ngOnInit(): void {
     this.getAllTeamLeaders();
     this.getAllTeamLeader();
+    this.getManagerInfo();
   }
+  
   getAllTeamLeaders(TeamLeaderName?: string): void {
     let queryURL;
     if (TeamLeaderName) {
@@ -72,6 +85,19 @@ export class LeaderSectionDetailsComponent {
     this.getAllTeamLeaders();
   }
 
+  showTeamLeaderModal(id: string) {
+    this.intervieweeId = id;
+    this.displayTeamLeaderModal = true;
+    this.getAllTeamLeaders();
+  }
+  getManagerInfo():void
+  {
+    this.manager.getManagerInfo().subscribe({
+      next:(response)=>{
+        this.managerData = response;
+      }
+    })
+  }
   previousPage() {
     this.Page = --this.Page;
     this.getAllTeamLeaders()
@@ -79,6 +105,11 @@ export class LeaderSectionDetailsComponent {
   getSalesById(id: string) {
     this.teamLeaderId = id;
     this.getAllTeamLeadersSellers();
+  }
+  getClientsById(id: string) {
+    this.allTeamLeadersClients;
+    this.teamLeaderId = id;
+    this.getAllteamLeadersClients();
   }
   getIntervieweesByLeaderId(id: string) {
     this.teamLeaderId = id;
@@ -93,6 +124,17 @@ export class LeaderSectionDetailsComponent {
       }
     })
   }
+
+  getAllteamLeadersClients(){
+    const queryURL = `?Page=${this.Page}&PageSize=${this.PageSize}&TeamLeaderId=${this.teamLeaderId}`;
+    this.clientService.getAllClients(queryURL).subscribe({
+      next: (response: any) => {
+        this.allTeamLeadersClients = response.data.items;
+        this.totalCount = Math.ceil(response.data.count);
+      }
+    })
+  }
+
   getAllTeamLeadersInterviewees() {
     const queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&SuperiorId=${this.teamLeaderId}`;
     this.admin.getAllInterviewees(queryURL).subscribe({
@@ -128,6 +170,36 @@ export class LeaderSectionDetailsComponent {
     let msg = `Are you sure you want to delete ${intervieweeName} ?`
     this.Confirmation(msg, intervieweeId, 'interviewee');
   }
+  deleteSpecificClient(cline: any) {
+    let clienName = cline.name;
+    let clineId = cline.id;
+    let msg = `Are you sure you want to delete ${clienName} ?`
+    this.Confirmation(msg, clineId, 'client');
+  }
+
+  moveSpecificClientToOtherTeamLead(client:any){
+    let clienName = client.name;
+    let clineId = client.id;
+    let msg = `Are you sure you want to move ${clienName} ?`
+    this.Confirmation(msg, clineId, 'moveClient');
+  }
+  moveAllClientToOtherTeamLead(){
+    let msg = `Are you sure you want to move all client ?`
+    this.Confirmation(msg, this.teamLeaderId, 'moveAllClient');
+  }
+  
+  moveClient(){
+    if(this.moveAllClient){
+      
+      this.moveAllClientToOtherTeamLead()
+    }
+    else{
+      this.moveSpecificClientToOtherTeamLead(this.client);
+
+    }
+  }
+
+
   Confirmation(msg: any, id: string, Role: string) {
     this.confirmationService.confirm({
       message: msg,
@@ -173,7 +245,26 @@ export class LeaderSectionDetailsComponent {
             break;
           case 'moveAllInterviwee':
             break;
-        }
+          case 'client' : this.clientService.deleteClient(id).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+            })
+            break;
+          case 'moveClient':
+            this.clientService.changeTeamLead(id,this.newTeamLeaderId).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+              this.viewAllClientsmodal= false;
+            })
+            break;
+          case 'moveAllClient':
+            this.clientService.changeAllTeamLeaders(this.teamLeaderId,this.newTeamLeaderId).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+              this.viewAllClientsmodal= false;
+            })
+            break;
+          }
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
       },
       reject: () => {
@@ -214,7 +305,11 @@ export class LeaderSectionDetailsComponent {
     this.displayChangeTeamLeaderModel = true;
   }
 
-
+  showMoveClientModal(all:boolean,clinet:string ) {
+    this.client = clinet;
+    this.moveAllClient = all;
+    this.viewAllClientsmodal = true;
+  }
 
   moveAllInterviweeToOtherHr() {
 
