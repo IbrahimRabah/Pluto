@@ -199,7 +199,5 @@ export class ClientsSectionDetailsComponent {
       this.preventMovingMsg = msg;
       this.preventMoving = true;
     }
-
-
   }
 }

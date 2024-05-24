@@ -72,9 +72,8 @@
           <th><i class="fas fa-info-circle"></i> Status Name</th>
           <th><i class="fas fa-user-tie"></i> Leader Name</th>
           <th><i class="fas fa-user"></i> Sales Name</th>
-          <th *ngIf="userRole!=='Retention'"><i class="fas fa-trash-alt"></i> Delete</th>
           <th><i class="fas fa-eye"></i> View</th>
-          <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
+          <th class="border" *ngIf="userRole!=='Retention'"><i class="fas fa-trash-can"></i> Delete</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item>
@@ -89,28 +88,8 @@
           <td>{{ item.statusName }}</td>
           <td>{{ item.teamLeaderName }}</td>
           <td>{{ item.salesName }}</td>
-          <td *ngIf="userRole!=='Retention'">
-            <button
-              type="button"
-              pButton
-              icon="fas fa-trash"
-              (click)="delteClient(item.id)"
-              title="Delete Client"
-              class="btn btn-danger"
-            >
-              .
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary"
-              routerLink="/client/clientDetailes/{{ item.id }}"
-            >
-              Details
-            </button>
-          </td>
-          <td class="border bg-dark-subtle" (click)="deleteSpecificClient(item)"><i class="fas fa-trash-can text-danger"></i></td>
+          <td><button type="button" class="btn btn-primary" routerLink="/client/clientDetailes/{{ item.id }}"> Details</button></td>
+          <td *ngIf="userRole!=='Retention'" class="border bg-dark-subtle" (click)="deleteSpecificClient(item)"><i class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
