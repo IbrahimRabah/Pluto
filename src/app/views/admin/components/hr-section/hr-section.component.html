@@ -3,26 +3,12 @@
     <div class="text-center mb-4">
       <h2 class="text-primary"><i class="fa-regular fa-user"></i> All Hrs</h2>
     </div>
-    <p-table
-      class="custom-table py-2"
-      [value]="allHrs"
-      [paginator]="true"
-      [rows]="10"
-      [totalRecords]="totalCount"
-      [showCurrentPageReport]="true"
-      [tableStyle]="{ 'max-width': '100%' }"
-      [responsive]="true"
-    >
+    <p-table class="custom-table py-2" [value]="allHrs" [paginator]="true" [rows]="10" [totalRecords]="totalCount"
+      [showCurrentPageReport]="true" [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
       <ng-template pTemplate="caption">
         <span class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input
-            pInputText
-            type="text"
-            id="search-hr"
-            placeholder="Search keyword"
-            (input)="onInputChange($event)"
-          />
+          <input pInputText type="text" id="search-hr" placeholder="Search keyword" (input)="onInputChange($event)" />
         </span>
       </ng-template>
       <ng-template pTemplate="header">
@@ -43,30 +29,118 @@
           <td class="border">{{ item.companyPhoneNumber }}</td>
           <td class="border">{{ item.email }}</td>
           <td class="border">{{ item.nationalId }}</td>
-          <td class="border">{{ item.numberOfInterviewees }}</td>
-          <td class="border bg-dark-subtle" (click)="deleteSpecificHr(item)"><i class="fas fa-trash-can text-danger"></i></td>
+          <td class="border">
+            <button type="button" class="btn btn-xs btn-details" data-bs-toggle="modal" href="#teamLeaderInterviewees"
+              (click)="getAllInterviewees(item.id)">
+              <i class="fas fa-eye"></i> Viewsdad {{ item.numberOfClients }}
+            </button>
+            {{ item.numberOfInterviewees }}
+          </td>
+          <td class="border bg-dark-subtle" (click)="deleteSpecificHr(item)"><i
+              class="fas fa-trash-can text-danger"></i></td>
         </tr>
       </ng-template>
       <ng-template pTemplate="paginatorleft">
-        <p-button
-          type="button"
-          icon="pi pi-chevron-left"
-          (click)="previousPage()"
-          styleClass="p-button-text"
-          label="Previous"
-        ></p-button>
+        <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text"
+          label="Previous"></p-button>
       </ng-template>
       <ng-template pTemplate="paginatorright">
-        <p-button
-          type="button"
-          icon="pi pi-chevron-right"
-          (click)="nextPage()"
-          styleClass="p-button-text fw-bold"
-          >Next</p-button
-        >
+        <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()"
+          styleClass="p-button-text fw-bold">Next</p-button>
       </ng-template>
     </p-table>
   </div>
+  <div class="modal fade" id="teamLeaderInterviewees" tabindex="-1" aria-labelledby="teamLeaderIntervieweesLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="teamLeaderIntervieweesLabel">
+            Team_Leader_Interviewees <i class="fas fa-users"></i>
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body m-0 p-0">
+          <div class="py-5 d-flex justify-content-center">
+            <div class="row" style="overflow-x: auto; width: 100%;">
+              <button (click)="showMoveModal(true,'')" class="btn btn-success"> Move All </button>
+
+              <p-table class="custom-table py-2" [value]="allInterviewees" [paginator]="true" [rows]="10"
+                [totalRecords]="totalCount" [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '800px' }"
+                [responsive]="true">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th class="border"><i class="fas fa-user"></i> Name</th>
+                    <th class="border"><i class="fas fa-phone"></i> PhoneNumber</th>
+                    <th class="border"><i class="fas fa-envelope"></i> Email</th>
+                    <th class="border"><i class="fas fa-id-card"></i> National_ID</th>
+                    <th class="border"><i class="fas fa-calendar"></i> Date_Of_Birth</th>
+                    <th class="border"><i class="fas fa-calendar-plus"></i> Added_Date</th>
+                    <th class="border"><i class="fas fa-bolt"></i> Move </th>
+
+                    <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                  <tr *ngIf="allInterviewees.length > 0">
+                    <td class="border">{{ item.name }}</td>
+                    <td class="border">{{ item.phoneNumber }}</td>
+                    <td class="border">{{ item.email }}</td>
+                    <td class="border">{{ item.nationalId }}</td>
+                    <td class="border">{{ item.dateOfBirth }}</td>
+                    <td class="border">{{ item.addedDate }}</td>
+                    <td class="border bg-dark" (click)="showMoveModal(false,item.id)"><i class="fas fa-bolt"></i></td>
+                    <td class="border bg-dark-subtle" (click)="deleteSpecificInterviewee(item)"><i
+                        class="fas fa-trash-can text-danger"></i></td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                  <p-button type="button" icon="pi pi-chevron-left" (click)="previousPage()" styleClass="p-button-text"
+                    label="Previous"></p-button>
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                  <p-button type="button" icon="pi pi-chevron-right" (click)="nextPage()"
+                    styleClass="p-button-text fw-bold">Next</p-button>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+header="Select  Leader"
+[(visible)]="displayChangeHRModel"
+>
+<div class="field-container">
+  <label for="hr"><i class="fa-solid fa-user"></i> Superior : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="newHrId"
+  >
+  <option *ngFor="let hr of allHrs"  [value]="hr.id">
+      {{ hr.name }} (Leader)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="moveAllInterviewwToOtherHr()"
+  ></button>
+</p-footer>
+</p-dialog>
 </div>
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>

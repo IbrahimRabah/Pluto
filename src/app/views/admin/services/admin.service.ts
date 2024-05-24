@@ -92,6 +92,11 @@ export class AdminService {
 >>>>>>> Stashed changes
     return this.http.put(currentUrl,{})
   }
+  changeAllHr(CurrentHr:string,NewHr:string):Observable<any>
+  {
+    let currentUrl = this.baseUrl +`Interviewee/Bulk/CurrentHr/${CurrentHr}/NewHr/${NewHr}`
+    return this.http.put(currentUrl,{})
+  }
 
 
 };

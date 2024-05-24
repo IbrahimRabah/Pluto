@@ -13,15 +13,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 })
 export class HrSectionComponent {
-  getSalesById(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-  allHrs!: MemberResponse[];
+  allInterviewees: any;
+  hrId!: string;
+  newHrId!: string
+  moveAll!: boolean;
+  displayChangeHRModel!: boolean;
+  allHrs!: any[];
   Page: number = 1;
   PageSize: number = 10;
   numberOfPage: number[] = [];
   totalCount: number = 0;
   private searchSubject = new Subject<string>();
+  intervieweeId: any;
   constructor(private admin: AdminService, private confirmationService: ConfirmationService, private messageService: MessageService) {
     this.searchSubject.pipe(debounceTime(500)).subscribe(value => {
       this.filter(value);
@@ -80,14 +83,83 @@ export class HrSectionComponent {
       acceptIcon: "none",
       rejectIcon: "none",
       accept: () => {
-        this.admin.deleteHrById(id).subscribe({
-          next: () => { this.getAllHrs() }
-        })
+        switch (Role) {
+          case 'interviewee':
+            this.admin.deleteIntervieweeById(id).subscribe({
+              next: () => { this.getAllInterviewees() }
+            })
+            break;
+          case "seller":
+            this.admin.deleteHrById(id).subscribe({
+              next: () => { this.getAllHrs() }
+            })
+            break;
+          case 'moveOne':
+            const queryURL = `${this.intervieweeId}/Hr/${this.newHrId}`;
+            this.admin.changeIntervieweeHr(queryURL).subscribe(() => {
+              this.getAllHrs();
+              this.getAllInterviewees();
+            })
+            break;
+          case "moveAllIntervieww":
+            this.admin.changeAllHr(this.hrId, this.newHrId).subscribe(() => {
+              this.getAllHrs();
+              this.getAllInterviewees();
+            })
+            break;
+        }
         this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
       },
       reject: () => {
         this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
       }
     });
+  }
+
+  getAllInterviewees(HRId?: string): void {
+    this.hrId = HRId ?? '';
+    let queryURL;
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&HRId=${HRId}`;
+
+    this.admin.getAllInterviewees(queryURL).subscribe({
+      next: (response: any) => {
+        this.allInterviewees = response.data.items;
+        this.totalCount = Math.ceil(response.data.count);
+      }
+    })
+  }
+
+  deleteSpecificInterviewee(interviewee: any) {
+    let intervieweeName = interviewee.name;
+    let intervieweeId = interviewee.id;
+    let msg = `Are you sure you want to delete ${intervieweeName} ?`
+    this.Confirmation(msg, intervieweeId, 'interviewee');
+  }
+
+  showMoveModal(all: boolean, intervieweeId: string) {
+    this.moveAll = all;
+    this.intervieweeId = intervieweeId;
+    this.displayChangeHRModel = true;
+  }
+
+
+  moveAllInterviewwToOtherHr() {
+
+    if (this.moveAll) {
+
+      let msg = "Are you sure you want to change all intervwee Hr ?";
+      let role = 'moveAllIntervieww';
+      this.Confirmation(msg, this.newHrId, role);
+      this.displayChangeHRModel = false;
+    }
+    else {
+      let msg = "Are you sure you want to change this intervwee's Hr ?";
+      let role = 'moveOne';
+      this.Confirmation(msg, this.newHrId, role);
+      this.displayChangeHRModel = false;
+
+    }
+
+
   }
 }
