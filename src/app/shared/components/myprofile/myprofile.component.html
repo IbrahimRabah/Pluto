@@ -16,9 +16,14 @@
             src="https://cdn-icons-png.freepik.com/256/8955/8955147.png"
           />
         </div>
-        <div class="team-content">
+        <div class="team-content" [ngSwitch]="managerData.data.role">
           <h3 class="name">{{managerData.data.name}} </h3>
-          <h4 class="title">Manager</h4>
+          <h4 class="title" *ngSwitchCase="0">Admin</h4>
+          <h4 class="title" *ngSwitchCase="1">Manager</h4>
+          <h4 class="title" *ngSwitchCase="2">Team_Leader</h4>
+          <h4 class="title" *ngSwitchCase="3">Saller</h4>
+          <h4 class="title" *ngSwitchCase="4">Hr</h4>
+          <h4 class="title" *ngSwitchCase="5">Retention</h4>
           <p-table class="custom-table py-2"  [tableStyle]="{ 'max-width': '100%' }" [responsive]="true">
    <ng-template pTemplate="header">
      <tr>

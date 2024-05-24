@@ -43,9 +43,8 @@
           <th class="border"><i class="fas fa-building"></i> Company Phone</th>
           <th class="border"><i class="fas fa-envelope"></i> Email</th>
           <th class="border"><i class="fas fa-id-card"></i> National ID</th>
-          <th class="border">
-            <i class="fa-solid fa-circle-info"></i> Details
-          </th>
+          <th class="border"><i class="fa-solid fa-user-group"></i> Leader</th>
+          <th class="border"><i class="fa-solid fa-circle-info"></i> Details</th>
           <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
 
         </tr>
@@ -57,6 +56,7 @@
           <td class="border">{{ item.companyPhoneNumber }}</td>
           <td class="border">{{ item.email }}</td>
           <td class="border">{{ item.nationalId }}</td>
+          <td class="border"(click)="showTeamLeaderModal(item.id)">{{ item.superiorName }} <i class="fas fa-edit"></i></td>
           <td class="click" routerLink="/sales/salesHistory/{{ item.id }}">
             Show Day
           </td>
@@ -84,5 +84,35 @@
     </p-table>
   </div>
 </div>
+<p-dialog
+class="d-flex justify-content-center"
+[modal]="true"
+header="Select  Leader"
+[(visible)]="displayTeamLeaderModal"
+>
+<div class="field-container">
+  <label for="teamleader"><i class="fa-solid fa-user"></i> Superior : </label>
+  <br />
+  <select
+    class="custom-select"
+    [(ngModel)]="newTeamleaderId"
+  >
+  <option  value="{{managerData.data.id}}"  selected>{{managerData.data.name}} (Manager)</option>
+  <option *ngFor="let leader of allTeamLeaders"  [value]="leader.id">
+      {{ leader.name }} (Leader)
+    </option>
+  </select>
+</div>
+<p-footer class="d-flex justify-content-center">
+  <button
+    type="button"
+    pButton
+    label="Save"
+    icon="pi pi-check"
+    class="modal-open-button"
+    (click)="assignToTeamLeader()"
+  ></button>
+</p-footer>
+</p-dialog>
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>
