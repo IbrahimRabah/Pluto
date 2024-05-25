@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 })
 export class HrSectionComponent {
   allInterviewees: any;
-  hrId!: string;
+  hrId: string='';
   newHrId!: string
   moveAll!: boolean;
   displayChangeHRModel!: boolean;
@@ -115,11 +115,53 @@ export class HrSectionComponent {
       }
     });
   }
+  ConfirmationMove(msg: any, id: string, Role: string) {
+    this.confirmationService.confirm({
+      message: msg,
+      header: 'Move Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      accept: () => {
+        switch (Role) {
+          case 'interviewee':
+            this.admin.deleteIntervieweeById(id).subscribe({
+              next: () => { this.getAllInterviewees() }
+            })
+            break;
+          case "seller":
+            this.admin.deleteHrById(id).subscribe({
+              next: () => { this.getAllHrs() }
+            })
+            break;
+          case 'moveOne':
+            const queryURL = `${this.intervieweeId}/Hr/${this.newHrId}`;
+            this.admin.changeIntervieweeHr(queryURL).subscribe(() => {
+              this.getAllHrs();
+              this.getAllInterviewees();
+            })
+            break;
+          case "moveAllIntervieww":
+            this.admin.changeAllHr(this.hrId, this.newHrId).subscribe(() => {
+              this.getAllHrs();
+              this.getAllInterviewees();
+            })
+            break;
+        }
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
+  }
 
   getAllInterviewees(HRId?: string): void {
-    this.hrId = HRId ?? '';
+    this.hrId = HRId ?? this.hrId;
     let queryURL;
-      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&HRId=${HRId}`;
+      queryURL = `Page=${this.Page}&PageSize=${this.PageSize}&HRId=${this.hrId}`;
 
     this.admin.getAllInterviewees(queryURL).subscribe({
       next: (response: any) => {
@@ -149,13 +191,13 @@ export class HrSectionComponent {
 
       let msg = "Are you sure you want to change all intervwee Hr ?";
       let role = 'moveAllIntervieww';
-      this.Confirmation(msg, this.newHrId, role);
+      this.ConfirmationMove(msg, this.newHrId, role);
       this.displayChangeHRModel = false;
     }
     else {
       let msg = "Are you sure you want to change this intervwee's Hr ?";
       let role = 'moveOne';
-      this.Confirmation(msg, this.newHrId, role);
+      this.ConfirmationMove(msg, this.newHrId, role);
       this.displayChangeHRModel = false;
 
     }

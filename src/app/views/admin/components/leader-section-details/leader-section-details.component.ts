@@ -181,11 +181,11 @@ export class LeaderSectionDetailsComponent {
     let clienName = client.name;
     let clineId = client.id;
     let msg = `Are you sure you want to move ${clienName} ?`
-    this.Confirmation(msg, clineId, 'moveClient');
+    this.ConfirmationMove(msg, clineId, 'moveClient');
   }
   moveAllClientToOtherTeamLead(){
     let msg = `Are you sure you want to move all client ?`
-    this.Confirmation(msg, this.teamLeaderId, 'moveAllClient');
+    this.ConfirmationMove(msg, this.teamLeaderId, 'moveAllClient');
   }
   
   moveClient(){
@@ -272,6 +272,78 @@ export class LeaderSectionDetailsComponent {
       }
     });
   }
+  ConfirmationMove(msg: any, id: string, Role: string) {
+    this.confirmationService.confirm({
+      message: msg,
+      header: 'Move Confirmation',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: "p-button-danger p-button-text",
+      rejectButtonStyleClass: "p-button-text p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      accept: () => {
+        switch (Role) {
+          case 'leader':
+            this.admin.deleteTeamLeader(id).subscribe({
+              next: () => { this.getAllTeamLeaders() }
+            })
+            break;
+          case 'seller':
+            this.admin.deleteSellerById(id).subscribe({
+              next: () => { this.getAllTeamLeadersSellers() }
+            })
+            break;
+          case 'interviewee':
+            this.admin.deleteIntervieweeById(id).subscribe({
+              next: () => { this.getAllTeamLeadersInterviewees() }
+            })
+            break;
+          case 'moveSeller':
+
+            this.admin.changeSellerTeamleader(this.salesId, id).subscribe(() => {
+              this.getAllTeamLeadersSellers();
+              this.getAllTeamLeaders();
+            })
+
+            break;
+          case 'moveAllSellers':
+            this.salesService.changeAllTeamLeaders(this.teamLeaderId, this.newTeamLeaderId).subscribe(() => {
+              this.getAllTeamLeadersSellers();
+              this.getAllTeamLeaders();
+            })
+            break;
+          case 'moveInterviwee':
+
+            break;
+          case 'moveAllInterviwee':
+            break;
+          case 'client' : this.clientService.deleteClient(id).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+            })
+            break;
+          case 'moveClient':
+            this.clientService.changeTeamLead(id,this.newTeamLeaderId).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+              this.viewAllClientsmodal= false;
+            })
+            break;
+          case 'moveAllClient':
+            this.clientService.changeAllTeamLeaders(this.teamLeaderId,this.newTeamLeaderId).subscribe(()=>{
+              this.getAllteamLeadersClients();
+              this.getAllTeamLeaders();
+              this.viewAllClientsmodal= false;
+            })
+            break;
+          }
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected' });
+      }
+    });
+  }
   getAllTeamLeader() {
     this.teamLeaderService.getAllTeamLeaders().subscribe((data) => {
       this.allTeamLeadersForAssign = data.data;
@@ -284,14 +356,14 @@ export class LeaderSectionDetailsComponent {
       let msg = "Are you sure you want to change all seller's teamleader ?";
       let newTeamLeaderId = this.teamLeaderId;
       let role = 'moveAllSellers';
-      this.Confirmation(msg, newTeamLeaderId, role);
+      this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
     }
     else {
       let msg = "Are you sure you want to change this seller's teamleader ?";
       let newTeamLeaderId = this.teamLeaderId;
       let role = 'moveSeller';
-      this.Confirmation(msg, newTeamLeaderId, role);
+      this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
 
     }
@@ -318,14 +390,14 @@ export class LeaderSectionDetailsComponent {
       let msg = "Are you sure you want to change all seller's teamleader ?";
       let newTeamLeaderId = this.teamLeaderId;
       let role = 'moveAllSellers';
-      this.Confirmation(msg, newTeamLeaderId, role);
+      this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
     }
     else {
       let msg = "Are you sure you want to change this seller's teamleader ?";
       let newTeamLeaderId = this.teamLeaderId;
       let role = 'moveSeller';
-      this.Confirmation(msg, newTeamLeaderId, role);
+      this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
 
     }
