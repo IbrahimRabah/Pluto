@@ -92,8 +92,8 @@
                   <th class="border"><i class="fas fa-building"></i> Company Phone</th>
                   <th class="border"><i class="fas fa-envelope"></i> Email</th>
                   <th class="border"><i class="fas fa-id-card"></i> National ID</th>
-                  <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
                   <th class="border"><i class="fas fa-bolt"></i> Move </th>
+                  <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-item>
@@ -103,9 +103,9 @@
                   <td class="border">{{ item.companyPhoneNumber }}</td>
                   <td class="border">{{ item.email }}</td>
                   <td class="border">{{ item.nationalId }}</td>
+                  <td class="border bg-dark" (click)="showMoveModal(false,item.id)"><i class="fas fa-bolt"></i></td>
                   <td class="border bg-dark-subtle" (click)="deleteSpecificSeller(item)"><i
                       class="fas fa-trash-can text-danger"></i></td>
-                  <td class="border bg-dark" (click)="showMoveModal(false,item.id)"><i class="fas fa-bolt"></i></td>
                 </tr>
               </ng-template>
               <ng-template pTemplate="paginatorleft">
@@ -156,6 +156,7 @@
       <div class="modal-body m-0 p-0">
         <div class="py-5 d-flex justify-content-center">
           <div class="row" style="overflow-x: auto; width: 100%;">
+            <button (click)="showMoveIntervieweeModel(true,'')" class="btn btn-success"> Move All </button>
 
             <p-table class="custom-table py-2" [value]="allTeamLeadersInterviewees" [paginator]="true" [rows]="10"
               [totalRecords]="totalCount" [showCurrentPageReport]="true" [tableStyle]="{ 'min-width': '800px' }"
@@ -168,6 +169,7 @@
                   <th class="border"><i class="fas fa-id-card"></i> National_ID</th>
                   <th class="border"><i class="fas fa-calendar"></i> Date_Of_Birth</th>
                   <th class="border"><i class="fas fa-calendar-plus"></i> Added_Date</th>
+                  <th class="border"><i class="fas fa-bolt"></i> Move </th>
                   <th class="border"><i class="fas fa-trash-can"></i> Delete</th>
                 </tr>
               </ng-template>
@@ -179,6 +181,8 @@
                   <td class="border">{{ item.nationalId }}</td>
                   <td class="border">{{ item.dateOfBirth }}</td>
                   <td class="border">{{ item.addedDate }}</td>
+                  <td class="border bg-dark" (click)="showMoveIntervieweeModel(false,item.id)"><i class="fas fa-bolt"></i></td>
+
                   <td class="border bg-dark-subtle" (click)="deleteSpecificInterviewee(item)"><i
                       class="fas fa-trash-can text-danger"></i></td>
                 </tr>
@@ -198,7 +202,22 @@
       <div class="modal-footer"></div>
     </div>
   </div>
-  
+  <p-dialog class="d-flex justify-content-center" [modal]="true" header="Select new teamleader"
+    [(visible)]="displayChangeTeamLeaderModel">
+    <div class="field-container">
+      <label for="hr"><i class="fa-solid fa-user"></i> Teamleader : </label>
+      <br />
+      <select class="custom-select" [(ngModel)]="newTeamLeaderId">
+        <option *ngFor="let teamLeader of allTeamLeadersForAssign" [value]="teamLeader.id">
+          {{ teamLeader.name }} (Teamleader)
+        </option>
+      </select>
+    </div>
+    <p-footer class="d-flex justify-content-center">
+      <button type="button" pButton label="Save" icon="pi pi-check" class="modal-open-button"
+        (click)="moveAllInterviweeToOtherHr()"></button>
+    </p-footer>
+  </p-dialog>
 </div>
 
 <div class="modal fade" id="teamLeaderClients" tabindex="-1" aria-labelledby="teamLeaderClients" aria-hidden="true">
