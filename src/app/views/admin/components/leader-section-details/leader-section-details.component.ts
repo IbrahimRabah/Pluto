@@ -32,6 +32,7 @@ export class LeaderSectionDetailsComponent {
   newTeamLeaderId: any;
   salesId!: string
   moveAll!: boolean
+  moveAllInterviewees!:boolean
   viewAllClientsmodal = false;
   moveAllClient!:boolean
   clientId!:string
@@ -42,6 +43,7 @@ export class LeaderSectionDetailsComponent {
   intervieweeId!: string;
   displayTeamLeaderModal!: boolean;
   managerData: any
+  currentInterviewee: any;
   constructor(private manager:ManagerService,private admin: AdminService, private confirmationService: ConfirmationService, private messageService: MessageService,
     private teamLeaderService: TeamLeaderService, private clientService: ClientService, private salesService: SalesService
   ) {
@@ -312,10 +314,17 @@ export class LeaderSectionDetailsComponent {
               this.getAllTeamLeaders();
             })
             break;
-          case 'moveInterviwee':
-
+          case 'moveAllInterviewee':
+              this.admin.changeAllInterviewee(this.teamLeaderId,this.newTeamLeaderId).subscribe(()=>{
+                this.getAllTeamLeadersInterviewees();
+                this.getAllTeamLeaders();
+              })
             break;
-          case 'moveAllInterviwee':
+          case 'moveInterviewee':
+            this.admin.changeTeamLeadSuperior(this.currentInterviewee,this.newTeamLeaderId).subscribe(()=>{
+              this.getAllTeamLeadersInterviewees();
+              this.getAllTeamLeaders();
+            })
             break;
           case 'client' : this.clientService.deleteClient(id).subscribe(()=>{
               this.getAllteamLeadersClients();
@@ -377,6 +386,12 @@ export class LeaderSectionDetailsComponent {
     this.displayChangeTeamLeaderModel = true;
   }
 
+  showMoveIntervieweeModel(all:boolean,intervieweeId:string){
+    this.currentInterviewee = intervieweeId;
+    this.moveAllInterviewees = all;
+    this.displayChangeTeamLeaderModel = true;
+
+  }
   showMoveClientModal(all:boolean,clinet:string ) {
     this.client = clinet;
     this.moveAllClient = all;
@@ -385,18 +400,18 @@ export class LeaderSectionDetailsComponent {
 
   moveAllInterviweeToOtherHr() {
 
-    if (this.moveAll) {
+    if (this.moveAllInterviewees) {
 
-      let msg = "Are you sure you want to change all seller's teamleader ?";
+      let msg = "Are you sure you want to change all interviewee's superior ?";
       let newTeamLeaderId = this.teamLeaderId;
-      let role = 'moveAllSellers';
+      let role = 'moveAllInterviewee';
       this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
     }
     else {
-      let msg = "Are you sure you want to change this seller's teamleader ?";
+      let msg = "Are you sure you want to change this interviewee's superior ?";
       let newTeamLeaderId = this.teamLeaderId;
-      let role = 'moveSeller';
+      let role = 'moveInterviewee';
       this.ConfirmationMove(msg, newTeamLeaderId, role);
       this.displayChangeTeamLeaderModel = false;
 

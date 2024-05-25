@@ -92,5 +92,16 @@ export class AdminService {
     return this.http.put(currentUrl,{})
   }
 
+  changeAllInterviewee(CurrentSuperior:string,NewSuperior:string):Observable<any>
+  {
+    let currentUrl = this.baseUrl +`Interviewee/Bulk/CurrentSuperior/${CurrentSuperior}/NewSuperior/${NewSuperior}`
+    return this.http.put(currentUrl,{})
+  }
+  
+  changeTeamLeadSuperior(Interviewee:string,Superior:string){
+    //Interviewee/q/Superior/q'
+    let currentUrl = this.baseUrl +`Interviewee/${Interviewee}/Superior/${Superior}`
+    return this.http.put(currentUrl,{})
+  }
 
 };
